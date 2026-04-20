@@ -17,7 +17,7 @@ body{background:#080808;color:#F0EDE6;font-family:'DM Sans',sans-serif;min-heigh
 .hero h1 em{color:#C8A97E;font-style:inherit}
 .hero p{font-size:15px;color:#555;line-height:1.75;max-width:480px;margin:0 auto 8px}
 .hero-note{font-size:12px;color:#2E2E2E;font-style:italic;margin-top:6px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:0 48px 72px;max-width:1280px;margin:0 auto}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;padding:0 48px 72px;max-width:1280px;margin:0 auto}
 .card{background:#0F0F0F;border:1px solid rgba(255,255,255,.06);border-radius:14px;overflow:hidden;cursor:pointer;transition:transform .22s,border-color .22s,box-shadow .22s;display:flex;flex-direction:column;text-decoration:none;color:inherit}
 .card:hover{transform:translateY(-5px);border-color:rgba(200,169,126,.4);box-shadow:0 24px 56px rgba(0,0,0,.5)}
 .card-preview{width:100%;aspect-ratio:16/10;overflow:hidden;position:relative;background:#1A1A1A;border-bottom:1px solid rgba(255,255,255,.05);flex-shrink:0}
@@ -42,6 +42,10 @@ body{background:#080808;color:#F0EDE6;font-family:'DM Sans',sans-serif;min-heigh
 .c3 .card-num{background:rgba(201,107,82,.12);color:#E8897A}
 .c3 .card-btn{background:rgba(201,107,82,.1);color:#E8897A}
 .c3:hover .card-btn{background:rgba(201,107,82,.2)}
+
+.c4 .card-num{background:rgba(78,95,212,.15);color:#7A8FFF}
+.c4 .card-btn{background:rgba(78,95,212,.1);color:#7A8FFF}
+.c4:hover .card-btn{background:rgba(78,95,212,.2)}
 .divider{display:flex;align-items:center;gap:16px;padding:0 48px;margin-bottom:24px;max-width:1280px;margin-left:auto;margin-right:auto}
 .divider span{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#2A2A2A;white-space:nowrap}
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.05)}
@@ -125,6 +129,18 @@ body{background:#080808;color:#F0EDE6;font-family:'DM Sans',sans-serif;min-heigh
       <div class="card-btn"><span>Editar este template</span><span class="arrow">→</span></div>
     </div>
   </a>
+  <!-- T4 STUDIO ZINE -->
+  <a class="card c4" href="editor.html?t=4" onclick="go(4,event)">
+    <div class="card-preview"><iframe id="pv4" title="preview"></iframe><div class="card-preview-fade"></div></div>
+    <div class="card-body">
+      <span class="card-num">Template 04</span>
+      <div class="card-name">Studio Zine</div>
+      <div class="card-sub">Scrapbook · Bold · Space Mono</div>
+      <p class="card-desc">Estética zine/scrapbook com nav em tabs tipo pasta, foto com clipe binder + polaroid, stats em círculos sobrepostos, reviews com bolha, secção de ferramentas e formulário de contacto.</p>
+      <div class="card-features"><span class="feat">Nav folder tabs</span><span class="feat">Polaroid + clips</span><span class="feat">Stats círculos</span><span class="feat">Tools grid</span><span class="feat">Formulário</span></div>
+      <div class="card-btn"><span>Editar este template</span><span class="arrow">→</span></div>
+    </div>
+  </a>
 </div>
 
 <div class="divider"><span>Comparação</span></div>
@@ -132,22 +148,22 @@ body{background:#080808;color:#F0EDE6;font-family:'DM Sans',sans-serif;min-heigh
 <div class="compare">
   <table class="compare-table">
     <thead>
-      <tr><th>Funcionalidade</th><th>Velvet Noir</th><th>Lumière</th><th>The Edit</th></tr>
+      <tr><th>Funcionalidade</th><th>Velvet Noir</th><th>Lumière</th><th>The Edit</th><th>Studio Zine</th></tr>
     </thead>
     <tbody>
-      <tr><td>Fontes</td><td>Playfair + Inter</td><td>Cormorant + Jost</td><td>Fraunces + DM Sans</td></tr>
-      <tr><td>Upload fotos &amp; vídeos</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Vídeos reproduzem no site</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Arrastar e reordenar secções</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Adicionar blocos custom</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Tabela de preços</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Testimonials</td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Case studies com stats</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Pain points &amp; resultados</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>FAQ (6 perguntas)</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Cores editáveis</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Barra de anúncio</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Download HTML final</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Fontes</td><td>Playfair + Inter</td><td>Cormorant + Jost</td><td>Fraunces + DM Sans</td><td>Space Mono + Caveat</td></tr>
+      <tr><td>Upload fotos &amp; vídeos</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Vídeos reproduzem no site</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Arrastar e reordenar secções</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Adicionar blocos custom</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Tabela de preços</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Testimonials</td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Case studies com stats</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td></tr>
+      <tr><td>Pain points &amp; resultados</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td></tr>
+      <tr><td>FAQ (6 perguntas)</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td></tr>
+      <tr><td>Cores editáveis</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Barra de anúncio</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Download HTML final</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
     </tbody>
   </table>
 </div>
@@ -155,7 +171,7 @@ body{background:#080808;color:#F0EDE6;font-family:'DM Sans',sans-serif;min-heigh
 <div class="footer">✦ UGC Portfolio Studio — cada template descarrega como site HTML completo e autónomo</div>
 
 <script>
-const NAMES={1:'Velvet Noir',2:'Lumière',3:'The Edit'};
+const NAMES={1:'Velvet Noir',2:'Lumière',3:'The Edit',4:'Studio Zine'};
 function go(t,e){
   e.preventDefault();
   document.getElementById('load-sub').textContent='A abrir '+NAMES[t]+'...';
@@ -169,8 +185,33 @@ const PV2=`<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://
 
 const PV3=`<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,900&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box}html,body{height:100%;overflow:hidden;background:#F5EFE4}</style></head><body><div style="background:#C96B52;padding:5px 16px;text-align:center"><span style="font-size:7.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff">DISPONÍVEL PARA PARCERIAS — Vamos criar conteúdo juntas! ✦</span></div><div style="background:#F5EFE4;display:flex;align-items:center;justify-content:space-between;padding:8px 20px;border-bottom:1px solid rgba(26,26,26,.1)"><span style="font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:18px;color:#C96B52">jessica.</span></div><div style="display:grid;grid-template-columns:1fr 1fr;min-height:calc(100% - 54px);align-items:center;padding:20px 24px 20px 28px;gap:16px"><div><div style="font-size:7px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#4A4444;margin-bottom:8px">UGC Creator · Storytelling</div><h1 style="font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:30px;line-height:1.0;margin-bottom:10px">conteúdo<br>que as pessoas<br><span style="color:#C96B52">realmente</span><br><span style="color:#7CBFB5">assistem.</span></h1><div style="display:inline-block;padding:7px 18px;border-radius:20px;font-size:7.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#D4A030;color:#fff">Vamos Trabalhar Juntas</div></div><div style="position:relative;display:flex;align-items:center;justify-content:center;height:220px"><svg viewBox="0 0 200 220" style="position:absolute;right:-10px;top:0;width:95%;height:100%"><path d="M130 18C175 18 196 58 193 100C190 142 164 168 124 175C84 182 44 164 26 128C8 92 18 42 52 22C72 12 96 18 130 18Z" fill="#7CBFB5" opacity="0.5"/></svg><div style="position:relative;z-index:2;width:48%;aspect-ratio:3/4;background:#c8bfb4;border-radius:3px;margin-right:24px"></div></div></div></body></html>`;
 
+
+const PV4=`<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700&family=Caveat:wght@700&family=Permanent+Marker&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box}html,body{height:100%;overflow:hidden;background:#EBEBEB}</style></head><body>
+<div style="background:#0D0D0D;color:#fff;text-align:center;padding:6px;font-family:'Space Mono',monospace;font-size:7px;letter-spacing:.1em;text-transform:uppercase">✦ DISPONÍVEL PARA NOVAS PARCERIAS — JANEIRO 2026 ✦</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);height:36px">
+  <div style="background:#4E5FD4;display:flex;align-items:center;justify-content:center;font-family:'Caveat',cursive;font-size:12px;font-weight:700;color:#fff;border-radius:8px 8px 0 0;text-transform:uppercase">Portfolio</div>
+  <div style="background:#EBEBEB;display:flex;align-items:center;justify-content:center;font-family:'Caveat',cursive;font-size:12px;font-weight:700;color:#0D0D0D;border-radius:8px 8px 0 0;text-transform:uppercase;border-top:2px solid rgba(0,0,0,.08)">Sobre</div>
+  <div style="background:#4E5FD4;display:flex;align-items:center;justify-content:center;font-family:'Caveat',cursive;font-size:12px;font-weight:700;color:#fff;border-radius:8px 8px 0 0;text-transform:uppercase">Serviços</div>
+  <div style="background:#EBEBEB;display:flex;align-items:center;justify-content:center;font-family:'Caveat',cursive;font-size:12px;font-weight:700;color:#0D0D0D;border-radius:8px 8px 0 0;text-transform:uppercase;border-top:2px solid rgba(0,0,0,.08)">Contacto</div>
+</div>
+<div style="display:grid;grid-template-columns:1.1fr 1fr;min-height:calc(100% - 72px);align-items:center;padding:16px 20px 16px 24px;gap:14px;background:#EBEBEB">
+  <div style="position:relative;max-width:260px">
+    <div style="position:absolute;top:-14px;left:70px;font-size:26px;filter:drop-shadow(1px 2px 3px rgba(0,0,0,.3));z-index:5">🖇</div>
+    <div style="width:80%;aspect-ratio:2/3;background:#888;filter:grayscale(100%);display:block"></div>
+    <div style="position:absolute;top:22%;right:-4%;background:rgba(255,255,255,.85);padding:5px 10px;font-family:'Caveat',cursive;font-size:11px;font-weight:600;transform:rotate(-2deg);box-shadow:1px 2px 4px rgba(0,0,0,.15)">ugc creator</div>
+    <div style="position:absolute;top:38%;right:-6%;background:rgba(255,255,255,.85);padding:5px 10px;font-family:'Caveat',cursive;font-size:11px;font-weight:600;transform:rotate(1.5deg);box-shadow:1px 2px 4px rgba(0,0,0,.15)">brand storyteller</div>
+    <div style="position:absolute;bottom:2%;right:-2%;width:90px;background:#fff;padding:5px 5px 18px;box-shadow:2px 3px 10px rgba(0,0,0,.25);transform:rotate(3deg)"><div style="width:100%;aspect-ratio:1;background:#aaa"></div><div style="text-align:center;font-family:'Space Mono',monospace;font-size:5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-top:4px">JESSICA SANTOS</div></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:4px">
+    <span style="font-family:'Caveat',cursive;font-size:11px;color:#0D0D0D;opacity:.6">THE</span>
+    <span style="font-family:'Permanent Marker',cursive;font-size:38px;line-height:.92;color:#0D0D0D">Jessica<br>Santos</span>
+    <span style="font-family:'Permanent Marker',cursive;font-size:11px;color:#CC3333;margin-top:2px">by jessica.creates</span>
+    <p style="font-family:'Caveat',cursive;font-size:10px;color:#0D0D0D;opacity:.7;margin-top:8px;line-height:1.5;max-width:160px">Criadora de conteúdo UGC especializada em beleza, lifestyle e produtos de consumo.</p>
+    <div style="margin-top:10px"><div style="display:inline-flex;align-items:center;background:#4E5FD4;color:#fff;font-family:'Caveat',cursive;font-size:11px;font-weight:700;padding:7px 16px;border-radius:20px;text-decoration:none">Ver o meu trabalho →</div></div>
+  </div>
+</div></body></html>`;
 window.addEventListener('load',()=>{
-  [[1,PV1],[2,PV2],[3,PV3]].forEach(([t,html])=>{
+  [[1,PV1],[2,PV2],[3,PV3],[4,PV4]].forEach(([t,html])=>{
     const fr=document.getElementById('pv'+t);
     if(!fr)return;
     const doc=fr.contentDocument||fr.contentWindow.document;
