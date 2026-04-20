@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UGC Portfolio Studio ✦</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700;1,9..144,900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{font-family:'DM Sans',sans-serif;background:#0D0D0D;color:#F0EDE6;display:flex;flex-direction:column}
+.topbar{display:flex;align-items:center;padding:0 16px;height:52px;background:#111;border-bottom:1px solid rgba(200,169,126,.18);flex-shrink:0;gap:10px;z-index:100;overflow-x:auto}
+.logo{font-family:'Playfair Display',serif;font-size:15px;color:#C8A97E;letter-spacing:.5px;white-space:nowrap;flex-shrink:0}
+.tmpl-label{font-size:9px;color:#555;text-transform:uppercase;letter-spacing:.8px;white-space:nowrap;flex-shrink:0;margin-left:6px}
+.tmpl-bar{display:flex;gap:5px;flex-shrink:0}
+.tmpl-btn{padding:5px 12px;border-radius:20px;font-size:10.5px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,.1);background:transparent;color:#666;transition:all .2s;white-space:nowrap;line-height:1.4}
+.tmpl-btn.on{background:#C8A97E;color:#000;border-color:#C8A97E}
+.tmpl-btn small{display:block;font-size:8px;font-weight:400;opacity:.65;letter-spacing:.3px}
+.topbar-right{display:flex;gap:5px;align-items:center;margin-left:auto;flex-shrink:0}
+.tbtn{padding:6px 12px;border-radius:6px;font-size:11px;font-weight:500;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:all .2s;white-space:nowrap}
+.tbtn-ghost{background:transparent;border:1px solid rgba(200,169,126,.3);color:#999}
+.tbtn-ghost:hover{border-color:#C8A97E;color:#C8A97E}
+.tbtn-primary{background:#C8A97E;color:#000}
+.tbtn-primary:hover{opacity:.85}
+.app{display:flex;flex:1;overflow:hidden;height:calc(100vh - 52px)}
+.sidebar{width:290px;min-width:260px;background:#111;border-right:1px solid rgba(200,169,126,.15);display:flex;flex-direction:column;overflow:hidden}
+.tabs{display:flex;border-bottom:1px solid rgba(200,169,126,.15);flex-shrink:0}
+.tab{flex:1;padding:10px 2px;font-size:9px;font-weight:600;text-align:center;cursor:pointer;color:#666;border-bottom:2px solid transparent;transition:all .2s;letter-spacing:.4px;text-transform:uppercase}
+.tab.on{color:#C8A97E;border-bottom-color:#C8A97E}
+.panel{display:none;padding:12px;overflow-y:auto;flex:1}
+.panel.on{display:block}
+.panel::-webkit-scrollbar{width:3px}
+.panel::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08);border-radius:2px}
+.sec{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:#555;margin:12px 0 6px}
+.sec:first-child{margin-top:0}
+.fld{margin-bottom:8px}
+.fld label{display:block;font-size:11px;color:#666;margin-bottom:3px}
+.fld input,.fld textarea,.fld select{width:100%;background:#1A1A1A;border:1px solid rgba(255,255,255,.07);color:#EEE;border-radius:6px;padding:6px 9px;font-size:12px;font-family:'DM Sans',sans-serif;transition:border .2s}
+.fld textarea{resize:vertical}
+.fld input:focus,.fld textarea:focus{outline:none;border-color:#C8A97E}
+.sep{height:1px;background:rgba(255,255,255,.05);margin:10px 0}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:8px}
+.sgrid .si-wrap label{display:block;font-size:10px;color:#555;margin-bottom:2px}
+.sgrid .si-wrap input{width:100%;background:#1A1A1A;border:1px solid rgba(255,255,255,.07);color:#EEE;border-radius:5px;padding:5px 7px;font-size:11px;font-family:'DM Sans',sans-serif}
+.tags-wrap{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px}
+.tag-item{display:flex;align-items:center;gap:3px;padding:3px 8px;border-radius:20px;font-size:10.5px;font-weight:500;background:rgba(200,169,126,.1);color:#C8A97E;border:1px solid rgba(200,169,126,.22)}
+.tag-item button{background:none;border:none;color:#C8A97E;cursor:pointer;font-size:9px;padding:0;opacity:.6}
+.tag-row{display:flex;gap:5px}
+.tag-row input{flex:1;background:#1A1A1A;border:1px solid rgba(255,255,255,.07);color:#EEE;border-radius:6px;padding:5px 8px;font-size:11px;font-family:'DM Sans',sans-serif}
+.tag-row button{padding:5px 10px;border-radius:6px;border:1px solid rgba(200,169,126,.4);background:transparent;color:#C8A97E;font-size:12px;cursor:pointer}
+.soc-row{display:flex;align-items:center;gap:6px;margin-bottom:5px}
+.soc-icon{width:23px;height:23px;border-radius:4px;background:#1A1A1A;border:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+.soc-row input{flex:1;background:#1A1A1A;border:1px solid rgba(255,255,255,.07);color:#EEE;border-radius:6px;padding:5px 8px;font-size:11px;font-family:'DM Sans',sans-serif}
+.upzone{border:1px dashed rgba(200,169,126,.22);border-radius:7px;padding:12px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:7px}
+.upzone:hover{border-color:#C8A97E;background:rgba(200,169,126,.03)}
+.upzone p{font-size:10.5px;color:#666;line-height:1.4;margin-top:3px}
+.upzone input{display:none}
+.uico{font-size:17px}
+.mthumb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-bottom:7px}
+.mthumb{aspect-ratio:1;border-radius:5px;overflow:hidden;position:relative;background:#1A1A1A;border:1px solid rgba(255,255,255,.07)}
+.mthumb img,.mthumb video{width:100%;height:100%;object-fit:cover}
+.mthumb .rm{position:absolute;top:2px;right:2px;width:15px;height:15px;background:rgba(0,0,0,.85);border:none;border-radius:50%;color:#fff;font-size:8px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.mthumb .vico{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);font-size:13px;pointer-events:none}
+.color-row{display:flex;align-items:center;gap:7px;margin-bottom:8px}
+.cswatch{width:26px;height:26px;border-radius:5px;border:1px solid rgba(255,255,255,.1);cursor:pointer;position:relative;overflow:hidden;flex-shrink:0}
+.cswatch input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer;border:none}
+.clabel{font-size:11px;color:#555}
+.range-row{display:flex;align-items:center;gap:7px}
+.range-row input[type=range]{flex:1;-webkit-appearance:none;height:3px;border-radius:2px;background:rgba(255,255,255,.1);outline:none;cursor:pointer}
+.range-row input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:#C8A97E;cursor:pointer}
+.rval{font-size:11px;color:#C8A97E;min-width:18px;text-align:right}
+.tog-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.tog-row label{font-size:12px}
+.tog{width:32px;height:18px;border-radius:9px;background:rgba(255,255,255,.1);position:relative;cursor:pointer;transition:background .2s;flex-shrink:0}
+.tog.on{background:#C8A97E}
+.tog-k{width:12px;height:12px;border-radius:50%;background:#fff;position:absolute;top:3px;left:3px;transition:left .2s}
+.tog.on .tog-k{left:17px}
+.pkg-card{background:#1A1A1A;border:1px solid rgba(255,255,255,.07);border-radius:7px;padding:9px;margin-bottom:7px}
+.pkg-card label{font-size:10px;color:#555;display:block;margin-bottom:2px}
+.pkg-card input,.pkg-card textarea{width:100%;background:#0D0D0D;border:1px solid rgba(255,255,255,.07);color:#EEE;border-radius:5px;padding:4px 7px;font-size:11px;font-family:'DM Sans',sans-serif}
+.pkg-card textarea{resize:vertical}
+.pkg-name-lbl{font-size:10px;font-weight:700;color:#C8A97E;margin-bottom:5px;text-transform:uppercase;letter-spacing:1px}
+/* pages */
+.pages-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.pages-bar span{font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.8px}
+.add-page-btn{padding:5px 10px;border-radius:6px;border:1px solid rgba(200,169,126,.4);background:transparent;color:#C8A97E;font-size:11px;cursor:pointer}
+.page-item{background:#1A1A1A;border-radius:8px;margin-bottom:5px;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:border .15s}
+.page-item.drag-over{border-color:#C8A97E;background:rgba(200,169,126,.05)}
+.page-header{display:flex;align-items:center;gap:7px;padding:8px 10px;cursor:grab;user-select:none}
+.page-header:active{cursor:grabbing}
+.drag-handle{color:#444;font-size:12px;flex-shrink:0}
+.page-icon{font-size:13px;flex-shrink:0}
+.page-name{font-size:11.5px;font-weight:500;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.page-actions{display:flex;gap:4px;flex-shrink:0;align-items:center}
+.page-act-btn{background:none;border:none;color:#555;cursor:pointer;font-size:10px;padding:2px 5px;border-radius:4px;transition:all .2s}
+.page-act-btn:hover{color:#C8A97E;background:rgba(200,169,126,.1)}
+.page-act-btn.del:hover{color:#ff6060;background:rgba(255,60,60,.1)}
+.page-toggle{width:28px;height:16px;border-radius:8px;background:rgba(255,255,255,.1);position:relative;cursor:pointer;transition:background .2s;flex-shrink:0}
+.page-toggle.on{background:#C8A97E}
+.page-toggle-k{width:10px;height:10px;border-radius:50%;background:#fff;position:absolute;top:3px;left:3px;transition:left .2s;pointer-events:none}
+.page-toggle.on .page-toggle-k{left:15px}
+.page-edit{display:none;padding:0 10px 10px;border-top:1px solid rgba(255,255,255,.05)}
+.page-edit.open{display:block}
+.page-edit input,.page-edit textarea,.page-edit select{width:100%;background:#0D0D0D;border:1px solid rgba(255,255,255,.07);color:#EEE;border-radius:5px;padding:5px 8px;font-size:11px;font-family:'DM Sans',sans-serif;margin-bottom:5px}
+.page-edit textarea{resize:vertical}
+.page-edit label{display:block;font-size:10px;color:#555;margin-bottom:2px;margin-top:5px}
+.add-block-panel{background:#0D0D0D;border-radius:8px;padding:10px;margin-bottom:10px;display:none}
+.add-block-panel p{font-size:10px;color:#555;margin-bottom:7px;text-transform:uppercase;letter-spacing:.8px}
+.block-type-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.block-type-btn{background:#1A1A1A;border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:7px 5px;text-align:center;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
+.block-type-btn:hover{border-color:#C8A97E;background:rgba(200,169,126,.06)}
+.block-type-btn .bico{font-size:15px;display:block;margin-bottom:2px}
+.block-type-btn span{font-size:10px;color:#888;display:block}
+/* preview */
+.preview-wrap{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.preview-bar{display:flex;align-items:center;gap:8px;padding:7px 14px;background:#111;border-bottom:1px solid rgba(200,169,126,.15);flex-shrink:0}
+.preview-label{font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.8px}
+.view-btns{display:flex;gap:4px;margin-left:auto}
+.vbtn{padding:4px 9px;border-radius:5px;border:1px solid rgba(255,255,255,.07);background:transparent;color:#666;font-size:11px;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
+.vbtn.on{background:#C8A97E;color:#000;border-color:#C8A97E}
+#preview-frame{flex:1;border:none;background:#fff}
+#preview-frame.mobile{max-width:390px;margin:14px auto;border-radius:12px;box-shadow:0 0 60px rgba(0,0,0,.8);display:block}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="tbtn tbtn-ghost" onclick="window.location.href='index.html'" style="margin-right:4px;font-size:12px">← Home</button>
+  <div class="logo">✦ UGC Studio</div>
+  <div class="tmpl-label">Template:</div>
+  <div class="tmpl-bar">
+    <button class="tmpl-btn on" onclick="switchTemplate(1,this)">Velvet Noir<small>cartões · clássico</small></button>
+    <button class="tmpl-btn" onclick="switchTemplate(2,this)">Lumière<small>tipográfico · elegante</small></button>
+    <button class="tmpl-btn" onclick="switchTemplate(3,this)">The Edit<small>colorido · conversão</small></button>
+  </div>
+  <div class="topbar-right">
+    <button class="tbtn tbtn-ghost" onclick="setView('desktop',event)">🖥</button>
+    <button class="tbtn tbtn-ghost" onclick="setView('mobile',event)">📱</button>
+    <button class="tbtn tbtn-primary" onclick="downloadSite()">⬇ Download</button>
+  </div>
+</div>
+
+<div class="app">
+  <div class="sidebar">
+    <div class="tabs">
+      <div class="tab on"  onclick="switchTab('perfil',this)">Perfil</div>
+      <div class="tab"     onclick="switchTab('media',this)">Média</div>
+      <div class="tab"     onclick="switchTab('paginas',this)">Páginas</div>
+      <div class="tab"     onclick="switchTab('design',this)">Design</div>
+      <div class="tab"     onclick="switchTab('texto',this)">Textos</div>
+    </div>
+
+    <!-- PERFIL -->
+    <div class="panel on" id="panel-perfil">
+      <div class="sec">Identidade</div>
+      <div class="fld"><label>Nome</label><input id="p-name" value="Jessica" oninput="render()"></div>
+      <div class="fld"><label>Apelido</label><input id="p-surname" value="Santos" oninput="render()"></div>
+      <div class="fld"><label>Handle / @</label><input id="p-handle" value="@jessicasantos.ugc" oninput="render()"></div>
+      <div class="fld"><label>Tagline</label><input id="p-tagline" value="UGC Creator · Storytelling · Conteúdo Autêntico" oninput="render()"></div>
+      <div class="fld"><label>Bio — parágrafo 1</label><textarea id="p-bio1" rows="3" oninput="render()">Sou uma UGC Creator especializada em conteúdo de beleza, lifestyle e bem-estar. Comecei a criar por pura paixão — e hoje transformei isso numa carreira a tempo inteiro.</textarea></div>
+      <div class="fld"><label>Bio — parágrafo 2</label><textarea id="p-bio2" rows="3" oninput="render()">Acredito que o melhor conteúdo é aquele que parece real, porque é real. Nada de scripts ensaiados — só histórias autênticas que conectam marcas às pessoas certas.</textarea></div>
+      <div class="fld"><label>Bio — parágrafo 3</label><textarea id="p-bio3" rows="2" oninput="render()">Quando não estou a filmar, encontras-me a explorar cafés novos, a testar produtos de skincare ou a planear a próxima aventura. 🌿</textarea></div>
+      <div class="sep"></div>
+      <div class="sec">Estatísticas / Resultados</div>
+      <div class="sgrid">
+        <div class="si-wrap"><label>Stat 1 num</label><input id="st-v1" value="50+" oninput="render()"></div>
+        <div class="si-wrap"><label>Stat 1 label</label><input id="st-l1" value="Marcas" oninput="render()"></div>
+        <div class="si-wrap"><label>Stat 2 num</label><input id="st-v2" value="300+" oninput="render()"></div>
+        <div class="si-wrap"><label>Stat 2 label</label><input id="st-l2" value="Vídeos criados" oninput="render()"></div>
+        <div class="si-wrap"><label>Stat 3 num</label><input id="st-v3" value="98%" oninput="render()"></div>
+        <div class="si-wrap"><label>Stat 3 label</label><input id="st-l3" value="Satisfação" oninput="render()"></div>
+        <div class="si-wrap"><label>Stat 4 num</label><input id="st-v4" value="2M+" oninput="render()"></div>
+        <div class="si-wrap"><label>Stat 4 label</label><input id="st-l4" value="Views geradas" oninput="render()"></div>
+      </div>
+      <div class="sep"></div>
+      <div class="sec">Contacto</div>
+      <div class="fld"><label>Email</label><input id="p-email" value="ola.jessycatarina@gmail.com" oninput="render()"></div>
+      <div class="fld"><label>Telefone</label><input id="p-tel" value="+351 900 000 000" oninput="render()"></div>
+      <div class="fld"><label>Website</label><input id="p-web" value="jessica-santos.com" oninput="render()"></div>
+      <div class="fld"><label>Localização</label><input id="p-loc" value="Lisboa, Portugal · Disponível remotamente" oninput="render()"></div>
+      <div class="sep"></div>
+      <div class="sec">Redes Sociais (URLs completos)</div>
+      <div class="soc-row"><div class="soc-icon">📸</div><input id="soc-ig" placeholder="https://instagram.com/..." oninput="render()"></div>
+      <div class="soc-row"><div class="soc-icon">🎵</div><input id="soc-tt" placeholder="https://tiktok.com/..." oninput="render()"></div>
+      <div class="soc-row"><div class="soc-icon">📌</div><input id="soc-pt" placeholder="https://pinterest.com/..." oninput="render()"></div>
+      <div class="soc-row"><div class="soc-icon">▶️</div><input id="soc-yt" placeholder="https://youtube.com/..." oninput="render()"></div>
+      <div class="soc-row"><div class="soc-icon">💼</div><input id="soc-li" placeholder="https://linkedin.com/..." oninput="render()"></div>
+      <div class="sep"></div>
+      <div class="sec">Nichos / Tags</div>
+      <div class="tags-wrap" id="niches-wrap"></div>
+      <div class="tag-row"><input id="niche-in" placeholder="Ex: Beleza, Food..." onkeydown="if(event.key==='Enter')addNiche()"><button onclick="addNiche()">+</button></div>
+      <div class="sep"></div>
+      <div class="sec">Marcas trabalhadas (barra rosa)</div>
+      <div class="fld"><textarea id="p-brands" rows="3" oninput="render()">glamour
+LUMIÈRE
+velvetco.
+NUDELAB
+santal&co
+EVERLY</textarea></div>
+      <div class="sep"></div>
+      <div class="sec">Announcement bar (topo)</div>
+      <div class="fld"><input id="p-ann" value="DISPONÍVEL PARA PARCERIAS — Vamos criar conteúdo juntas! ✦" oninput="render()"></div>
+    </div>
+
+    <!-- MEDIA -->
+    <div class="panel" id="panel-media">
+      <div class="sec">Foto Hero (principal)</div>
+      <div class="upzone" onclick="document.getElementById('up-hero').click()"><div class="uico">🖼</div><p>Foto principal do hero</p><input type="file" id="up-hero" accept="image/*" onchange="handleSingle(this,'heroImg')"></div>
+      <div id="heroImg-preview"></div>
+      <div class="sec">Foto About / Sobre mim</div>
+      <div class="upzone" onclick="document.getElementById('up-about').click()"><div class="uico">👤</div><p>Foto da secção about</p><input type="file" id="up-about" accept="image/*" onchange="handleSingle(this,'aboutImg')"></div>
+      <div id="aboutImg-preview"></div>
+      <div class="sec">Foto Testimonial (centro)</div>
+      <div class="upzone" onclick="document.getElementById('up-testi-center').click()"><div class="uico">💬</div><p>Foto central entre testimonials</p><input type="file" id="up-testi-center" accept="image/*" onchange="handleSingle(this,'testiCenterImg')"></div>
+      <div id="testiCenterImg-preview"></div>
+      <div class="sec">Foto Contacto / CTA</div>
+      <div class="upzone" onclick="document.getElementById('up-contact').click()"><div class="uico">📷</div><p>Foto da secção contacto</p><input type="file" id="up-contact" accept="image/*" onchange="handleSingle(this,'contactImg')"></div>
+      <div id="contactImg-preview"></div>
+      <div class="sec">Fotos Hero Cards (Template Velvet Noir)</div>
+      <div class="upzone" onclick="document.getElementById('up-hcards').click()"><div class="uico">🃏</div><p>Até 7 fotos para os cartões do hero</p><input type="file" id="up-hcards" accept="image/*" multiple onchange="handleMulti(this,'heroCards',7,'hcards-thumbs')"></div>
+      <div class="mthumb-grid" id="hcards-thumbs"></div>
+      <div class="sec">Portfolio — Fotos &amp; Vídeos</div>
+      <p style="font-size:10.5px;color:#555;margin-bottom:6px;line-height:1.5">Vídeos reproduzem directamente com clique no site.</p>
+      <div class="upzone" onclick="document.getElementById('up-port').click()"><div class="uico">🎬</div><p>Fotos e vídeos do portfolio<br><span style="font-size:10px;opacity:.5">MP4, MOV, JPG, PNG</span></p><input type="file" id="up-port" accept="image/*,video/*" multiple onchange="handlePortMedia(this)"></div>
+      <div class="mthumb-grid" id="port-thumbs"></div>
+      <div class="sec">Serviços — 3 Fotos</div>
+      <div class="upzone" onclick="document.getElementById('up-svcs').click()"><div class="uico">✨</div><p>3 fotos para os cards de serviços</p><input type="file" id="up-svcs" accept="image/*" multiple onchange="handleMulti(this,'svcImgs',3,'svc-thumbs')"></div>
+      <div class="mthumb-grid" id="svc-thumbs"></div>
+      <div class="sec">Case Studies — 2 Fotos</div>
+      <div class="upzone" onclick="document.getElementById('up-cases').click()"><div class="uico">📊</div><p>2 fotos para os casos de estudo</p><input type="file" id="up-cases" accept="image/*" multiple onchange="handleMulti(this,'caseImgs',2,'case-thumbs')"></div>
+      <div class="mthumb-grid" id="case-thumbs"></div>
+      <div class="sec">Galeria Strip (Template Lumière)</div>
+      <div class="upzone" onclick="document.getElementById('up-strip').click()"><div class="uico">🖼</div><p>4 fotos para a faixa</p><input type="file" id="up-strip" accept="image/*" multiple onchange="handleMulti(this,'stripImgs',4,'strip-thumbs')"></div>
+      <div class="mthumb-grid" id="strip-thumbs"></div>
+    </div>
+
+    <!-- PÁGINAS -->
+    <div class="panel" id="panel-paginas">
+      <div class="pages-bar">
+        <span>Secções — arrastar para reordenar</span>
+        <button class="add-page-btn" onclick="toggleAddBlock()">+ Bloco</button>
+      </div>
+      <div class="add-block-panel" id="add-block-panel">
+        <p>Tipo de bloco a adicionar</p>
+        <div class="block-type-grid" id="block-type-grid"></div>
+      </div>
+      <div id="pages-list"></div>
+    </div>
+
+    <!-- DESIGN -->
+    <div class="panel" id="panel-design">
+      <div class="sec">Cores — Template The Edit</div>
+      <div class="color-row"><div class="cswatch" id="sw-terra" style="background:#C96B52"><input type="color" id="c-terra" value="#C96B52" oninput="updateC('terra',this.value)"></div><div class="clabel">Terra (destaque principal)</div></div>
+      <div class="color-row"><div class="cswatch" id="sw-sage" style="background:#7CBFB5"><input type="color" id="c-sage" value="#7CBFB5" oninput="updateC('sage',this.value)"></div><div class="clabel">Sage (destaque 2)</div></div>
+      <div class="color-row"><div class="cswatch" id="sw-gold" style="background:#D4A030"><input type="color" id="c-gold" value="#D4A030" oninput="updateC('gold',this.value)"></div><div class="clabel">Gold (destaque 3)</div></div>
+      <div class="color-row"><div class="cswatch" id="sw-pink" style="background:#E8899A"><input type="color" id="c-pink" value="#E8899A" oninput="updateC('pink',this.value)"></div><div class="clabel">Pink (barra de marcas)</div></div>
+      <div class="color-row"><div class="cswatch" id="sw-cream" style="background:#F5EFE4"><input type="color" id="c-cream" value="#F5EFE4" oninput="updateC('cream',this.value)"></div><div class="clabel">Cream (fundo)</div></div>
+      <div class="sep"></div>
+      <div class="sec">Colunas portfolio</div>
+      <div class="range-row">
+        <input type="range" min="2" max="4" step="1" value="3" oninput="portCols=+this.value;render();document.getElementById('cols-v').textContent=this.value">
+        <span class="rval" id="cols-v">3</span>
+      </div>
+      <div class="sep"></div>
+      <div class="sec">Secções visíveis — Velvet Noir</div>
+      <div id="tog-t1"></div>
+      <div class="sep"></div>
+      <div class="sec">Secções visíveis — Lumière</div>
+      <div id="tog-t2"></div>
+      <div class="sep"></div>
+      <div class="sec">Secções visíveis — The Edit</div>
+      <div id="tog-t3"></div>
+    </div>
+
+    <!-- TEXTOS -->
+    <div class="panel" id="panel-texto">
+      <div class="sec">Serviços (3 cards)</div>
+      <div class="fld"><label>Nome 1</label><input id="svc1-name" value="UGC Vídeo" oninput="render()"></div>
+      <div class="fld"><label>Descrição 1</label><textarea id="svc1-desc" rows="2" oninput="render()">Vídeos autênticos para Instagram Reels, TikTok e anúncios — com guião, filmagem, edição e entrega de ficheiros raw + editados.</textarea></div>
+      <div class="fld"><label>Preço 1</label><input id="svc1-price" value="A partir de €150 / vídeo" oninput="render()"></div>
+      <div class="fld"><label>Nome 2</label><input id="svc2-name" value="Fotografia UGC" oninput="render()"></div>
+      <div class="fld"><label>Descrição 2</label><textarea id="svc2-desc" rows="2" oninput="render()">Imagens lifestyle de alta qualidade para feed, stories e e-commerce. Estilo editorial ou casual — tu escolhes a vibe.</textarea></div>
+      <div class="fld"><label>Preço 2</label><input id="svc2-price" value="A partir de €80 / foto" oninput="render()"></div>
+      <div class="fld"><label>Nome 3</label><input id="svc3-name" value="Pack Completo" oninput="render()"></div>
+      <div class="fld"><label>Descrição 3</label><textarea id="svc3-desc" rows="2" oninput="render()">Estratégia + vídeo + foto + revisões incluídas. Para marcas que querem presença consistente e conteúdo em escala.</textarea></div>
+      <div class="fld"><label>Preço 3</label><input id="svc3-price" value="A partir de €500 / mês" oninput="render()"></div>
+      <div class="sep"></div>
+      <div class="sec">Case Studies (2 casos)</div>
+      <div class="fld"><label>Tag 1 (cor sage)</label><input id="case1-tag" value="Beleza" oninput="render()"></div>
+      <div class="fld"><label>Título 1</label><input id="case1-title" value="Lumière Beauty — Lançamento de Sérum" oninput="render()"></div>
+      <div class="fld"><label>Descrição 1</label><textarea id="case1-desc" rows="3" oninput="render()">A Lumière queria apresentar o novo sérum de ácido hialurónico a uma audiência mais jovem. Criámos uma série de 6 vídeos UGC para Meta Ads e TikTok orgânico.</textarea></div>
+      <div class="fld"><label>Stats 1 (sep. vírgula: num|label)</label><input id="case1-stats" value="2.4M|visualizações,4.8%|CTR médio,312%|ROAS" oninput="render()"></div>
+      <div class="fld"><label>Tag 2</label><input id="case2-tag" value="Lifestyle" oninput="render()"></div>
+      <div class="fld"><label>Título 2</label><input id="case2-title" value="Santal&Co — Campanha de Outono" oninput="render()"></div>
+      <div class="fld"><label>Descrição 2</label><textarea id="case2-desc" rows="3" oninput="render()">Uma marca de velas e perfumes de ambiente que precisava de conteúdo com alma para a campanha de Outono. Criámos 4 vídeos atmosféricos + 12 fotos lifestyle.</textarea></div>
+      <div class="fld"><label>Stats 2</label><input id="case2-stats" value="180K|alcance orgânico,9.2%|engagement rate,98%|satisfação" oninput="render()"></div>
+      <div class="sep"></div>
+      <div class="sec">Testimonials</div>
+      <div class="fld"><label>Quote 1</label><textarea id="t1-quote" rows="3" oninput="render()">A Jessica entendeu a nossa marca desde o primeiro briefing. Os vídeos que criou tiveram um CTR 3x superior aos nossos criativos internos. Voltamos a trabalhar com ela de certeza.</textarea></div>
+      <div class="fld"><label>Autor 1</label><input id="t1-author" value="— Sofia R. · Lumière Beauty" oninput="render()"></div>
+      <div class="fld"><label>Quote 2</label><textarea id="t2-quote" rows="3" oninput="render()">Trabalhar com a Jessica foi incrivelmente fácil. Cumpriu todos os prazos, os conteúdos eram exatamente o que queríamos, e ainda nos deu ideias que não tínhamos pensado. Recomendo 100%.</textarea></div>
+      <div class="fld"><label>Autor 2</label><input id="t2-author" value="— Mariana C. · Santal&Co" oninput="render()"></div>
+      <div class="sep"></div>
+      <div class="sec">FAQ (6 perguntas)</div>
+      <div class="fld"><label>Q1</label><input id="faq1-q" value="Como é o processo de trabalho?" oninput="render()"></div>
+      <div class="fld"><label>A1</label><textarea id="faq1-a" rows="2" oninput="render()">Após a confirmação, envias o briefing e o produto (se aplicável). Em 48h apresento o conceito e em 7–10 dias úteis tens os conteúdos finais prontos a usar.</textarea></div>
+      <div class="fld"><label>Q2</label><input id="faq2-q" value="Incluis direitos de utilização nos anúncios pagos?" oninput="render()"></div>
+      <div class="fld"><label>A2</label><textarea id="faq2-a" rows="2" oninput="render()">Sim! Todos os meus pacotes incluem direitos de utilização para organic e paid ads. Para whitelabel ou uso exclusivo, existe um add-on específico.</textarea></div>
+      <div class="fld"><label>Q3</label><input id="faq3-q" value="Precisas de receber o produto físico?" oninput="render()"></div>
+      <div class="fld"><label>A3</label><textarea id="faq3-a" rows="2" oninput="render()">Para vídeos de unboxing e uso, sim. Para conteúdo mais conceitual ou lifestyle, nem sempre — depende do projeto.</textarea></div>
+      <div class="fld"><label>Q4</label><input id="faq4-q" value="Fazes revisões?" oninput="render()"></div>
+      <div class="fld"><label>A4</label><textarea id="faq4-a" rows="2" oninput="render()">Todos os pacotes incluem 1 ronda de revisões. Revisões adicionais têm um custo extra.</textarea></div>
+      <div class="fld"><label>Q5</label><input id="faq5-q" value="Trabalhas com marcas internacionais?" oninput="render()"></div>
+      <div class="fld"><label>A5</label><textarea id="faq5-a" rows="2" oninput="render()">Sim! Trabalho em português e inglês, e aceito colaborações de marcas de todo o mundo.</textarea></div>
+      <div class="fld"><label>Q6</label><input id="faq6-q" value="Quanto tempo antes devo contactar?" oninput="render()"></div>
+      <div class="fld"><label>A6</label><textarea id="faq6-a" rows="2" oninput="render()">Recomendo contactar com pelo menos 2–3 semanas de antecedência. Para campanhas maiores, quanto mais cedo melhor!</textarea></div>
+      <div class="sep"></div>
+      <div class="sec">Textos CTA / Hero</div>
+      <div class="fld"><label>Hero headline (linha 3)</label><input id="tx-hero3" value="realmente" oninput="render()"></div>
+      <div class="fld"><label>Hero headline (linha 4)</label><input id="tx-hero4" value="assistem." oninput="render()"></div>
+      <div class="fld"><label>Hero sub</label><textarea id="tx-hero-sub" rows="2" oninput="render()">Com uma criadora que vive o que filma — e sabe exatamente o que faz uma marca brilhar.</textarea></div>
+      <div class="fld"><label>CTA headline linha 3</label><input id="tx-cta3" value="brilhar" oninput="render()"></div>
+      <div class="fld"><label>CTA sub</label><textarea id="tx-cta-sub" rows="2" oninput="render()">Vamos criar conteúdo que converte — sem parecer que estás a vender. Marca uma chamada de descoberta gratuita e vemos como posso ajudar.</textarea></div>
+      <div class="fld"><label>Texto botão CTA</label><input id="tx-cta-btn" value="Agendar Chamada Gratuita" oninput="render()"></div>
+    </div>
+  </div>
+
+  <div class="preview-wrap">
+    <div class="preview-bar">
+      <span class="preview-label" id="tmpl-name-label">Velvet Noir</span>
+      <div class="view-btns">
+        <button class="vbtn on" onclick="setView('desktop',event)">🖥 Desktop</button>
+        <button class="vbtn" onclick="setView('mobile',event)">📱 Mobile</button>
+      </div>
+    </div>
+    <iframe id="preview-frame" title="Portfolio Preview"></iframe>
+  </div>
+</div>
+
+<script>
+// ── STATE ─────────────────────────────────────────────────────────────────────
+let activeTemplate = 1;
+const imgs = {};
+const heroCards=[], stripImgs=[], svcImgs=[], caseImgs=[], portMedia=[];
+let niches = ['Beleza','Lifestyle','Bem-estar','Moda','Viagens'];
+let portCols = 3;
+let C = { terra:'#C96B52', sage:'#7CBFB5', gold:'#D4A030', pink:'#E8899A', cream:'#F5EFE4' };
+
+// ── SECTIONS PER TEMPLATE ────────────────────────────────────────────────────
+const SECTION_DEFS = {
+  1: [
+    {id:'hero',     label:'Hero',           icon:'🌟'},
+    {id:'about',    label:'Sobre mim',      icon:'👤'},
+    {id:'portfolio',label:'Portfolio',      icon:'🎬'},
+    {id:'pricing',  label:'Preços',         icon:'💰'},
+    {id:'process',  label:'Processo',       icon:'⚙️'},
+    {id:'contact',  label:'Contacto',       icon:'📩'},
+  ],
+  2: [
+    {id:'hero',       label:'Hero',             icon:'🌟'},
+    {id:'strip',      label:'Galeria Strip',    icon:'🖼'},
+    {id:'about',      label:'Sobre mim',        icon:'👤'},
+    {id:'why',        label:'Por que UGC?',     icon:'❓'},
+    {id:'mywork',     label:'O meu trabalho',   icon:'🖼'},
+    {id:'testimonials',label:'Testimonials',    icon:'💬'},
+    {id:'pricing',    label:'Preços',           icon:'💰'},
+    {id:'contact',    label:'Contacto',         icon:'📩'},
+  ],
+  3: [
+    {id:'ann',          label:'Barra anúncio',      icon:'📢'},
+    {id:'hero',         label:'Hero',               icon:'🌟'},
+    {id:'brands',       label:'Barra de marcas',    icon:'🏷'},
+    {id:'statement',    label:'Big Statement',      icon:'💡'},
+    {id:'about',        label:'Sobre mim',          icon:'👤'},
+    {id:'pain',         label:'Pain Points',        icon:'⚠️'},
+    {id:'results',      label:'Resultados',         icon:'📈'},
+    {id:'services',     label:'Serviços',           icon:'✨'},
+    {id:'cases',        label:'Case Studies',       icon:'📊'},
+    {id:'testimonials', label:'Testimonials',       icon:'💬'},
+    {id:'faq',          label:'FAQ',                icon:'❓'},
+    {id:'contact',      label:'Contacto / CTA',     icon:'📩'},
+  ]
+};
+
+// pages state: ordered list with visible flag + custom blocks
+let templatePages = { 1:null, 2:null, 3:null };
+function getPages(){
+  if(!templatePages[activeTemplate]){
+    templatePages[activeTemplate] = SECTION_DEFS[activeTemplate].map(s=>({
+      ...s, uid:'pg_'+Math.random().toString(36).slice(2), visible:true, data:{}
+    }));
+  }
+  return templatePages[activeTemplate];
+}
+
+// ── CUSTOM BLOCK TYPES ───────────────────────────────────────────────────────
+const CUSTOM_BLOCKS = [
+  {type:'custom_text',    label:'Bloco de Texto',   icon:'📝'},
+  {type:'custom_gallery', label:'Galeria de Fotos',  icon:'🖼'},
+  {type:'custom_video',   label:'Vídeo directo',     icon:'▶️'},
+  {type:'custom_cta',     label:'Botão CTA',         icon:'🔗'},
+  {type:'custom_quote',   label:'Citação',           icon:'💬'},
+  {type:'custom_brands',  label:'Marcas',            icon:'🏷'},
+  {type:'custom_divider', label:'Separador',         icon:'➖'},
+  {type:'custom_stats',   label:'Estatísticas',      icon:'📊'},
+];
+
+// ── TABS ─────────────────────────────────────────────────────────────────────
+function switchTab(name,el){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  document.getElementById('panel-'+name).classList.add('on');
+  if(name==='paginas') renderPagesList();
+}
+
+// ── TEMPLATE SWITCH ──────────────────────────────────────────────────────────
+const TMPL_NAMES = {1:'Velvet Noir',2:'Lumière',3:'The Edit'};
+function switchTemplate(n,el){
+  activeTemplate=n;
+  document.querySelectorAll('.tmpl-btn').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('tmpl-name-label').textContent=TMPL_NAMES[n];
+  renderPagesList();
+  render();
+}
+
+// ── NICHES ───────────────────────────────────────────────────────────────────
+function addNiche(){
+  const inp=document.getElementById('niche-in'),v=inp.value.trim();
+  if(!v)return;niches.push(v);inp.value='';renderNiches();render();
+}
+function rmNiche(i){niches.splice(i,1);renderNiches();render();}
+function renderNiches(){
+  document.getElementById('niches-wrap').innerHTML=niches.map((n,i)=>
+    `<div class="tag-item">${n}<button onclick="rmNiche(${i})">✕</button></div>`).join('');
+}
+
+// ── COLORS ───────────────────────────────────────────────────────────────────
+function updateC(k,v){
+  C[k]=v;
+  document.getElementById('sw-'+k).style.background=v;
+  render();
+}
+
+// ── UPLOADS ──────────────────────────────────────────────────────────────────
+function handleSingle(input,key){
+  const f=input.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    imgs[key]=e.target.result;
+    const el=document.getElementById(key+'-preview');
+    if(el)el.innerHTML=`<img src="${e.target.result}" style="width:100%;border-radius:5px;margin-bottom:6px;max-height:70px;object-fit:cover">`;
+    render();
+  };r.readAsDataURL(f);
+}
+function handleMulti(input,arrName,max,thumbsId){
+  const arr=window[arrName];
+  Array.from(input.files).slice(0,max).forEach(f=>{
+    const r=new FileReader();
+    r.onload=e=>{arr.push(e.target.result);refreshMulti(arrName,thumbsId);render();};
+    r.readAsDataURL(f);
+  });
+}
+function refreshMulti(arrName,thumbsId){
+  const arr=window[arrName];
+  document.getElementById(thumbsId).innerHTML=arr.map((s,i)=>`
+    <div class="mthumb"><img src="${s}">
+    <button class="rm" onclick="window['${arrName}'].splice(${i},1);refreshMulti('${arrName}','${thumbsId}');render()">✕</button>
+    </div>`).join('');
+}
+function handlePortMedia(input){
+  Array.from(input.files).forEach(f=>{
+    const r=new FileReader();const isVid=f.type.startsWith('video');
+    r.onload=e=>{
+      portMedia.push({src:e.target.result,type:isVid?'video':'image'});
+      document.getElementById('port-thumbs').innerHTML=portMedia.map((m,i)=>`
+        <div class="mthumb">${m.type==='video'?`<video src="${m.src}" muted style="width:100%;height:100%;object-fit:cover"></video><div class="vico">▶</div>`:`<img src="${m.src}">`}
+        <button class="rm" onclick="portMedia.splice(${i},1);this.parentElement.remove();render()">✕</button></div>`).join('');
+      render();
+    };r.readAsDataURL(f);
+  });
+}
+
+// ── PAGES ─────────────────────────────────────────────────────────────────────
+let dragSrc=null;
+function toggleAddBlock(){
+  const el=document.getElementById('add-block-panel');
+  const open=el.style.display==='block';
+  el.style.display=open?'none':'block';
+  if(!open){
+    document.getElementById('block-type-grid').innerHTML=CUSTOM_BLOCKS.map(b=>`
+      <button class="block-type-btn" onclick="addBlock('${b.type}')">
+        <span class="bico">${b.icon}</span>
+        <span>${b.label}</span>
+      </button>`).join('');
+  }
+}
+function addBlock(type){
+  const def=CUSTOM_BLOCKS.find(b=>b.type===type)||{label:type,icon:'📄'};
+  const pg={id:type,uid:'pg_'+Math.random().toString(36).slice(2),label:def.label,icon:def.icon,visible:true,data:{},custom:true};
+  const pages=getPages();
+  const ci=pages.findIndex(p=>p.id==='contact');
+  if(ci>=0)pages.splice(ci,0,pg);else pages.push(pg);
+  document.getElementById('add-block-panel').style.display='none';
+  renderPagesList();render();
+}
+function renderPagesList(){
+  const pages=getPages();
+  document.getElementById('pages-list').innerHTML=pages.map((pg,i)=>`
+    <div class="page-item" id="pgi-${pg.uid}" draggable="true"
+      ondragstart="dragStart(event,'${pg.uid}')"
+      ondragover="dragOver(event,'${pg.uid}')"
+      ondragleave="dragLeave(event,'${pg.uid}')"
+      ondrop="dragDrop(event,'${pg.uid}')">
+      <div class="page-header" onclick="togglePgEdit('${pg.uid}')">
+        <span class="drag-handle">⠿</span>
+        <span class="page-icon">${pg.icon||'📄'}</span>
+        <span class="page-name">${pg.data&&pg.data.label||pg.label}</span>
+        <div class="page-actions">
+          <div class="page-toggle ${pg.visible?'on':''}" id="pgt-${pg.uid}" onclick="event.stopPropagation();togglePgVis('${pg.uid}')"><div class="page-toggle-k"></div></div>
+          ${pg.custom?`<button class="page-act-btn del" onclick="event.stopPropagation();removePg('${pg.uid}')">✕</button>`:''}
+        </div>
+      </div>
+      <div class="page-edit" id="pge-${pg.uid}">${buildPgEditor(pg)}</div>
+    </div>`).join('');
+}
+function buildPgEditor(pg){
+  if(!pg.custom) return `<p style="font-size:10.5px;color:#555;padding:8px 0;line-height:1.5">Secção nativa — edita o conteúdo nas abas <strong style="color:#C8A97E">Textos</strong> e <strong style="color:#C8A97E">Média</strong>.<br>Arrastar para reordenar. Toggle para mostrar/esconder.</p>`;
+  const d=pg.data||{};
+  const id=pg.uid;
+  if(pg.id==='custom_text') return `
+    <label>Título</label><input value="${d.title||''}" oninput="pgData('${id}','title',this.value)" placeholder="Título (opcional)">
+    <label>Texto</label><textarea rows="4" oninput="pgData('${id}','text',this.value)">${d.text||''}</textarea>
+    <label>Alinhamento</label>
+    <select oninput="pgData('${id}','align',this.value)"><option value="left" ${d.align==='left'?'selected':''}>Esquerda</option><option value="center" ${(!d.align||d.align==='center')?'selected':''}>Centro</option><option value="right" ${d.align==='right'?'selected':''}>Direita</option></select>`;
+  if(pg.id==='custom_gallery') return `
+    <label>Título</label><input value="${d.title||''}" oninput="pgData('${id}','title',this.value)" placeholder="Título (opcional)">
+    <div class="upzone" onclick="document.getElementById('cg-${id}').click()" style="margin:5px 0 4px"><div class="uico">🖼</div><p>Adicionar fotos</p><input type="file" id="cg-${id}" accept="image/*" multiple onchange="handleCGallery(this,'${id}')"></div>
+    <div class="mthumb-grid" id="cg-${id}-t">${(d.images||[]).map((s,i)=>`<div class="mthumb"><img src="${s}"><button class="rm" onclick="rmCImg('${id}',${i})">✕</button></div>`).join('')}</div>`;
+  if(pg.id==='custom_video') return `
+    <label>Título</label><input value="${d.title||''}" oninput="pgData('${id}','title',this.value)">
+    <div class="upzone" onclick="document.getElementById('cv-${id}').click()" style="margin:5px 0"><div class="uico">▶️</div><p>${d.videoSrc?'Vídeo carregado ✓':'Upload vídeo (MP4, MOV)'}</p><input type="file" id="cv-${id}" accept="video/*" onchange="handleCVideo(this,'${id}')"></div>`;
+  if(pg.id==='custom_cta') return `
+    <label>Texto do botão</label><input value="${d.btnText||'Contacta-me'}" oninput="pgData('${id}','btnText',this.value)">
+    <label>Link</label><input value="${d.btnUrl||'#contact'}" oninput="pgData('${id}','btnUrl',this.value)">
+    <label>Texto acima</label><input value="${d.title||''}" oninput="pgData('${id}','title',this.value)">`;
+  if(pg.id==='custom_quote') return `
+    <label>Citação</label><textarea rows="3" oninput="pgData('${id}','quote',this.value)">${d.quote||''}</textarea>
+    <label>Autor (opcional)</label><input value="${d.author||''}" oninput="pgData('${id}','author',this.value)">`;
+  if(pg.id==='custom_brands') return `
+    <label>Título</label><input value="${d.title||'Marcas com quem trabalhei'}" oninput="pgData('${id}','title',this.value)">
+    <label>Marcas (uma por linha)</label><textarea rows="4" oninput="pgData('${id}','brands',this.value)">${d.brands||''}</textarea>`;
+  if(pg.id==='custom_divider') return `
+    <label>Estilo</label>
+    <select oninput="pgData('${id}','style',this.value)"><option value="line" ${d.style==='line'?'selected':''}>Linha</option><option value="dots" ${d.style==='dots'?'selected':''}>Pontos</option><option value="space" ${d.style==='space'?'selected':''}>Espaço</option></select>`;
+  if(pg.id==='custom_stats') return `
+    <label>Stat 1 — Número / Label</label>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px"><input value="${d.s1v||''}" oninput="pgData('${id}','s1v',this.value)" placeholder="50+"><input value="${d.s1l||''}" oninput="pgData('${id}','s1l',this.value)" placeholder="Marcas"></div>
+    <label>Stat 2</label>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px"><input value="${d.s2v||''}" oninput="pgData('${id}','s2v',this.value)" placeholder="300+"><input value="${d.s2l||''}" oninput="pgData('${id}','s2l',this.value)" placeholder="Vídeos"></div>
+    <label>Stat 3</label>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px"><input value="${d.s3v||''}" oninput="pgData('${id}','s3v',this.value)" placeholder="2M+"><input value="${d.s3l||''}" oninput="pgData('${id}','s3l',this.value)" placeholder="Views"></div>`;
+  return `<p style="font-size:10px;color:#555;padding:6px 0">Bloco personalizado.</p>`;
+}
+function togglePgEdit(uid){document.getElementById('pge-'+uid).classList.toggle('open');}
+function togglePgVis(uid){
+  const pg=getPages().find(p=>p.uid===uid);
+  if(pg){pg.visible=!pg.visible;document.getElementById('pgt-'+uid).classList.toggle('on',pg.visible);}
+  render();
+}
+function removePg(uid){
+  const pages=getPages();const i=pages.findIndex(p=>p.uid===uid);
+  if(i>=0){pages.splice(i,1);renderPagesList();render();}
+}
+function pgData(uid,key,val){
+  const pg=getPages().find(p=>p.uid===uid);
+  if(pg){pg.data[key]=val;render();}
+}
+
+// custom gallery/video helpers
+function handleCGallery(input,uid){
+  const pg=getPages().find(p=>p.uid===uid);
+  if(!pg.data.images)pg.data.images=[];
+  Array.from(input.files).forEach(f=>{
+    const r=new FileReader();
+    r.onload=e=>{pg.data.images.push(e.target.result);
+      document.getElementById('cg-'+uid+'-t').innerHTML=(pg.data.images||[]).map((s,i)=>`<div class="mthumb"><img src="${s}"><button class="rm" onclick="rmCImg('${uid}',${i})">✕</button></div>`).join('');
+      render();};r.readAsDataURL(f);
+  });
+}
+function rmCImg(uid,idx){
+  const pg=getPages().find(p=>p.uid===uid);
+  if(pg&&pg.data.images){pg.data.images.splice(idx,1);renderPagesList();render();}
+}
+function handleCVideo(input,uid){
+  const f=input.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    const pg=getPages().find(p=>p.uid===uid);
+    if(pg){pg.data.videoSrc=e.target.result;renderPagesList();render();}
+  };r.readAsDataURL(f);
+}
+
+// drag
+function dragStart(e,uid){dragSrc=uid;document.getElementById('pgi-'+uid).style.opacity='.4';e.dataTransfer.effectAllowed='move';}
+function dragOver(e,uid){e.preventDefault();if(dragSrc!==uid)document.getElementById('pgi-'+uid).classList.add('drag-over');}
+function dragLeave(e,uid){document.getElementById('pgi-'+uid).classList.remove('drag-over');}
+function dragDrop(e,uid){
+  e.preventDefault();
+  document.querySelectorAll('.page-item').forEach(el=>{el.classList.remove('drag-over');el.style.opacity='1';});
+  if(dragSrc===uid)return;
+  const pages=getPages();
+  const fi=pages.findIndex(p=>p.uid===dragSrc),ti=pages.findIndex(p=>p.uid===uid);
+  if(fi>=0&&ti>=0){const[m]=pages.splice(fi,1);pages.splice(ti,0,m);}
+  dragSrc=null;renderPagesList();render();
+}
+
+// ── SECTION TOGGLES (design tab) ──────────────────────────────────────────────
+function renderToggles(){
+  [1,2,3].forEach(t=>{
+    const el=document.getElementById('tog-t'+t);
+    if(!el)return;
+    const savedT=activeTemplate;activeTemplate=t;
+    const pages=getPages();activeTemplate=savedT;
+    el.innerHTML=pages.filter(pg=>!pg.custom).map(pg=>`
+      <div class="tog-row">
+        <label>${pg.label}</label>
+        <div class="tog ${pg.visible?'on':''}" id="tog-${t}-${pg.uid}" onclick="toggleSecFromDesign(${t},'${pg.uid}')"><div class="tog-k"></div></div>
+      </div>`).join('');
+  });
+}
+function toggleSecFromDesign(tmpl,uid){
+  const saved=activeTemplate;activeTemplate=tmpl;
+  const pg=getPages().find(p=>p.uid===uid);
+  if(pg){pg.visible=!pg.visible;document.getElementById('tog-'+tmpl+'-'+uid).classList.toggle('on',pg.visible);}
+  activeTemplate=saved;
+  render();
+}
+
+// ── HELPERS ───────────────────────────────────────────────────────────────────
+const FB={
+  hero:'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=85',
+  about:'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=600&q=85',
+  testiCenter:'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=80',
+  contact:'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=700&q=85',
+  port:['https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=620&q=82','https://images.unsplash.com/photo-1483985988355-763728e1935b?w=620&q=82','https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=620&q=82','https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=620&q=82','https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=620&q=82','https://images.unsplash.com/photo-1509631179647-0177331693ae?w=620&q=82'],
+  svcs:['https://images.unsplash.com/photo-1616078360649-20fc2d14e7f1?w=600&q=80','https://images.unsplash.com/photo-1493916063172-f5ab3a5ba77a?w=600&q=80','https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&q=80'],
+  cases:['https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=800&q=82','https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=800&q=82'],
+  strip:['https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500&q=82','https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&q=82','https://images.unsplash.com/photo-1495121605193-b116b5b9c87d?w=500&q=82','https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=500&q=82'],
+  heroCards:['https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=300&q=80','https://images.unsplash.com/photo-1483985988355-763728e1935b?w=200&q=80','https://images.unsplash.com/photo-1495121605193-b116b5b9c87d?w=250&q=80','https://images.unsplash.com/photo-1509631179647-0177331693ae?w=210&q=80','https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=280&q=80','https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=320&q=80','https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=180&q=80'],
+};
+function g(id){const e=document.getElementById(id);return e?e.value:'';}
+function gi(k){return imgs[k]||null;}
+function gA(arr,fb){return arr.length>0?arr:fb;}
+function lh(hex,amt){try{let r=parseInt(hex.slice(1,3),16),g2=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);return'#'+[Math.min(255,Math.max(0,r+amt)),Math.min(255,Math.max(0,g2+amt)),Math.min(255,Math.max(0,b+amt))].map(v=>v.toString(16).padStart(2,'0')).join('');}catch{return hex;}}
+const GFONTS=`<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700;1,9..144,900&display=swap" rel="stylesheet">`;
+const RCSS=`.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}.reveal.visible{opacity:1;transform:translateY(0)}`;
+const RJS=`<script>const _r=document.querySelectorAll('.reveal');const _o=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');_o.unobserve(x.target)}})},{threshold:.1});_r.forEach(el=>_o.observe(el));<\/script>`;
+
+// ── CUSTOM BLOCK HTML ─────────────────────────────────────────────────────────
+function renderCustomBlock(pg){
+  const d=pg.data||{};
+  const ter=C.terra,sag=C.sage,gol=C.gold,crm=C.cream;
+  switch(pg.id){
+    case 'custom_text': return `<section style="padding:80px 60px;background:${crm};text-align:${d.align||'center'}">${d.title?`<h2 style="font-family:'Fraunces',serif;font-style:italic;font-size:clamp(32px,4vw,52px);font-weight:900;color:#1A1A1A;margin-bottom:24px">${d.title}</h2>`:''}<p style="font-size:17px;line-height:1.85;color:#4A4444;max-width:700px;margin:0 auto">${(d.text||'Texto aqui...').replace(/\n/g,'<br>')}</p></section>`;
+    case 'custom_gallery': const ims=d.images&&d.images.length>0?d.images:[];
+      return `<section style="padding:60px;background:${crm}">${d.title?`<h2 style="font-family:'Fraunces',serif;font-style:italic;font-size:clamp(28px,3vw,44px);font-weight:900;margin-bottom:32px;text-align:center;color:#1A1A1A">${d.title}</h2>`:''}<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px">${ims.length>0?ims.map(s=>`<div style="aspect-ratio:4/5;overflow:hidden;border-radius:12px"><img src="${s}" style="width:100%;height:100%;object-fit:cover;display:block"></div>`).join(''):`<div style="text-align:center;padding:40px;border:1px dashed #ccc;border-radius:12px;color:#aaa">Carrega fotos na aba Páginas</div>`}</div></section>`;
+    case 'custom_video': return `<section style="padding:60px;background:#1A1A1A;text-align:center">${d.title?`<h2 style="font-family:'Fraunces',serif;font-style:italic;font-size:clamp(28px,3vw,44px);font-weight:900;color:${crm};margin-bottom:32px">${d.title}</h2>`:''} ${d.videoSrc?`<video src="${d.videoSrc}" controls style="max-width:800px;width:100%;border-radius:12px;display:block;margin:0 auto"></video>`:`<div style="max-width:600px;margin:0 auto;aspect-ratio:16/9;background:rgba(255,255,255,.05);border-radius:12px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);font-size:14px">Carrega vídeo na aba Páginas</div>`}</section>`;
+    case 'custom_cta': return `<section style="padding:80px 60px;background:${ter};text-align:center">${d.title?`<p style="font-size:16px;color:rgba(255,255,255,.88);margin-bottom:20px">${d.title}</p>`:''}<a href="${d.btnUrl||'#'}" style="display:inline-block;padding:16px 48px;background:#fff;color:${ter};font-size:15px;font-weight:700;border-radius:50px;text-decoration:none">${d.btnText||'Contacta-me'}</a></section>`;
+    case 'custom_quote': return `<section style="padding:80px 60px;background:${crm};text-align:center"><blockquote style="font-family:'Fraunces',serif;font-style:italic;font-size:clamp(22px,3vw,38px);font-weight:700;line-height:1.3;color:#1A1A1A;max-width:800px;margin:0 auto 20px">${d.quote||'Citação aqui...'}</blockquote>${d.author?`<p style="font-size:14px;color:#888;letter-spacing:2px;text-transform:uppercase">${d.author}</p>`:''}</section>`;
+    case 'custom_brands': const brs=(d.brands||'').split('\n').filter(Boolean);
+      return `<section style="padding:80px 60px;background:${crm};text-align:center"><h2 style="font-family:'Fraunces',serif;font-style:italic;font-size:clamp(28px,3vw,44px);font-weight:900;color:#1A1A1A;margin-bottom:32px">${d.title||'Marcas com quem trabalhei'}</h2><div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center">${brs.length>0?brs.map(b=>`<span style="padding:10px 24px;border-radius:50px;border:2px solid #1A1A1A;font-size:14px;font-weight:600;color:#1A1A1A">${b}</span>`).join(''):`<p style="color:#aaa">Adiciona marcas na aba Páginas</p>`}</div></section>`;
+    case 'custom_divider':
+      if(d.style==='dots') return `<div style="padding:40px;text-align:center;background:${crm}"><span style="color:#ccc;font-size:22px;letter-spacing:12px">✦ ✦ ✦</span></div>`;
+      if(d.style==='space') return `<div style="height:80px;background:${crm}"></div>`;
+      return `<div style="padding:0 60px;background:${crm}"><div style="height:1px;background:rgba(26,26,26,.12)"></div></div>`;
+    case 'custom_stats': const sts=[[d.s1v,d.s1l],[d.s2v,d.s2l],[d.s3v,d.s3l]].filter(([v])=>v);
+      return `<div style="display:grid;grid-template-columns:repeat(${Math.max(sts.length,1)},1fr);background:${ter};padding:60px 40px">${sts.map(([v,l])=>`<div style="text-align:center;border-right:1px solid rgba(255,255,255,.2);padding:0 20px"><span style="font-family:'Fraunces',serif;font-size:clamp(52px,6vw,80px);font-weight:900;color:white;line-height:1;display:block">${v}</span><span style="font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.7);margin-top:10px;display:block">${l||''}</span></div>`).join('')}</div>`;
+    default: return '';
+  }
+}
+
+// ── TEMPLATE 1 — VELVET NOIR ─────────────────────────────────────────────────
+function buildT1(){
+  const pages=getPages();
+  const name=g('p-name'),sname=g('p-surname');
+  const email=g('p-email'),tel=g('p-tel');
+  const bio1=g('p-bio1'),bio2=g('p-bio2');
+  const hCards=gA(heroCards,FB.heroCards).slice(0,7);
+  const portItems=portMedia.length>0?portMedia:FB.port.map(s=>({src:s,type:'image'}));
+  const colMap={2:'1fr 1fr',3:'repeat(3,1fr)',4:'repeat(4,1fr)'};
+  const pcols=colMap[portCols]||'repeat(3,1fr)';
+  const blue='#3A5BF0', yellow='#FFE13A', cream='#F0EAE2', black='#1A1A1A', gray='#E4DED8';
+  const pcNames=[{cls:'pc1',fn:'lifestyle.jpg'},{cls:'pc2',fn:'fashion.jpg'},{cls:'pc3',fn:'travel.jpg'},{cls:'pc4',fn:'ugc_01.jpg'},{cls:'pc5',fn:'portrait.png'},{cls:'pc6',fn:'beauty.png'},{cls:'pc7',fn:'collab.jpg'}];
+  const pcPos=['top:11%;left:2.5%;width:210px;transform:rotate(-2.4deg)','top:31%;left:18%;width:128px;transform:rotate(1.8deg)','bottom:13%;left:4%;width:172px;transform:rotate(-1.3deg)','bottom:15%;left:21%;width:143px;transform:rotate(2.1deg)','top:9%;right:2.5%;width:192px;transform:rotate(1.6deg)','top:38%;right:1.5%;width:232px;transform:rotate(-1.7deg)','top:39%;right:19%;width:112px;transform:rotate(0.8deg)'];
+  const pcH=[268,158,172,178,248,312,132];
+
+  function sec(id){const pg=pages.find(p=>p.id===id);return pg&&pg.visible;}
+
+  const sections = pages.map(pg => {
+    if(!pg.visible) return '';
+    if(pg.custom) return renderCustomBlock(pg);
+    switch(pg.id){
+      case 'hero': return `
+        <section style="height:100vh;min-height:700px;position:relative;background:${cream};display:flex;align-items:center;justify-content:center;overflow:hidden">
+          ${hCards.map((src,i)=>`<div style="position:absolute;background:#fff;padding:5px 5px 24px;box-shadow:0 8px 32px rgba(0,0,0,.17);z-index:1;${pcPos[i]}"><img src="${src}" style="display:block;object-fit:cover;width:100%;height:${pcH[i]}px"><div style="font-size:10px;color:#666;margin-top:5px;padding:0 2px">${pcNames[i].fn}</div></div>`).join('')}
+          <div style="text-align:center;position:relative;z-index:2;user-select:none">
+            <span style="display:block;font-family:'Playfair Display',serif;font-size:clamp(78px,11vw,148px);font-weight:900;line-height:.88;letter-spacing:-2px;color:${black}">${name}</span>
+            <span style="display:inline-block;font-family:'Playfair Display',serif;font-size:clamp(78px,11vw,148px);font-weight:900;font-style:italic;line-height:1.15;background:${yellow};padding:2px 18px 6px;color:${black}">${sname||'creator'}<span style="display:inline-block;width:17px;height:17px;background:${blue};border-radius:50%;vertical-align:middle;margin-left:3px;position:relative;top:-6px"></span></span>
+          </div>
+        </section>`;
+      case 'about': return `
+        <section style="display:grid;grid-template-columns:1fr 1fr;min-height:100vh;background:${cream}">
+          <div style="overflow:hidden"><img src="${gi('aboutImg')||FB.about}" style="width:100%;height:100%;min-height:700px;object-fit:cover;object-position:top;display:block"></div>
+          <div style="padding:90px 64px;display:flex;flex-direction:column;justify-content:center;gap:26px">
+            <div class="reveal" style="font-size:10.5px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#aaa">✦ sobre mim</div>
+            <div class="reveal" style="background:#fff;padding:34px;border-radius:6px;box-shadow:0 2px 18px rgba(0,0,0,.06)"><p style="font-size:16.5px;line-height:1.78;color:#444">${bio1}</p>${bio2?`<p style="font-size:16.5px;line-height:1.78;color:#444;margin-top:14px">${bio2}</p>`:''}</div>
+            ${niches.length>0?`<div class="reveal">${niches.map(n=>`<span style="display:inline-block;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;background:${yellow}44;color:${black};margin:3px;border:1px solid ${yellow}88">${n}</span>`).join('')}</div>`:''}
+          </div>
+        </section>`;
+      case 'portfolio': return `
+        <section style="background:${cream};padding:100px 60px">
+          <div class="reveal" style="text-align:center;margin-bottom:56px"><h2 style="font-family:'Playfair Display',serif;font-size:clamp(50px,7vw,90px);font-weight:900;line-height:1;color:${black}">conteúdo <span style="font-style:italic;background:${yellow};padding:0 12px 5px">criado</span></h2></div>
+          <div style="display:grid;grid-template-columns:${pcols};gap:14px">
+            ${portItems.map((m,i)=>m.type==='video'?`<div style="aspect-ratio:4/5;border-radius:10px;overflow:hidden;cursor:pointer;position:relative" onclick="const v=this.querySelector('video'),o=this.querySelector('.pov');v.paused?v.play():v.pause();o.style.opacity=v.paused?'1':'0'"><video src="${m.src}" loop playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;display:block"></video><div class="pov" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.25)"><div style="width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;font-size:20px">▶</div></div></div>`:`<div class="reveal" style="aspect-ratio:4/5;border-radius:10px;overflow:hidden"><img src="${m.src}" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform=''" loading="lazy"></div>`).join('')}
+          </div>
+        </section>`;
+      case 'pricing': return `
+        <section style="background:${gray};padding:110px 60px">
+          <div class="reveal" style="text-align:center;margin-bottom:60px"><h2 style="font-family:'Playfair Display',serif;font-size:clamp(38px,5vw,62px);font-weight:900;color:${black}">packages</h2></div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1040px;margin:0 auto">
+            ${[1,2,3].map(n=>`<div class="reveal" style="background:#fff;border:1.5px solid ${black};border-radius:12px;overflow:hidden"><div style="background:${black};padding:10px 14px;display:flex;gap:6px"><div style="width:11px;height:11px;border-radius:50%;background:#FF5F57"></div><div style="width:11px;height:11px;border-radius:50%;background:#FEBC2E"></div><div style="width:11px;height:11px;border-radius:50%;background:#28C840"></div></div><div style="padding:28px"><div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#aaa;margin-bottom:6px">${g('svc'+n+'-name')}</div><div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:900;margin-bottom:8px;line-height:1;color:${black}">${g('svc'+n+'-price')}</div><p style="font-size:13px;color:#888;line-height:1.6;margin-bottom:20px">${g('svc'+n+'-desc')}</p><a href="#contact" style="display:inline-block;padding:10px 24px;background:${black};color:#fff;font-size:13px;font-weight:500;border-radius:50px;text-decoration:none">Começar →</a></div></div>`).join('')}
+          </div>
+        </section>`;
+      case 'process': return `
+        <section style="background:${cream};padding:100px 80px">
+          <div style="max-width:900px;margin:0 auto">
+            <div class="reveal" style="font-size:10.5px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#aaa;margin-bottom:10px">✦ como funciona</div>
+            <h2 class="reveal" style="font-family:'Playfair Display',serif;font-size:clamp(34px,4vw,50px);font-weight:900;line-height:1.1;margin-bottom:36px;color:${black}">O processo</h2>
+            <div style="display:flex;flex-direction:column;gap:30px">
+              ${['Contacto inicial|Partilha a tua marca, objetivos e timeline.','Alinhamento criativo|Definimos entregáveis, direitos de uso e direção criativa.','Criação|O conteúdo é produzido e entregue dentro do prazo acordado.','Entrega|Ficheiros finais partilhados — prontos para publicar.'].map((s,i)=>{const[t,d]=s.split('|');return`<div class="reveal" style="border-left:2px solid #DDD7D0;padding-left:24px;position:relative"><div style="position:absolute;left:-6px;top:5px;width:10px;height:10px;background:${blue};border-radius:50%"></div><div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:${blue};margin-bottom:3px">0${i+1}</div><div style="font-size:17px;font-weight:600;margin-bottom:4px;color:${black}">${t}</div><div style="font-size:13.5px;color:#888;line-height:1.7">${d}</div></div>`;}).join('')}
+            </div>
+          </div>
+        </section>`;
+      case 'contact': return `
+        <section style="background:linear-gradient(150deg,${blue}55,${lh(blue,30)} 45%,${lh(blue,50)});display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:100px 60px;min-height:80vh">
+          <div class="reveal" style="border-radius:14px;overflow:hidden;max-height:620px"><img src="${gi('contactImg')||FB.contact}" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block"></div>
+          <div class="reveal" style="display:flex;flex-direction:column;gap:32px">
+            <div style="background:${blue};color:#fff;padding:22px 34px;border-radius:26px 26px 26px 5px;font-family:'Playfair Display',serif;font-size:clamp(26px,3vw,40px);font-weight:900;font-style:italic;line-height:1.25;display:inline-block">Vamos trabalhar<br>juntos!</div>
+            <div style="display:flex;flex-direction:column;gap:7px">${email?`<a href="mailto:${email}" style="font-size:15.5px;color:#1A1A1A;text-decoration:none;font-weight:500">${email}</a>`:''} ${tel?`<a href="tel:${tel.replace(/\s/g,'')}" style="font-size:15.5px;color:#1A1A1A;text-decoration:none;font-weight:500">${tel}</a>`:''}</div>
+          </div>
+        </section>`;
+      default: return '';
+    }
+  }).join('\n');
+
+  return `<!DOCTYPE html><html lang="pt"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${name} ${sname} — Velvet Noir Portfolio</title>${GFONTS}<style>*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Inter',sans-serif;background:#F0EAE2;color:#1A1A1A;overflow-x:hidden}::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:#bbb;border-radius:3px}nav{position:fixed;top:22px;left:28px;z-index:1000;display:flex;gap:8px}nav a{text-decoration:none;color:#1A1A1A;font-size:13px;padding:8px 20px;border:1.5px solid rgba(26,26,26,.65);border-radius:50px;background:rgba(255,255,255,.75);backdrop-filter:blur(12px);transition:all .22s}nav a:hover{background:#1A1A1A;color:#F0EAE2}${RCSS}</style></head><body>
+<nav><a href="#about">sobre</a><a href="#portfolio">trabalho</a><a href="#pricing">preços</a><a href="#contact">contacto</a></nav>
+${sections}
+<footer style="background:#1A1A1A;color:rgba(255,255,255,.35);text-align:center;padding:22px;font-size:12px">© ${new Date().getFullYear()} ${name} ${sname} · Velvet Noir ✦</footer>
+${RJS}</body></html>`;
+}
+
+// ── TEMPLATE 2 — LUMIÈRE ─────────────────────────────────────────────────────
+function buildT2(){
+  const pages=getPages();
+  const name=g('p-name'),sname=g('p-surname'),handle=g('p-handle')||'@jessicasantos';
+  const bio1=g('p-bio1'),bio2=g('p-bio2'),email=g('p-email'),tel=g('p-tel'),web=g('p-web');
+  const strip=gA(stripImgs,FB.strip).slice(0,4);
+  const portItems=portMedia.length>0?portMedia:FB.port.map(s=>({src:s,type:'image'}));
+  const colMap={2:'1fr 1fr',3:'repeat(3,1fr)',4:'repeat(4,1fr)'};
+  const pcols=colMap[portCols]||'repeat(3,1fr)';
+  const black='#0A0A0A', cream='#F2ECE5', blush='#E8D5C8', gray='#EDEBE7';
+  const tAvs=['https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&q=80','https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=100&q=80','https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=100&q=80'];
+
+  const sections = pages.map(pg=>{
+    if(!pg.visible) return '';
+    if(pg.custom) return renderCustomBlock(pg);
+    switch(pg.id){
+      case 'hero': return `
+        <section style="background:${cream};min-height:100vh;display:grid;grid-template-columns:1fr 1px 1fr 1fr;align-items:center;padding:60px;gap:0">
+          <div><div style="font-family:'Cormorant Garamond',serif;font-size:clamp(52px,6vw,82px);font-style:italic;font-weight:300;line-height:1.05;color:${black}">${name}<br>${sname}</div><div style="font-size:13px;font-weight:300;letter-spacing:1px;color:#888;margin-top:10px">${handle}</div></div>
+          <div style="width:1px;height:60%;background:${black};margin:0 60px"></div>
+          <div style="padding-left:60px"><div style="font-size:12px;font-weight:300;letter-spacing:2px;text-transform:uppercase;color:#aaa">UGC · Beauty · Lifestyle</div><div style="font-family:'Cormorant Garamond',serif;font-size:clamp(42px,5.5vw,72px);font-weight:300;line-height:1;margin-top:16px;color:${black}">portfolio</div></div>
+          <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px"><div style="font-family:'Cormorant Garamond',serif;font-size:clamp(80px,10vw,140px);font-weight:700;line-height:.9;letter-spacing:-4px;color:${black}">UGC</div><div style="font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,56px);font-weight:300;font-style:italic;writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:6px;color:${black}">creator</div></div>
+        </section>`;
+      case 'strip': return `<div style="display:grid;grid-template-columns:repeat(4,1fr);height:320px;gap:3px">${strip.map(s=>`<img src="${s}" style="width:100%;height:100%;object-fit:cover;display:block">`).join('')}</div>`;
+      case 'about': return `
+        <section style="background:${cream};min-height:90vh"><div style="display:grid;grid-template-columns:280px 1fr 1fr;min-height:90vh;align-items:stretch">
+          <div style="position:relative;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:${black};z-index:2"></div><img src="${gi('aboutImg')||FB.about}" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block"></div>
+          <div style="padding:80px 60px;display:flex;flex-direction:column;justify-content:center;gap:28px;position:relative"><div class="reveal" style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#aaa">sobre mim</div><p class="reveal" style="font-size:15px;line-height:1.85;color:#555;max-width:380px">${bio1}</p>${bio2?`<p class="reveal" style="font-size:15px;line-height:1.85;color:#555;max-width:380px">${bio2}</p>`:''}<div style="position:absolute;bottom:-20px;left:-20px;font-family:'Cormorant Garamond',serif;font-size:clamp(80px,10vw,140px);font-weight:700;color:${black};line-height:1;letter-spacing:-4px;pointer-events:none;z-index:0">ABOUT <span style="font-style:italic;font-weight:300;color:${blush}">me</span></div></div>
+          <div style="display:flex;align-items:center;justify-content:center;padding:60px 40px;background:${gray}" class="reveal"><div style="width:220px;height:450px;border:7px solid ${black};border-radius:32px;overflow:hidden;position:relative;background:#111"><img src="${gi('heroImg')||FB.hero}" style="width:100%;height:100%;object-fit:cover;display:block"></div></div>
+        </div></section>`;
+      case 'why': return `
+        <section style="background:${black};color:white;display:grid;grid-template-columns:1fr 1fr;min-height:80vh">
+          <div style="padding:100px 80px;display:flex;flex-direction:column;gap:24px;border-right:1px solid rgba(255,255,255,.1)"><div class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(38px,4vw,54px);font-weight:300;color:white">Por que UGC?</div><div class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(100px,14vw,180px);font-weight:300;color:rgba(255,255,255,.12);line-height:.85;letter-spacing:-6px">93%</div><p class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2vw,26px);font-style:italic;font-weight:300;color:rgba(255,255,255,.7);line-height:1.5;max-width:380px">dos consumidores consideram o UGC <em>muito útil</em> na decisão de compra.</p></div>
+          <div style="padding:100px 80px;display:flex;flex-direction:column;justify-content:center;gap:20px">${['Aumenta a confiança e credibilidade de forma orgânica','Reduz custos mantendo qualidade editorial elevada','Melhora taxas de conversão e engagement','Conteúdo versátil para paid ads, orgânico e email'].map(b=>`<div class="reveal" style="display:flex;align-items:flex-start;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.08)"><div style="width:20px;height:20px;border-radius:50%;border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;color:rgba(255,255,255,.7)">✓</div><div style="font-size:14px;font-weight:300;color:rgba(255,255,255,.6);line-height:1.6">${b}</div></div>`).join('')}</div>
+        </section>`;
+      case 'mywork': return `
+        <section style="background:${cream};padding:80px 60px 100px">
+          <div class="reveal" style="display:flex;align-items:baseline;gap:20px;margin-bottom:50px"><div style="background:${black};color:white;padding:6px 16px;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600">portfolio</div><div style="font-family:'Cormorant Garamond',serif;font-size:clamp(52px,7vw,96px);font-weight:300;font-style:italic;line-height:1;color:${black}">o meu trabalho</div></div>
+          <div style="display:grid;grid-template-columns:${pcols};gap:14px">${portItems.map((m,i)=>m.type==='video'?`<div style="aspect-ratio:4/5;border-radius:10px;overflow:hidden;cursor:pointer;position:relative" onclick="const v=this.querySelector('video'),o=this.querySelector('.pov');v.paused?v.play():v.pause();o.style.opacity=v.paused?'1':'0'"><video src="${m.src}" loop playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;display:block"></video><div class="pov" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.25)"><div style="width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;font-size:20px">▶</div></div></div>`:`<div class="reveal" style="aspect-ratio:4/5;border-radius:10px;overflow:hidden"><img src="${m.src}" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform=''" loading="lazy"></div>`).join('')}</div>
+        </section>`;
+      case 'testimonials': return `
+        <section style="background:${black};color:white;padding:100px 60px">
+          <div class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(38px,4vw,54px);font-weight:300;font-style:italic;color:white;text-align:center;margin-bottom:70px">"o que dizem as marcas"</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px">
+            ${[1,2,3].map(n=>`<div class="reveal"><div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);padding:28px;border-radius:4px;font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;font-weight:300;line-height:1.7;color:rgba(255,255,255,.8);margin-bottom:16px">${g('t'+n+'-quote')}</div><div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;font-weight:300;color:white">- ${g('t'+n+'-author')}</div></div>`).join('')}
+          </div>
+        </section>`;
+      case 'pricing': return `
+        <section style="background:${black};color:white;padding:0 60px 100px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;padding-top:80px;border-top:1px solid rgba(255,255,255,.08)">
+            <div class="reveal"><div style="font-family:'Cormorant Garamond',serif;font-size:clamp(52px,7vw,88px);font-weight:300;line-height:.9;color:rgba(255,255,255,.12);letter-spacing:-3px">UGC<br><span style="font-style:italic">pricing</span><br>packages</div><div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:16px">preços em euros</div></div>
+            <div class="reveal" style="display:flex;flex-direction:column">
+              ${[1,2,3].map(n=>`<div style="display:flex;justify-content:space-between;align-items:baseline;padding:20px 0;border-bottom:1px solid rgba(255,255,255,.08)"><span style="font-size:15px;font-weight:300;color:rgba(255,255,255,.7)">${g('svc'+n+'-name')}</span><span style="font-family:'Cormorant Garamond',serif;font-size:32px;font-style:italic;font-weight:300;color:white">${g('svc'+n+'-price')}</span></div>`).join('')}
+            </div>
+          </div>
+        </section>`;
+      case 'contact': return `
+        <section style="display:grid;grid-template-columns:1fr 1fr;min-height:70vh">
+          <div style="background:${cream};display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px">
+            <div style="width:100%;max-width:440px;background:${gray};border-radius:220px 220px 0 0;padding:60px 48px 48px;text-align:center">
+              <div style="width:120px;height:120px;border-radius:50%;overflow:hidden;margin:0 auto 28px;border:3px solid white"><img src="${gi('aboutImg')||FB.about}" style="width:100%;height:100%;object-fit:cover;object-position:top"></div>
+              <div class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,3.5vw,46px);font-weight:300;color:${black};line-height:1.2;margin-bottom:8px">Vamos trabalhar juntos</div>
+              <p style="font-size:13px;font-weight:300;color:#888;line-height:1.7;margin-bottom:36px">... e garantir que a tua marca recebe a atenção que merece.</p>
+              ${email?`<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:44px;height:44px;background:${black};border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:16px;flex-shrink:0">✉</div><a href="mailto:${email}" style="font-size:14px;color:#444;text-decoration:none">${email}</a></div>`:''} ${tel?`<div style="display:flex;align-items:center;gap:12px"><div style="width:44px;height:44px;background:${black};border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:16px;flex-shrink:0">☎</div><span style="font-size:14px;color:#444">${tel}</span></div>`:''}
+            </div>
+          </div>
+          <div style="background:${black};display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px;gap:28px">
+            <div class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(48px,6vw,80px);font-style:italic;font-weight:300;color:white;text-align:center;line-height:1">${name}<br>${sname}</div>
+            <div style="font-size:13px;letter-spacing:2px;color:rgba(255,255,255,.4)">${handle}</div>
+          </div>
+        </section>`;
+      default: return '';
+    }
+  }).join('\n');
+
+  return `<!DOCTYPE html><html lang="pt"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${name} ${sname} — Lumière Portfolio</title>${GFONTS}<style>*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Jost',sans-serif;background:${cream};color:${black};overflow-x:hidden}::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:#bbb;border-radius:3px}${RCSS}</style></head><body>
+${sections}
+<footer style="background:${black};border-top:1px solid rgba(255,255,255,.06);text-align:center;padding:20px;font-size:11px;color:rgba(255,255,255,.2);letter-spacing:1px">© ${new Date().getFullYear()} ${name} ${sname} · LUMIÈRE ✦</footer>
+${RJS}</body></html>`;
+}
+
+// ── TEMPLATE 3 — THE EDIT (Fraunces) ─────────────────────────────────────────
+function buildT3(){
+  const pages=getPages();
+  const name=g('p-name'),sname=g('p-surname'),handle=g('p-handle')||'@jessicasantos.ugc';
+  const bio1=g('p-bio1'),bio2=g('p-bio2'),bio3=g('p-bio3');
+  const email=g('p-email'),tel=g('p-tel'),web=g('p-web'),loc=g('p-loc');
+  const ter=C.terra,sag=C.sage,gol=C.gold,pnk=C.pink,crm=C.cream;
+  const black='#1A1A1A',mid='#4A4444';
+  const brands=(g('p-brands')||'').split('\n').filter(Boolean);
+  const ann=g('p-ann');
+  const portItems=portMedia.length>0?portMedia:FB.port.map(s=>({src:s,type:'image'}));
+  const colMap={2:'1fr 1fr',3:'repeat(3,1fr)',4:'repeat(4,1fr)'};
+  const pcols=colMap[portCols]||'repeat(3,1fr)';
+  const svcs=gA(svcImgs,FB.svcs);
+  const cases=gA(caseImgs,FB.cases);
+
+  function caseStats(id){
+    return (g(id)||'').split(',').filter(Boolean).map(s=>{const[n,l]=s.split('|');return`<div style="text-align:center"><span style="font-family:'Fraunces',serif;font-weight:900;font-size:28px;color:${ter};display:block">${n||''}</span><span style="font-size:12px;color:${mid};font-weight:600;letter-spacing:.06em;text-transform:uppercase">${l||''}</span></div>`;}).join('');
+  }
+
+  const sections = pages.map(pg=>{
+    if(!pg.visible) return '';
+    if(pg.custom) return renderCustomBlock(pg);
+    switch(pg.id){
+      case 'ann': return ann?`<div style="background:${ter};color:#fff;text-align:center;padding:10px 20px;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">${ann}</div>`:'';
+      case 'hero': return `
+        <section style="display:grid;grid-template-columns:1fr 1fr;min-height:88vh;align-items:center;padding:60px 60px 60px 80px;gap:40px;background:${crm}">
+          <div style="max-width:600px">
+            <p style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:${mid};margin-bottom:18px">${g('p-tagline')}</p>
+            <h1 style="font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:clamp(52px,6vw,80px);line-height:1.0;margin-bottom:24px">
+              conteúdo<br>que as pessoas<br>
+              <span style="color:${ter}">${g('tx-hero3')||'realmente'}</span><br>
+              <span style="color:${sag}">${g('tx-hero4')||'assistem.'}</span>
+            </h1>
+            <p style="font-size:17px;color:${mid};max-width:440px;margin-bottom:36px;line-height:1.7">${g('tx-hero-sub')}</p>
+            <a href="#contact" style="display:inline-block;padding:16px 36px;border-radius:50px;font-size:14px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;background:${gol};color:#fff;transition:transform .2s,opacity .2s">Vamos Trabalhar Juntas</a>
+          </div>
+          <div style="position:relative;display:flex;align-items:center;justify-content:center;height:580px">
+            <div style="position:absolute;right:-20px;top:0;width:88%;height:100%">
+              <svg viewBox="0 0 600 580" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+                <path d="M420 60 C540 60 590 160 580 280 C570 400 500 480 390 500 C280 520 160 480 100 380 C40 280 60 140 160 80 C220 48 300 60 420 60Z" fill="${sag}" opacity="0.55"/>
+                <path d="M440 200 C520 200 560 290 540 380 C520 460 440 500 360 490 C280 480 220 430 220 350 C220 260 320 200 440 200Z" fill="${sag}" opacity="0.45"/>
+              </svg>
+            </div>
+            <img src="${gi('heroImg')||FB.hero}" style="position:relative;z-index:2;width:54%;aspect-ratio:3/4;border-radius:4px;object-fit:cover;margin-right:60px">
+          </div>
+        </section>`;
+      case 'brands': return brands.length>0?`
+        <div class="reveal" style="background:${pnk};padding:28px 60px;display:flex;align-items:center;justify-content:center;gap:64px;flex-wrap:wrap">
+          ${brands.map((b,i)=>`<span style="font-family:'Fraunces',serif;font-weight:900;font-size:clamp(18px,2.5vw,26px);color:${black};letter-spacing:-.01em;text-transform:lowercase;${i%2===1?'font-style:italic':''}">${b}</span>`).join('')}
+        </div>`:'';
+      case 'statement': return `
+        <div class="reveal" style="background:${crm};padding:80px 60px;text-align:center;max-width:1100px;margin:0 auto">
+          <h2 style="font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:clamp(40px,5.5vw,72px);line-height:1.1;margin-bottom:40px">
+            ajudo marcas a contar <span style="color:${ter}">histórias</span><br>
+            que as pessoas <span style="color:${sag}">guardam</span>,<br>
+            partilham — e <span style="color:${gol}">compram.</span>
+          </h2>
+          <a href="#services" style="display:inline-block;padding:16px 36px;border-radius:50px;font-size:14px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;background:${pnk};color:#fff">Ver Como Funciona</a>
+        </div>`;
+      case 'about': return `
+        <section id="sobre" style="display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;padding:80px 80px;background:${crm};max-width:1200px;margin:0 auto">
+          <div style="position:relative;display:flex;align-items:flex-end">
+            <div style="position:absolute;left:-10px;bottom:0;font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:320px;color:${sag};opacity:.25;line-height:1;z-index:0;user-select:none">J</div>
+            <img src="${gi('aboutImg')||FB.about}" class="reveal" style="position:relative;z-index:1;width:78%;aspect-ratio:2/3;object-fit:cover;border-radius:4px;margin-left:40px">
+          </div>
+          <div style="padding:20px 0 20px 60px;display:flex;flex-direction:column;justify-content:center" class="reveal">
+            <h2 style="font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:clamp(44px,4vw,60px);line-height:1.05;margin-bottom:20px">Olá!<br>Sou a <span style="color:${ter}">${name}.</span></h2>
+            <p style="font-size:16px;color:${mid};line-height:1.8;margin-bottom:16px">${bio1}</p>
+            <p style="font-size:16px;color:${mid};line-height:1.8;margin-bottom:16px">${bio2}</p>
+            ${bio3?`<p style="font-size:16px;color:${mid};line-height:1.8;margin-bottom:16px">${bio3}</p>`:''}
+            <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:20px">
+              ${niches.map((n,i)=>{const cs=[`background:${ter};color:#fff`,`background:${sag};color:#fff`,`background:${gol};color:#fff`,'background:transparent;border:2px solid #1A1A1A;color:#1A1A1A'];return`<span style="padding:8px 18px;border-radius:50px;font-size:13px;font-weight:600;letter-spacing:.04em;${cs[i%cs.length]}">${n}</span>`;}).join('')}
+            </div>
+          </div>
+        </section>`;
+      case 'pain': return `
+        <section style="background:${crm};padding:80px 80px">
+          <div class="reveal"><p style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:${ter};margin-bottom:16px">Isto soa familiar?</p>
+          <h2 style="font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:clamp(36px,3.5vw,52px);line-height:1.1;margin-bottom:52px">os teus vídeos têm<br><span style="color:${ter}">impressões</span> mas não<br>têm <span style="color:${sag}">conversões.</span></h2></div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px">
+            ${[['01','O conteúdo parece demasiado "publicidade"','O público de hoje rejeita anúncios óbvios. Precisa de conteúdo que pareça uma recomendação genuína de uma amiga — não de uma marca.'],['02','Não tens tempo para criar conteúdo consistente','Gerir um negócio já é exigente. Produzir vídeos de qualidade por cima? É impossível sem a pessoa certa ao teu lado.'],['03','Os teus criativos deixaram de converter','O que funcionava há 6 meses já não funciona hoje. O algoritmo muda, os gostos mudam — e o teu conteúdo precisa de acompanhar.']].map(([n,t,d])=>`<div class="reveal" style="background:#fff;border-radius:20px;padding:36px 32px"><div style="font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:56px;color:${sag};opacity:.35;line-height:1;margin-bottom:12px">${n}</div><h3 style="font-family:'Fraunces',serif;font-style:italic;font-weight:700;font-size:21px;line-height:1.25;margin-bottom:12px">${t}</h3><p style="font-size:15px;color:${mid};line-height:1.7">${d}</p></div>`).join('')}
+          </div>
+        </section>`;
+      case 'results': return `
+        <section style="background:${black};color:${crm};padding:100px 80px">
+          <div style="max-width:1040px;margin:0 auto">
+            <div class="reveal"><p style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:${gol};margin-bottom:16px">O que podes esperar</p>
+            <h2 style="font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:clamp(36px,3.5vw,52px);line-height:1.1;margin-bottom:52px;color:${crm}">Com o meu conteúdo,<br>a tua marca <span style="color:${ter}">cresce</span> assim…</h2></div>
+            <div style="display:flex;flex-direction:column;gap:0">
+              ${[['01','Vídeos que param o scroll — e geram cliques reais','Criativos pensados para o feed atual, com hooks fortes nos primeiros 3 segundos e CTAs naturais que convertem sem parecer forçados.'],['02','Conteúdo pronto a usar em todos os canais','Redes sociais orgânicas, anúncios pagos, email marketing, landing pages — o mesmo conteúdo, adaptado a cada contexto.'],['03','Uma audiência que confia na tua marca','Conteúdo autêntico cria comunidade. E comunidade cria clientes recorrentes que voltam — e trazem amigos.']].map(([n,t,d])=>`<div class="reveal" style="display:flex;align-items:flex-start;gap:28px;padding:32px 0;border-bottom:1px solid rgba(255,255,255,.1)"><span style="font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:48px;color:${ter};line-height:1;min-width:48px">${n}</span><div><h3 style="font-family:'Fraunces',serif;font-style:italic;font-weight:700;font-size:22px;margin-bottom:6px;color:${crm}">${t}</h3><p style="font-size:15px;color:rgba(245,239,228,.6);line-height:1.7">${d}</p></div></div>`).join('')}
+            </div>
+          </div>
+        </section>`;
+      case 'services': return `
+        <section id="servicos" style="background:${crm};padding:100px 80px">
+          <div class="reveal"><p style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:${ter};margin-bottom:16px">Como posso ajudar</p>
+          <h2 style="font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:clamp(36px,3.5vw,52px);line-height:1.1;margin-bottom:52px">serviços feitos<br>para <span style="color:${ter}">resultados</span> reais</h2></div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px">
+            ${[1,2,3].map(n=>`<div class="reveal" style="border-radius:24px;overflow:hidden;background:#fff;display:flex;flex-direction:column"><img src="${svcs[n-1]||svcs[0]}" style="width:100%;aspect-ratio:4/3;object-fit:cover;filter:grayscale(20%)"><div style="padding:28px 28px 32px;flex:1;display:flex;flex-direction:column"><div style="font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:42px;color:${pnk};line-height:1;margin-bottom:10px">0${n}</div><h3 style="font-family:'Fraunces',serif;font-style:italic;font-weight:700;font-size:24px;margin-bottom:10px">${g('svc'+n+'-name')}</h3><p style="font-size:14px;color:${mid};line-height:1.7;flex:1;margin-bottom:20px">${g('svc'+n+'-desc')}</p><span style="font-family:'Fraunces',serif;font-weight:700;font-size:22px;color:${ter}">${g('svc'+n+'-price')}</span></div></div>`).join('')}
+          </div>
+        </section>`;
+      case 'cases': return `
+        <section id="portfolio" style="background:${crm};padding:0 80px 100px">
+          <div class="reveal" style="margin-bottom:52px;padding-top:20px"><p style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:${ter};margin-bottom:16px">Trabalho anterior</p>
+          <h2 style="font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:clamp(36px,3.5vw,52px);line-height:1.1">marcas que <span style="color:${ter}">confiam</span><br>na minha <span style="color:${sag}">visão</span></h2></div>
+          ${[1,2].map(n=>`<div class="reveal" style="display:grid;grid-template-columns:1.1fr 1fr;gap:0;border-radius:24px;overflow:hidden;background:#fff;margin-bottom:40px;${n===2?'direction:rtl':''}"${n===2?` `:``}><img src="${cases[n-1]||cases[0]}" style="width:100%;height:100%;min-height:380px;object-fit:cover;${n===2?'direction:ltr':''}"><div style="padding:48px 44px;display:flex;flex-direction:column;justify-content:center;${n===2?'direction:ltr':''}"><span style="display:inline-block;padding:6px 16px;border-radius:50px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:${n===2?gol:sag};color:#fff;margin-bottom:16px;width:fit-content">${g('case'+n+'-tag')}</span><h3 style="font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:30px;line-height:1.2;margin-bottom:12px">${g('case'+n+'-title')}</h3><p style="font-size:15px;color:${mid};line-height:1.7;margin-bottom:28px">${g('case'+n+'-desc')}</p><div style="display:flex;gap:28px;flex-wrap:wrap">${caseStats('case'+n+'-stats')}</div></div></div>`).join('')}
+        </section>`;
+      case 'testimonials': return `
+        <section id="reviews" style="background:${black};padding:100px 80px;color:${crm}">
+          <p style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:${pnk};margin-bottom:20px">O que dizem</p>
+          <div style="font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:clamp(60px,8vw,110px);color:transparent;-webkit-text-stroke:1.5px rgba(245,239,228,.15);line-height:1;margin-bottom:60px;user-select:none">palavras bonitas.</div>
+          <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:40px;align-items:center">
+            <div class="reveal" style="background:rgba(255,255,255,.05);border-radius:20px;padding:36px 32px"><span style="font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:64px;color:${ter};line-height:.6;display:block;margin-bottom:16px">"</span><p style="font-size:16px;line-height:1.7;color:rgba(245,239,228,.85);font-style:italic;margin-bottom:20px">${g('t1-quote')}</p><span style="font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:${pnk}">${g('t1-author')}</span></div>
+            <img src="${gi('testiCenterImg')||FB.testiCenter}" style="width:220px;aspect-ratio:2/3;object-fit:cover;border-radius:12px;filter:grayscale(30%)">
+            <div class="reveal" style="background:rgba(255,255,255,.05);border-radius:20px;padding:36px 32px"><span style="font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:64px;color:${ter};line-height:.6;display:block;margin-bottom:16px">"</span><p style="font-size:16px;line-height:1.7;color:rgba(245,239,228,.85);font-style:italic;margin-bottom:20px">${g('t2-quote')}</p><span style="font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:${pnk}">${g('t2-author')}</span></div>
+          </div>
+        </section>`;
+      case 'faq': return `
+        <section id="faq" style="background:${crm};padding:100px 80px">
+          <div class="reveal"><p style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:${ter};margin-bottom:16px">Perguntas frequentes</p>
+          <h2 style="font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:clamp(36px,3.5vw,52px);line-height:1.1;margin-bottom:52px">tudo o que<br>queres <span style="color:${ter}">saber</span></h2></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+            ${[1,2,3,4,5,6].map(n=>`<div class="reveal" style="background:#fff;border-radius:18px;padding:32px 28px"><h4 style="font-family:'Fraunces',serif;font-style:italic;font-weight:700;font-size:18px;line-height:1.3;margin-bottom:12px">${g('faq'+n+'-q')}</h4><p style="font-size:14px;color:${mid};line-height:1.75">${g('faq'+n+'-a')}</p></div>`).join('')}
+          </div>
+        </section>`;
+      case 'contact': return `
+        <section id="contacto" style="background:${ter};color:#fff;padding:100px 80px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center">
+          <div class="reveal">
+            <h2 style="font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:clamp(44px,5vw,70px);line-height:1.0;margin-bottom:20px">pronta para<br>fazer a tua<br>marca <span style="color:${sag}">${g('tx-cta3')||'brilhar'}</span>?</h2>
+            <p style="font-size:16px;opacity:.88;line-height:1.7;margin-bottom:36px">${g('tx-cta-sub')}</p>
+            <a href="mailto:${email}" style="display:inline-block;padding:16px 36px;border-radius:50px;font-size:14px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;background:#fff;color:${ter}">${g('tx-cta-btn')||'Agendar Chamada Gratuita'}</a>
+          </div>
+          <div class="reveal" style="display:flex;flex-direction:column;gap:20px">
+            ${email?`<div style="display:flex;align-items:center;gap:16px;font-size:16px;opacity:.88"><div style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">✉</div><span>${email}</span></div>`:''}
+            ${handle?`<div style="display:flex;align-items:center;gap:16px;font-size:16px;opacity:.88"><div style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">📱</div><span>${handle}</span></div>`:''}
+            ${loc?`<div style="display:flex;align-items:center;gap:16px;font-size:16px;opacity:.88"><div style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">📍</div><span>${loc}</span></div>`:''}
+            <div style="display:flex;align-items:center;gap:16px;font-size:16px;opacity:.88"><div style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">⚡</div><span>Resposta em menos de 24h</span></div>
+            <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap">
+              ${g('soc-ig')?`<a href="${g('soc-ig')}" target="_blank" style="display:inline-block;padding:12px 24px;border:2px solid rgba(255,255,255,.4);border-radius:50px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:#fff">Instagram</a>`:''}
+              ${g('soc-tt')?`<a href="${g('soc-tt')}" target="_blank" style="display:inline-block;padding:12px 24px;border:2px solid rgba(255,255,255,.4);border-radius:50px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:#fff">TikTok</a>`:''}
+              ${g('soc-li')?`<a href="${g('soc-li')}" target="_blank" style="display:inline-block;padding:12px 24px;border:2px solid rgba(255,255,255,.4);border-radius:50px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:#fff">LinkedIn</a>`:''}
+            </div>
+          </div>
+        </section>`;
+      default: return '';
+    }
+  }).join('\n');
+
+  return `<!DOCTYPE html><html lang="pt"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${name} ${sname} — The Edit</title>${GFONTS}<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:${crm};color:${black};font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:${crm}}::-webkit-scrollbar-thumb{background:#bbb;border-radius:3px}
+nav{background:${crm};display:flex;align-items:center;justify-content:space-between;padding:18px 60px;border-bottom:1.5px solid rgba(26,26,26,.1);position:sticky;top:0;z-index:100}
+.logo{font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:28px;color:${ter};text-decoration:none}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:${black};text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:${ter}}
+${RCSS}
+</style></head><body>
+<nav><a href="#" class="logo">${name.toLowerCase()}.</a><ul class="nav-links"><li><a href="#sobre">Sobre</a></li><li><a href="#servicos">Serviços</a></li><li><a href="#portfolio">Portfolio</a></li><li><a href="#reviews">Reviews</a></li><li><a href="#faq">FAQ</a></li><li><a href="#contacto">Contacto</a></li></ul></nav>
+${sections}
+<footer style="background:${black};color:rgba(245,239,228,.55);padding:56px 80px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px"><a href="#" style="font-family:'Fraunces',serif;font-style:italic;font-weight:900;font-size:30px;color:${ter};text-decoration:none">${name.toLowerCase()}.</a><span style="font-size:12px">©2025–${new Date().getFullYear()} ${name} ${sname} · UGC Creator</span></footer>
+${RJS}</body></html>`;
+}
+
+// ── RENDER ────────────────────────────────────────────────────────────────────
+function render(){
+  let html;
+  if(activeTemplate===1) html=buildT1();
+  else if(activeTemplate===2) html=buildT2();
+  else html=buildT3();
+  const fr=document.getElementById('preview-frame');
+  const doc=fr.contentDocument||fr.contentWindow.document;
+  doc.open();doc.write(html);doc.close();
+}
+
+function downloadSite(){
+  let html;
+  if(activeTemplate===1) html=buildT1();
+  else if(activeTemplate===2) html=buildT2();
+  else html=buildT3();
+  const n=(g('p-name')||'jessica').toLowerCase().replace(/\s+/g,'-');
+  const names={1:'velvet-noir',2:'lumiere',3:'the-edit'};
+  const blob=new Blob([html],{type:'text/html'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=`${n}-portfolio-${names[activeTemplate]}.html`;
+  a.click();URL.revokeObjectURL(url);
+}
+
+function setView(mode,ev){
+  document.querySelectorAll('.vbtn').forEach(b=>b.classList.remove('on'));
+  if(ev&&ev.target) ev.target.classList.add('on');
+  const fr=document.getElementById('preview-frame');
+  if(mode==='mobile'){fr.style.maxWidth='390px';fr.style.margin='14px auto';fr.style.borderRadius='12px';fr.style.display='block';}
+  else{fr.style.maxWidth='';fr.style.margin='';fr.style.borderRadius='';fr.style.display='';}
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────────────
+// Read template from URL query ?t=1 or ?t=2 or ?t=3
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  let t = parseInt(params.get('t')) || 1;
+  t = Math.min(3, Math.max(1, t));
+  activeTemplate = t;
+  const names={1:'Velvet Noir',2:'Lumière',3:'The Edit'};
+  document.getElementById('tmpl-name-label').textContent = names[t];
+  // hide the template switcher bar since we arrived from home
+  const bar = document.querySelector('.tmpl-bar');
+  const lbl = document.querySelector('.tmpl-label');
+  if(bar) bar.style.display='none';
+  if(lbl) lbl.style.display='none';
+})();
+
+renderNiches();
+renderPagesList();
+renderToggles();
+render();
+</script>
+</body>
+</html>
