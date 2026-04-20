@@ -3,19 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>UGC Portfolio Studio ✦</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700;1,9..144,900&display=swap" rel="stylesheet">
+<title>UGC Portfolio Studio ✦ — Editor</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700;1,9..144,900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;overflow:hidden}
 body{font-family:'DM Sans',sans-serif;background:#0D0D0D;color:#F0EDE6;display:flex;flex-direction:column}
-.topbar{display:flex;align-items:center;padding:0 16px;height:52px;background:#111;border-bottom:1px solid rgba(200,169,126,.18);flex-shrink:0;gap:10px;z-index:100;overflow-x:auto}
+.topbar{display:flex;align-items:center;padding:0 16px;height:52px;background:#111;border-bottom:1px solid rgba(200,169,126,.18);flex-shrink:0;gap:10px;z-index:100}
 .logo{font-family:'Playfair Display',serif;font-size:15px;color:#C8A97E;letter-spacing:.5px;white-space:nowrap;flex-shrink:0}
-.tmpl-label{font-size:9px;color:#555;text-transform:uppercase;letter-spacing:.8px;white-space:nowrap;flex-shrink:0;margin-left:6px}
-.tmpl-bar{display:flex;gap:5px;flex-shrink:0}
-.tmpl-btn{padding:5px 12px;border-radius:20px;font-size:10.5px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,.1);background:transparent;color:#666;transition:all .2s;white-space:nowrap;line-height:1.4}
-.tmpl-btn.on{background:#C8A97E;color:#000;border-color:#C8A97E}
-.tmpl-btn small{display:block;font-size:8px;font-weight:400;opacity:.65;letter-spacing:.3px}
+.tmpl-name{font-size:12px;color:#C8A97E;font-weight:600;white-space:nowrap}
 .topbar-right{display:flex;gap:5px;align-items:center;margin-left:auto;flex-shrink:0}
 .tbtn{padding:6px 12px;border-radius:6px;font-size:11px;font-weight:500;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:all .2s;white-space:nowrap}
 .tbtn-ghost{background:transparent;border:1px solid rgba(200,169,126,.3);color:#999}
@@ -80,7 +76,6 @@ body{font-family:'DM Sans',sans-serif;background:#0D0D0D;color:#F0EDE6;display:f
 .pkg-card input,.pkg-card textarea{width:100%;background:#0D0D0D;border:1px solid rgba(255,255,255,.07);color:#EEE;border-radius:5px;padding:4px 7px;font-size:11px;font-family:'DM Sans',sans-serif}
 .pkg-card textarea{resize:vertical}
 .pkg-name-lbl{font-size:10px;font-weight:700;color:#C8A97E;margin-bottom:5px;text-transform:uppercase;letter-spacing:1px}
-/* pages */
 .pages-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .pages-bar span{font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.8px}
 .add-page-btn{padding:5px 10px;border-radius:6px;border:1px solid rgba(200,169,126,.4);background:transparent;color:#C8A97E;font-size:11px;cursor:pointer}
@@ -93,8 +88,8 @@ body{font-family:'DM Sans',sans-serif;background:#0D0D0D;color:#F0EDE6;display:f
 .page-name{font-size:11.5px;font-weight:500;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .page-actions{display:flex;gap:4px;flex-shrink:0;align-items:center}
 .page-act-btn{background:none;border:none;color:#555;cursor:pointer;font-size:10px;padding:2px 5px;border-radius:4px;transition:all .2s}
-.page-act-btn:hover{color:#C8A97E;background:rgba(200,169,126,.1)}
-.page-act-btn.del:hover{color:#ff6060;background:rgba(255,60,60,.1)}
+.page-act-btn:hover{color:#C8A97E}
+.page-act-btn.del:hover{color:#ff6060}
 .page-toggle{width:28px;height:16px;border-radius:8px;background:rgba(255,255,255,.1);position:relative;cursor:pointer;transition:background .2s;flex-shrink:0}
 .page-toggle.on{background:#C8A97E}
 .page-toggle-k{width:10px;height:10px;border-radius:50%;background:#fff;position:absolute;top:3px;left:3px;transition:left .2s;pointer-events:none}
@@ -108,10 +103,9 @@ body{font-family:'DM Sans',sans-serif;background:#0D0D0D;color:#F0EDE6;display:f
 .add-block-panel p{font-size:10px;color:#555;margin-bottom:7px;text-transform:uppercase;letter-spacing:.8px}
 .block-type-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
 .block-type-btn{background:#1A1A1A;border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:7px 5px;text-align:center;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
-.block-type-btn:hover{border-color:#C8A97E;background:rgba(200,169,126,.06)}
+.block-type-btn:hover{border-color:#C8A97E}
 .block-type-btn .bico{font-size:15px;display:block;margin-bottom:2px}
 .block-type-btn span{font-size:10px;color:#888;display:block}
-/* preview */
 .preview-wrap{flex:1;display:flex;flex-direction:column;overflow:hidden}
 .preview-bar{display:flex;align-items:center;gap:8px;padding:7px 14px;background:#111;border-bottom:1px solid rgba(200,169,126,.15);flex-shrink:0}
 .preview-label{font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.8px}
@@ -125,14 +119,9 @@ body{font-family:'DM Sans',sans-serif;background:#0D0D0D;color:#F0EDE6;display:f
 <body>
 
 <div class="topbar">
-  <button class="tbtn tbtn-ghost" onclick="window.location.href='index.html'" style="margin-right:4px;font-size:12px">← Home</button>
+  <button class="tbtn tbtn-ghost" onclick="window.location.href='index.html'" style="font-size:12px">← Home</button>
   <div class="logo">✦ UGC Studio</div>
-  <div class="tmpl-label">Template:</div>
-  <div class="tmpl-bar">
-    <button class="tmpl-btn on" onclick="switchTemplate(1,this)">Velvet Noir<small>cartões · clássico</small></button>
-    <button class="tmpl-btn" onclick="switchTemplate(2,this)">Lumière<small>tipográfico · elegante</small></button>
-    <button class="tmpl-btn" onclick="switchTemplate(3,this)">The Edit<small>colorido · conversão</small></button>
-  </div>
+  <span class="tmpl-name" id="tmpl-name-label"></span>
   <div class="topbar-right">
     <button class="tbtn tbtn-ghost" onclick="setView('desktop',event)">🖥</button>
     <button class="tbtn tbtn-ghost" onclick="setView('mobile',event)">📱</button>
@@ -156,21 +145,21 @@ body{font-family:'DM Sans',sans-serif;background:#0D0D0D;color:#F0EDE6;display:f
       <div class="fld"><label>Nome</label><input id="p-name" value="Jessica" oninput="render()"></div>
       <div class="fld"><label>Apelido</label><input id="p-surname" value="Santos" oninput="render()"></div>
       <div class="fld"><label>Handle / @</label><input id="p-handle" value="@jessicasantos.ugc" oninput="render()"></div>
-      <div class="fld"><label>Tagline</label><input id="p-tagline" value="UGC Creator · Storytelling · Conteúdo Autêntico" oninput="render()"></div>
-      <div class="fld"><label>Bio — parágrafo 1</label><textarea id="p-bio1" rows="3" oninput="render()">Sou uma UGC Creator especializada em conteúdo de beleza, lifestyle e bem-estar. Comecei a criar por pura paixão — e hoje transformei isso numa carreira a tempo inteiro.</textarea></div>
-      <div class="fld"><label>Bio — parágrafo 2</label><textarea id="p-bio2" rows="3" oninput="render()">Acredito que o melhor conteúdo é aquele que parece real, porque é real. Nada de scripts ensaiados — só histórias autênticas que conectam marcas às pessoas certas.</textarea></div>
-      <div class="fld"><label>Bio — parágrafo 3</label><textarea id="p-bio3" rows="2" oninput="render()">Quando não estou a filmar, encontras-me a explorar cafés novos, a testar produtos de skincare ou a planear a próxima aventura. 🌿</textarea></div>
+      <div class="fld"><label>Tagline</label><input id="p-tagline" value="UGC Creator · Beleza & Lifestyle" oninput="render()"></div>
+      <div class="fld"><label>Bio 1</label><textarea id="p-bio1" rows="3" oninput="render()">Sou uma UGC Creator especializada em conteúdo de beleza, lifestyle e bem-estar. Comecei a criar por pura paixão — e hoje transformei isso numa carreira a tempo inteiro.</textarea></div>
+      <div class="fld"><label>Bio 2</label><textarea id="p-bio2" rows="3" oninput="render()">Acredito que o melhor conteúdo é aquele que parece real, porque é real. Histórias autênticas que conectam marcas às pessoas certas.</textarea></div>
+      <div class="fld"><label>Bio 3</label><textarea id="p-bio3" rows="2" oninput="render()">Quando não estou a filmar, encontras-me a explorar cafés novos ou a testar produtos de skincare. 🌿</textarea></div>
       <div class="sep"></div>
-      <div class="sec">Estatísticas / Resultados</div>
+      <div class="sec">Estatísticas</div>
       <div class="sgrid">
-        <div class="si-wrap"><label>Stat 1 num</label><input id="st-v1" value="50+" oninput="render()"></div>
-        <div class="si-wrap"><label>Stat 1 label</label><input id="st-l1" value="Marcas" oninput="render()"></div>
-        <div class="si-wrap"><label>Stat 2 num</label><input id="st-v2" value="300+" oninput="render()"></div>
-        <div class="si-wrap"><label>Stat 2 label</label><input id="st-l2" value="Vídeos criados" oninput="render()"></div>
-        <div class="si-wrap"><label>Stat 3 num</label><input id="st-v3" value="98%" oninput="render()"></div>
-        <div class="si-wrap"><label>Stat 3 label</label><input id="st-l3" value="Satisfação" oninput="render()"></div>
-        <div class="si-wrap"><label>Stat 4 num</label><input id="st-v4" value="2M+" oninput="render()"></div>
-        <div class="si-wrap"><label>Stat 4 label</label><input id="st-l4" value="Views geradas" oninput="render()"></div>
+        <div class="si-wrap"><label>Valor 1</label><input id="st-v1" value="50+" oninput="render()"></div>
+        <div class="si-wrap"><label>Label 1</label><input id="st-l1" value="Marcas Parceiras" oninput="render()"></div>
+        <div class="si-wrap"><label>Valor 2</label><input id="st-v2" value="300+" oninput="render()"></div>
+        <div class="si-wrap"><label>Label 2</label><input id="st-l2" value="Vídeos Criados" oninput="render()"></div>
+        <div class="si-wrap"><label>Valor 3</label><input id="st-v3" value="2M+" oninput="render()"></div>
+        <div class="si-wrap"><label>Label 3</label><input id="st-l3" value="Views Totais" oninput="render()"></div>
+        <div class="si-wrap"><label>Valor 4</label><input id="st-v4" value="98%" oninput="render()"></div>
+        <div class="si-wrap"><label>Label 4</label><input id="st-l4" value="Satisfação" oninput="render()"></div>
       </div>
       <div class="sep"></div>
       <div class="sec">Contacto</div>
@@ -179,59 +168,65 @@ body{font-family:'DM Sans',sans-serif;background:#0D0D0D;color:#F0EDE6;display:f
       <div class="fld"><label>Website</label><input id="p-web" value="jessica-santos.com" oninput="render()"></div>
       <div class="fld"><label>Localização</label><input id="p-loc" value="Lisboa, Portugal · Disponível remotamente" oninput="render()"></div>
       <div class="sep"></div>
-      <div class="sec">Redes Sociais (URLs completos)</div>
+      <div class="sec">Redes Sociais (URLs)</div>
       <div class="soc-row"><div class="soc-icon">📸</div><input id="soc-ig" placeholder="https://instagram.com/..." oninput="render()"></div>
       <div class="soc-row"><div class="soc-icon">🎵</div><input id="soc-tt" placeholder="https://tiktok.com/..." oninput="render()"></div>
       <div class="soc-row"><div class="soc-icon">📌</div><input id="soc-pt" placeholder="https://pinterest.com/..." oninput="render()"></div>
       <div class="soc-row"><div class="soc-icon">▶️</div><input id="soc-yt" placeholder="https://youtube.com/..." oninput="render()"></div>
       <div class="soc-row"><div class="soc-icon">💼</div><input id="soc-li" placeholder="https://linkedin.com/..." oninput="render()"></div>
       <div class="sep"></div>
-      <div class="sec">Nichos / Tags</div>
+      <div class="sec">Nichos</div>
       <div class="tags-wrap" id="niches-wrap"></div>
-      <div class="tag-row"><input id="niche-in" placeholder="Ex: Beleza, Food..." onkeydown="if(event.key==='Enter')addNiche()"><button onclick="addNiche()">+</button></div>
+      <div class="tag-row"><input id="niche-in" placeholder="Ex: Beleza..." onkeydown="if(event.key==='Enter')addNiche()"><button onclick="addNiche()">+</button></div>
       <div class="sep"></div>
-      <div class="sec">Marcas trabalhadas (barra rosa)</div>
-      <div class="fld"><textarea id="p-brands" rows="3" oninput="render()">glamour
+      <div class="sec">Marcas trabalhadas (barra)</div>
+      <div class="fld"><textarea id="p-brands" rows="4" oninput="render()">glamour
 LUMIÈRE
 velvetco.
 NUDELAB
 santal&co
 EVERLY</textarea></div>
       <div class="sep"></div>
-      <div class="sec">Announcement bar (topo)</div>
-      <div class="fld"><input id="p-ann" value="DISPONÍVEL PARA PARCERIAS — Vamos criar conteúdo juntas! ✦" oninput="render()"></div>
+      <div class="sec">Barra de anúncio (topo)</div>
+      <div class="fld"><input id="p-ann" value="✦ DISPONÍVEL PARA NOVAS PARCERIAS — JANEIRO 2026 ✦" oninput="render()"></div>
     </div>
 
     <!-- MEDIA -->
     <div class="panel" id="panel-media">
-      <div class="sec">Foto Hero (principal)</div>
-      <div class="upzone" onclick="document.getElementById('up-hero').click()"><div class="uico">🖼</div><p>Foto principal do hero</p><input type="file" id="up-hero" accept="image/*" onchange="handleSingle(this,'heroImg')"></div>
+      <div class="sec">Foto Principal (Hero)</div>
+      <div class="upzone" onclick="document.getElementById('up-hero').click()"><div class="uico">🖼</div><p>Foto principal</p><input type="file" id="up-hero" accept="image/*" onchange="handleSingle(this,'heroImg')"></div>
       <div id="heroImg-preview"></div>
       <div class="sec">Foto About / Sobre mim</div>
-      <div class="upzone" onclick="document.getElementById('up-about').click()"><div class="uico">👤</div><p>Foto da secção about</p><input type="file" id="up-about" accept="image/*" onchange="handleSingle(this,'aboutImg')"></div>
+      <div class="upzone" onclick="document.getElementById('up-about').click()"><div class="uico">👤</div><p>Foto secção about</p><input type="file" id="up-about" accept="image/*" onchange="handleSingle(this,'aboutImg')"></div>
       <div id="aboutImg-preview"></div>
-      <div class="sec">Foto Testimonial (centro)</div>
-      <div class="upzone" onclick="document.getElementById('up-testi-center').click()"><div class="uico">💬</div><p>Foto central entre testimonials</p><input type="file" id="up-testi-center" accept="image/*" onchange="handleSingle(this,'testiCenterImg')"></div>
-      <div id="testiCenterImg-preview"></div>
-      <div class="sec">Foto Contacto / CTA</div>
-      <div class="upzone" onclick="document.getElementById('up-contact').click()"><div class="uico">📷</div><p>Foto da secção contacto</p><input type="file" id="up-contact" accept="image/*" onchange="handleSingle(this,'contactImg')"></div>
+      <div class="sec">Foto Contacto / Polaroid</div>
+      <div class="upzone" onclick="document.getElementById('up-contact').click()"><div class="uico">📷</div><p>Foto contacto ou polaroid</p><input type="file" id="up-contact" accept="image/*" onchange="handleSingle(this,'contactImg')"></div>
       <div id="contactImg-preview"></div>
-      <div class="sec">Fotos Hero Cards (Template Velvet Noir)</div>
-      <div class="upzone" onclick="document.getElementById('up-hcards').click()"><div class="uico">🃏</div><p>Até 7 fotos para os cartões do hero</p><input type="file" id="up-hcards" accept="image/*" multiple onchange="handleMulti(this,'heroCards',7,'hcards-thumbs')"></div>
+      <div class="sec">Foto Telemóvel / Processo</div>
+      <div class="upzone" onclick="document.getElementById('up-phone').click()"><div class="uico">📱</div><p>Foto no mockup telemóvel</p><input type="file" id="up-phone" accept="image/*" onchange="handleSingle(this,'phoneImg')"></div>
+      <div id="phoneImg-preview"></div>
+      <div class="sec">Foto Filosofia / Story</div>
+      <div class="upzone" onclick="document.getElementById('up-phil').click()"><div class="uico">🌿</div><p>Foto filosofia / história</p><input type="file" id="up-phil" accept="image/*" onchange="handleSingle(this,'philImg')"></div>
+      <div id="philImg-preview"></div>
+      <div class="sec">Fotos Hero Cards (T1 — Velvet Noir)</div>
+      <div class="upzone" onclick="document.getElementById('up-hcards').click()"><div class="uico">🃏</div><p>Até 7 fotos para os cartões polaroid</p><input type="file" id="up-hcards" accept="image/*" multiple onchange="handleMulti(this,'heroCards',7,'hcards-thumbs')"></div>
       <div class="mthumb-grid" id="hcards-thumbs"></div>
       <div class="sec">Portfolio — Fotos &amp; Vídeos</div>
-      <p style="font-size:10.5px;color:#555;margin-bottom:6px;line-height:1.5">Vídeos reproduzem directamente com clique no site.</p>
-      <div class="upzone" onclick="document.getElementById('up-port').click()"><div class="uico">🎬</div><p>Fotos e vídeos do portfolio<br><span style="font-size:10px;opacity:.5">MP4, MOV, JPG, PNG</span></p><input type="file" id="up-port" accept="image/*,video/*" multiple onchange="handlePortMedia(this)"></div>
+      <p style="font-size:10.5px;color:#555;margin-bottom:6px;line-height:1.5">Vídeos reproduzem directamente com clique.</p>
+      <div class="upzone" onclick="document.getElementById('up-port').click()"><div class="uico">🎬</div><p>Fotos e vídeos do portfolio</p><input type="file" id="up-port" accept="image/*,video/*" multiple onchange="handlePortMedia(this)"></div>
       <div class="mthumb-grid" id="port-thumbs"></div>
-      <div class="sec">Serviços — 3 Fotos</div>
-      <div class="upzone" onclick="document.getElementById('up-svcs').click()"><div class="uico">✨</div><p>3 fotos para os cards de serviços</p><input type="file" id="up-svcs" accept="image/*" multiple onchange="handleMulti(this,'svcImgs',3,'svc-thumbs')"></div>
-      <div class="mthumb-grid" id="svc-thumbs"></div>
-      <div class="sec">Case Studies — 2 Fotos</div>
-      <div class="upzone" onclick="document.getElementById('up-cases').click()"><div class="uico">📊</div><p>2 fotos para os casos de estudo</p><input type="file" id="up-cases" accept="image/*" multiple onchange="handleMulti(this,'caseImgs',2,'case-thumbs')"></div>
-      <div class="mthumb-grid" id="case-thumbs"></div>
-      <div class="sec">Galeria Strip (Template Lumière)</div>
+      <div class="sec">Galeria Strip (T2 — Lumière)</div>
       <div class="upzone" onclick="document.getElementById('up-strip').click()"><div class="uico">🖼</div><p>4 fotos para a faixa</p><input type="file" id="up-strip" accept="image/*" multiple onchange="handleMulti(this,'stripImgs',4,'strip-thumbs')"></div>
       <div class="mthumb-grid" id="strip-thumbs"></div>
+      <div class="sec">Serviços — 3 Fotos (T3 — The Edit)</div>
+      <div class="upzone" onclick="document.getElementById('up-svcs').click()"><div class="uico">✨</div><p>3 fotos para os cards de serviços</p><input type="file" id="up-svcs" accept="image/*" multiple onchange="handleMulti(this,'svcImgs',3,'svc-thumbs')"></div>
+      <div class="mthumb-grid" id="svc-thumbs"></div>
+      <div class="sec">Case Studies — 2 Fotos (T3 — The Edit)</div>
+      <div class="upzone" onclick="document.getElementById('up-cases').click()"><div class="uico">📊</div><p>2 fotos para os casos de estudo</p><input type="file" id="up-cases" accept="image/*" multiple onchange="handleMulti(this,'caseImgs',2,'case-thumbs')"></div>
+      <div class="mthumb-grid" id="case-thumbs"></div>
+      <div class="sec">Avatares Testimonials</div>
+      <div class="upzone" onclick="document.getElementById('up-testi').click()"><div class="uico">💬</div><p>3 avatares dos testemunhos</p><input type="file" id="up-testi" accept="image/*" multiple onchange="handleMulti(this,'testiImgs',3,'testi-thumbs')"></div>
+      <div class="mthumb-grid" id="testi-thumbs"></div>
     </div>
 
     <!-- PÁGINAS -->
@@ -241,7 +236,7 @@ EVERLY</textarea></div>
         <button class="add-page-btn" onclick="toggleAddBlock()">+ Bloco</button>
       </div>
       <div class="add-block-panel" id="add-block-panel">
-        <p>Tipo de bloco a adicionar</p>
+        <p>Tipo de bloco</p>
         <div class="block-type-grid" id="block-type-grid"></div>
       </div>
       <div id="pages-list"></div>
@@ -249,11 +244,11 @@ EVERLY</textarea></div>
 
     <!-- DESIGN -->
     <div class="panel" id="panel-design">
-      <div class="sec">Cores — Template The Edit</div>
+      <div class="sec">Cores — The Edit (T3)</div>
       <div class="color-row"><div class="cswatch" id="sw-terra" style="background:#C96B52"><input type="color" id="c-terra" value="#C96B52" oninput="updateC('terra',this.value)"></div><div class="clabel">Terra (destaque principal)</div></div>
       <div class="color-row"><div class="cswatch" id="sw-sage" style="background:#7CBFB5"><input type="color" id="c-sage" value="#7CBFB5" oninput="updateC('sage',this.value)"></div><div class="clabel">Sage (destaque 2)</div></div>
       <div class="color-row"><div class="cswatch" id="sw-gold" style="background:#D4A030"><input type="color" id="c-gold" value="#D4A030" oninput="updateC('gold',this.value)"></div><div class="clabel">Gold (destaque 3)</div></div>
-      <div class="color-row"><div class="cswatch" id="sw-pink" style="background:#E8899A"><input type="color" id="c-pink" value="#E8899A" oninput="updateC('pink',this.value)"></div><div class="clabel">Pink (barra de marcas)</div></div>
+      <div class="color-row"><div class="cswatch" id="sw-pink" style="background:#E8899A"><input type="color" id="c-pink" value="#E8899A" oninput="updateC('pink',this.value)"></div><div class="clabel">Pink (barra marcas)</div></div>
       <div class="color-row"><div class="cswatch" id="sw-cream" style="background:#F5EFE4"><input type="color" id="c-cream" value="#F5EFE4" oninput="updateC('cream',this.value)"></div><div class="clabel">Cream (fundo)</div></div>
       <div class="sep"></div>
       <div class="sec">Colunas portfolio</div>
@@ -262,17 +257,8 @@ EVERLY</textarea></div>
         <span class="rval" id="cols-v">3</span>
       </div>
       <div class="sep"></div>
-      <div class="sec">Secções visíveis — Velvet Noir</div>
-      <div id="tog-t1"></div>
-      <div class="sep"></div>
-      <div class="sec">Secções visíveis — Lumière</div>
-      <div id="tog-t2"></div>
-      <div class="sep"></div>
-      <div class="sec">Secções visíveis — The Edit</div>
-      <div id="tog-t3"></div>
-      <div class="sep"></div>
-      <div class="sec">Secções visíveis — Studio Zine</div>
-      <div id="tog-t4"></div>
+      <div class="sec">Secções visíveis</div>
+      <div id="tog-list"></div>
     </div>
 
     <!-- TEXTOS -->
@@ -288,49 +274,52 @@ EVERLY</textarea></div>
       <div class="fld"><label>Descrição 3</label><textarea id="svc3-desc" rows="2" oninput="render()">Estratégia + vídeo + foto + revisões incluídas. Para marcas que querem presença consistente e conteúdo em escala.</textarea></div>
       <div class="fld"><label>Preço 3</label><input id="svc3-price" value="A partir de €500 / mês" oninput="render()"></div>
       <div class="sep"></div>
-      <div class="sec">Case Studies (2 casos)</div>
-      <div class="fld"><label>Tag 1 (cor sage)</label><input id="case1-tag" value="Beleza" oninput="render()"></div>
+      <div class="sec">Case Studies (T3)</div>
+      <div class="fld"><label>Tag 1</label><input id="case1-tag" value="Beleza" oninput="render()"></div>
       <div class="fld"><label>Título 1</label><input id="case1-title" value="Lumière Beauty — Lançamento de Sérum" oninput="render()"></div>
-      <div class="fld"><label>Descrição 1</label><textarea id="case1-desc" rows="3" oninput="render()">A Lumière queria apresentar o novo sérum de ácido hialurónico a uma audiência mais jovem. Criámos uma série de 6 vídeos UGC para Meta Ads e TikTok orgânico.</textarea></div>
-      <div class="fld"><label>Stats 1 (sep. vírgula: num|label)</label><input id="case1-stats" value="2.4M|visualizações,4.8%|CTR médio,312%|ROAS" oninput="render()"></div>
+      <div class="fld"><label>Descrição 1</label><textarea id="case1-desc" rows="2" oninput="render()">A Lumière queria apresentar o novo sérum de ácido hialurónico a uma audiência mais jovem. Criámos 6 vídeos UGC para Meta Ads e TikTok.</textarea></div>
+      <div class="fld"><label>Stats 1 (num|label,num|label)</label><input id="case1-stats" value="2.4M|visualizações,4.8%|CTR médio,312%|ROAS" oninput="render()"></div>
       <div class="fld"><label>Tag 2</label><input id="case2-tag" value="Lifestyle" oninput="render()"></div>
       <div class="fld"><label>Título 2</label><input id="case2-title" value="Santal&Co — Campanha de Outono" oninput="render()"></div>
-      <div class="fld"><label>Descrição 2</label><textarea id="case2-desc" rows="3" oninput="render()">Uma marca de velas e perfumes de ambiente que precisava de conteúdo com alma para a campanha de Outono. Criámos 4 vídeos atmosféricos + 12 fotos lifestyle.</textarea></div>
-      <div class="fld"><label>Stats 2</label><input id="case2-stats" value="180K|alcance orgânico,9.2%|engagement rate,98%|satisfação" oninput="render()"></div>
+      <div class="fld"><label>Descrição 2</label><textarea id="case2-desc" rows="2" oninput="render()">Uma marca de velas e perfumes que precisava de conteúdo com alma para a campanha de Outono.</textarea></div>
+      <div class="fld"><label>Stats 2</label><input id="case2-stats" value="180K|alcance orgânico,9.2%|engagement,98%|satisfação" oninput="render()"></div>
       <div class="sep"></div>
-      <div class="sec">Testimonials</div>
-      <div class="fld"><label>Quote 1</label><textarea id="t1-quote" rows="3" oninput="render()">A Jessica entendeu a nossa marca desde o primeiro briefing. Os vídeos que criou tiveram um CTR 3x superior aos nossos criativos internos. Voltamos a trabalhar com ela de certeza.</textarea></div>
+      <div class="sec">Testimonials / Reviews</div>
+      <div class="fld"><label>Quote 1</label><textarea id="t1-quote" rows="2" oninput="render()">"A Jessica entendeu a nossa marca desde o primeiro briefing. Os vídeos tiveram um CTR 3x superior aos nossos criativos internos."</textarea></div>
       <div class="fld"><label>Autor 1</label><input id="t1-author" value="— Sofia R. · Lumière Beauty" oninput="render()"></div>
-      <div class="fld"><label>Quote 2</label><textarea id="t2-quote" rows="3" oninput="render()">Trabalhar com a Jessica foi incrivelmente fácil. Cumpriu todos os prazos, os conteúdos eram exatamente o que queríamos, e ainda nos deu ideias que não tínhamos pensado. Recomendo 100%.</textarea></div>
+      <div class="fld"><label>Quote 2</label><textarea id="t2-quote" rows="2" oninput="render()">"Trabalhar com a Jessica foi incrivelmente fácil. Cumpriu todos os prazos e os conteúdos estavam sempre alinhados com a nossa visão."</textarea></div>
       <div class="fld"><label>Autor 2</label><input id="t2-author" value="— Mariana C. · Santal&Co" oninput="render()"></div>
       <div class="sep"></div>
-      <div class="sec">FAQ (6 perguntas)</div>
+      <div class="sec">FAQ (T3)</div>
       <div class="fld"><label>Q1</label><input id="faq1-q" value="Como é o processo de trabalho?" oninput="render()"></div>
-      <div class="fld"><label>A1</label><textarea id="faq1-a" rows="2" oninput="render()">Após a confirmação, envias o briefing e o produto (se aplicável). Em 48h apresento o conceito e em 7–10 dias úteis tens os conteúdos finais prontos a usar.</textarea></div>
-      <div class="fld"><label>Q2</label><input id="faq2-q" value="Incluis direitos de utilização nos anúncios pagos?" oninput="render()"></div>
-      <div class="fld"><label>A2</label><textarea id="faq2-a" rows="2" oninput="render()">Sim! Todos os meus pacotes incluem direitos de utilização para organic e paid ads. Para whitelabel ou uso exclusivo, existe um add-on específico.</textarea></div>
-      <div class="fld"><label>Q3</label><input id="faq3-q" value="Precisas de receber o produto físico?" oninput="render()"></div>
-      <div class="fld"><label>A3</label><textarea id="faq3-a" rows="2" oninput="render()">Para vídeos de unboxing e uso, sim. Para conteúdo mais conceitual ou lifestyle, nem sempre — depende do projeto.</textarea></div>
+      <div class="fld"><label>A1</label><textarea id="faq1-a" rows="2" oninput="render()">Após a confirmação, envias o briefing e o produto. Em 48h apresento o conceito e em 7–10 dias úteis tens os conteúdos finais prontos.</textarea></div>
+      <div class="fld"><label>Q2</label><input id="faq2-q" value="Incluis direitos de utilização?" oninput="render()"></div>
+      <div class="fld"><label>A2</label><textarea id="faq2-a" rows="2" oninput="render()">Sim! Todos os pacotes incluem direitos de utilização para organic e paid ads.</textarea></div>
+      <div class="fld"><label>Q3</label><input id="faq3-q" value="Precisas de receber o produto?" oninput="render()"></div>
+      <div class="fld"><label>A3</label><textarea id="faq3-a" rows="2" oninput="render()">Para vídeos de unboxing e uso, sim. Para conteúdo conceitual ou lifestyle, nem sempre.</textarea></div>
       <div class="fld"><label>Q4</label><input id="faq4-q" value="Fazes revisões?" oninput="render()"></div>
-      <div class="fld"><label>A4</label><textarea id="faq4-a" rows="2" oninput="render()">Todos os pacotes incluem 1 ronda de revisões. Revisões adicionais têm um custo extra.</textarea></div>
+      <div class="fld"><label>A4</label><textarea id="faq4-a" rows="2" oninput="render()">Todos os pacotes incluem 1 ronda de revisões. Revisões adicionais têm custo extra.</textarea></div>
       <div class="fld"><label>Q5</label><input id="faq5-q" value="Trabalhas com marcas internacionais?" oninput="render()"></div>
       <div class="fld"><label>A5</label><textarea id="faq5-a" rows="2" oninput="render()">Sim! Trabalho em português e inglês, e aceito colaborações de marcas de todo o mundo.</textarea></div>
       <div class="fld"><label>Q6</label><input id="faq6-q" value="Quanto tempo antes devo contactar?" oninput="render()"></div>
-      <div class="fld"><label>A6</label><textarea id="faq6-a" rows="2" oninput="render()">Recomendo contactar com pelo menos 2–3 semanas de antecedência. Para campanhas maiores, quanto mais cedo melhor!</textarea></div>
+      <div class="fld"><label>A6</label><textarea id="faq6-a" rows="2" oninput="render()">Recomendo contactar com pelo menos 2–3 semanas de antecedência.</textarea></div>
       <div class="sep"></div>
-      <div class="sec">Textos CTA / Hero</div>
-      <div class="fld"><label>Hero headline (linha 3)</label><input id="tx-hero3" value="realmente" oninput="render()"></div>
-      <div class="fld"><label>Hero headline (linha 4)</label><input id="tx-hero4" value="assistem." oninput="render()"></div>
+      <div class="sec">Textos Hero / CTA</div>
+      <div class="fld"><label>Hero linha 3 (cor)</label><input id="tx-hero3" value="realmente" oninput="render()"></div>
+      <div class="fld"><label>Hero linha 4 (cor)</label><input id="tx-hero4" value="assistem." oninput="render()"></div>
       <div class="fld"><label>Hero sub</label><textarea id="tx-hero-sub" rows="2" oninput="render()">Com uma criadora que vive o que filma — e sabe exatamente o que faz uma marca brilhar.</textarea></div>
-      <div class="fld"><label>CTA headline linha 3</label><input id="tx-cta3" value="brilhar" oninput="render()"></div>
-      <div class="fld"><label>CTA sub</label><textarea id="tx-cta-sub" rows="2" oninput="render()">Vamos criar conteúdo que converte — sem parecer que estás a vender. Marca uma chamada de descoberta gratuita e vemos como posso ajudar.</textarea></div>
+      <div class="fld"><label>CTA linha 3</label><input id="tx-cta3" value="brilhar" oninput="render()"></div>
+      <div class="fld"><label>CTA sub</label><textarea id="tx-cta-sub" rows="2" oninput="render()">Vamos criar conteúdo que converte — sem parecer que estás a vender. Marca uma chamada gratuita.</textarea></div>
       <div class="fld"><label>Texto botão CTA</label><input id="tx-cta-btn" value="Agendar Chamada Gratuita" oninput="render()"></div>
+      <div class="sep"></div>
+      <div class="sec">Quote inspiracional (T3)</div>
+      <div class="fld"><textarea id="tx-quote" rows="2" oninput="render()">"Um pouco de progresso todos os dias acumula-se em grandes resultados."</textarea></div>
     </div>
   </div>
 
   <div class="preview-wrap">
     <div class="preview-bar">
-      <span class="preview-label" id="tmpl-name-label">Velvet Noir</span>
+      <span class="preview-label" id="preview-template-label">A carregar...</span>
       <div class="view-btns">
         <button class="vbtn on" onclick="setView('desktop',event)">🖥 Desktop</button>
         <button class="vbtn" onclick="setView('mobile',event)">📱 Mobile</button>
@@ -343,64 +332,73 @@ EVERLY</textarea></div>
 <script>
 // ── STATE ─────────────────────────────────────────────────────────────────────
 let activeTemplate = 1;
-const imgs = {,
-  4: [
-    {id:'ann',        label:'Barra anúncio',        icon:'📢'},
-    {id:'tabnav',     label:'Nav folder tabs',       icon:'🗂'},
-    {id:'hero',       label:'Hero + foto',           icon:'🌟'},
-    {id:'about',      label:'Sobre mim (dark)',      icon:'👤'},
-    {id:'services',   label:'Serviços (cards dark)', icon:'✨'},
-    {id:'cta_stripe', label:'CTA stripe azul',       icon:'🔗'},
-    {id:'portfolio',  label:'Portfolio (mockup)',    icon:'🎬'},
-    {id:'stats',      label:'Stats círculos',        icon:'📊'},
-    {id:'reviews',    label:'Reviews (dark)',        icon:'💬'},
-    {id:'tools',      label:'Ferramentas',           icon:'🔧'},
-    {id:'contact',    label:'Contacto + Formulário', icon:'📩'},
-  ]
-};
-const heroCards=[], stripImgs=[], svcImgs=[], caseImgs=[], portMedia=[];
+const imgs = {};
+const heroCards=[], stripImgs=[], svcImgs=[], caseImgs=[], testiImgs=[], portMedia=[];
 let niches = ['Beleza','Lifestyle','Bem-estar','Moda','Viagens'];
 let portCols = 3;
 let C = { terra:'#C96B52', sage:'#7CBFB5', gold:'#D4A030', pink:'#E8899A', cream:'#F5EFE4' };
 
-// ── SECTIONS PER TEMPLATE ────────────────────────────────────────────────────
+// ── SECTION DEFS PER TEMPLATE ─────────────────────────────────────────────────
 const SECTION_DEFS = {
   1: [
-    {id:'hero',     label:'Hero',           icon:'🌟'},
-    {id:'about',    label:'Sobre mim',      icon:'👤'},
-    {id:'portfolio',label:'Portfolio',      icon:'🎬'},
-    {id:'pricing',  label:'Preços',         icon:'💰'},
-    {id:'process',  label:'Processo',       icon:'⚙️'},
-    {id:'contact',  label:'Contacto',       icon:'📩'},
+    {id:'hero',       label:'Hero (cartões polaroid)',  icon:'🌟'},
+    {id:'about',      label:'Sobre mim',                icon:'👤'},
+    {id:'portfolio',  label:'Portfolio',                icon:'🎬'},
+    {id:'pricing',    label:'Preços',                   icon:'💰'},
+    {id:'process',    label:'Processo',                 icon:'⚙️'},
+    {id:'contact',    label:'Contacto',                 icon:'📩'},
   ],
   2: [
-    {id:'hero',       label:'Hero',             icon:'🌟'},
-    {id:'strip',      label:'Galeria Strip',    icon:'🖼'},
-    {id:'about',      label:'Sobre mim',        icon:'👤'},
-    {id:'why',        label:'Por que UGC?',     icon:'❓'},
-    {id:'mywork',     label:'O meu trabalho',   icon:'🖼'},
-    {id:'testimonials',label:'Testimonials',    icon:'💬'},
-    {id:'pricing',    label:'Preços',           icon:'💰'},
-    {id:'contact',    label:'Contacto',         icon:'📩'},
+    {id:'hero',         label:'Hero tipográfico',       icon:'🌟'},
+    {id:'strip',        label:'Galeria strip',          icon:'🖼'},
+    {id:'about',        label:'Sobre mim',              icon:'👤'},
+    {id:'why',          label:'Por que UGC?',           icon:'❓'},
+    {id:'mywork',       label:'O meu trabalho',         icon:'🖼'},
+    {id:'testimonials', label:'Testimonials',           icon:'💬'},
+    {id:'pricing',      label:'Preços',                 icon:'💰'},
+    {id:'contact',      label:'Contacto',               icon:'📩'},
   ],
   3: [
-    {id:'ann',          label:'Barra anúncio',      icon:'📢'},
-    {id:'hero',         label:'Hero',               icon:'🌟'},
-    {id:'brands',       label:'Barra de marcas',    icon:'🏷'},
-    {id:'statement',    label:'Big Statement',      icon:'💡'},
-    {id:'about',        label:'Sobre mim',          icon:'👤'},
-    {id:'pain',         label:'Pain Points',        icon:'⚠️'},
-    {id:'results',      label:'Resultados',         icon:'📈'},
-    {id:'services',     label:'Serviços',           icon:'✨'},
-    {id:'cases',        label:'Case Studies',       icon:'📊'},
-    {id:'testimonials', label:'Testimonials',       icon:'💬'},
-    {id:'faq',          label:'FAQ',                icon:'❓'},
-    {id:'contact',      label:'Contacto / CTA',     icon:'📩'},
+    {id:'ann',          label:'Barra anúncio',          icon:'📢'},
+    {id:'hero',         label:'Hero + blob SVG',        icon:'🌟'},
+    {id:'brands',       label:'Barra de marcas',        icon:'🏷'},
+    {id:'statement',    label:'Big Statement',          icon:'💡'},
+    {id:'about',        label:'Sobre mim',              icon:'👤'},
+    {id:'pain',         label:'Pain Points',            icon:'⚠️'},
+    {id:'results',      label:'Resultados',             icon:'📈'},
+    {id:'services',     label:'Serviços',               icon:'✨'},
+    {id:'cases',        label:'Case Studies',           icon:'📊'},
+    {id:'testimonials', label:'Testimonials',           icon:'💬'},
+    {id:'faq',          label:'FAQ',                    icon:'❓'},
+    {id:'contact',      label:'Contacto / CTA',         icon:'📩'},
+  ],
+  4: [
+    {id:'ann',        label:'Barra anúncio',            icon:'📢'},
+    {id:'tabnav',     label:'Nav folder tabs',          icon:'🗂'},
+    {id:'hero',       label:'Hero + foto polaroid',     icon:'🌟'},
+    {id:'about',      label:'Sobre mim (dark)',         icon:'👤'},
+    {id:'services',   label:'Serviços (cards dark)',    icon:'✨'},
+    {id:'cta_stripe', label:'CTA stripe azul',         icon:'🔗'},
+    {id:'portfolio',  label:'Portfolio (mockup)',       icon:'🎬'},
+    {id:'stats',      label:'Stats em círculos',        icon:'📊'},
+    {id:'reviews',    label:'Reviews (dark)',           icon:'💬'},
+    {id:'tools',      label:'Ferramentas',              icon:'🔧'},
+    {id:'contact',    label:'Contacto + Formulário',    icon:'📩'},
   ]
 };
 
-// pages state: ordered list with visible flag + custom blocks
-let templatePages = { 1:null, 2:null, 3:null };
+const CUSTOM_BLOCKS = [
+  {type:'custom_text',    label:'Bloco de Texto',  icon:'📝'},
+  {type:'custom_gallery', label:'Galeria Fotos',   icon:'🖼'},
+  {type:'custom_video',   label:'Vídeo directo',   icon:'▶️'},
+  {type:'custom_cta',     label:'Botão CTA',       icon:'🔗'},
+  {type:'custom_quote',   label:'Citação',         icon:'💬'},
+  {type:'custom_brands',  label:'Marcas',          icon:'🏷'},
+  {type:'custom_divider', label:'Separador',       icon:'➖'},
+  {type:'custom_stats',   label:'Estatísticas',    icon:'📊'},
+];
+
+let templatePages = {1:null,2:null,3:null,4:null};
 function getPages(){
   if(!templatePages[activeTemplate]){
     templatePages[activeTemplate] = SECTION_DEFS[activeTemplate].map(s=>({
@@ -410,19 +408,7 @@ function getPages(){
   return templatePages[activeTemplate];
 }
 
-// ── CUSTOM BLOCK TYPES ───────────────────────────────────────────────────────
-const CUSTOM_BLOCKS = [
-  {type:'custom_text',    label:'Bloco de Texto',   icon:'📝'},
-  {type:'custom_gallery', label:'Galeria de Fotos',  icon:'🖼'},
-  {type:'custom_video',   label:'Vídeo directo',     icon:'▶️'},
-  {type:'custom_cta',     label:'Botão CTA',         icon:'🔗'},
-  {type:'custom_quote',   label:'Citação',           icon:'💬'},
-  {type:'custom_brands',  label:'Marcas',            icon:'🏷'},
-  {type:'custom_divider', label:'Separador',         icon:'➖'},
-  {type:'custom_stats',   label:'Estatísticas',      icon:'📊'},
-];
-
-// ── TABS ─────────────────────────────────────────────────────────────────────
+// ── TABS ──────────────────────────────────────────────────────────────────────
 function switchTab(name,el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
   el.classList.add('on');
@@ -431,18 +417,7 @@ function switchTab(name,el){
   if(name==='paginas') renderPagesList();
 }
 
-// ── TEMPLATE SWITCH ──────────────────────────────────────────────────────────
-const TMPL_NAMES = {1:'Velvet Noir',2:'Lumière',3:'The Edit'};
-function switchTemplate(n,el){
-  activeTemplate=n;
-  document.querySelectorAll('.tmpl-btn').forEach(b=>b.classList.remove('on'));
-  el.classList.add('on');
-  document.getElementById('tmpl-name-label').textContent=TMPL_NAMES[n];
-  renderPagesList();
-  render();
-}
-
-// ── NICHES ───────────────────────────────────────────────────────────────────
+// ── NICHES ────────────────────────────────────────────────────────────────────
 function addNiche(){
   const inp=document.getElementById('niche-in'),v=inp.value.trim();
   if(!v)return;niches.push(v);inp.value='';renderNiches();render();
@@ -453,14 +428,10 @@ function renderNiches(){
     `<div class="tag-item">${n}<button onclick="rmNiche(${i})">✕</button></div>`).join('');
 }
 
-// ── COLORS ───────────────────────────────────────────────────────────────────
-function updateC(k,v){
-  C[k]=v;
-  document.getElementById('sw-'+k).style.background=v;
-  render();
-}
+// ── COLOURS ───────────────────────────────────────────────────────────────────
+function updateC(k,v){C[k]=v;document.getElementById('sw-'+k).style.background=v;render();}
 
-// ── UPLOADS ──────────────────────────────────────────────────────────────────
+// ── UPLOADS ───────────────────────────────────────────────────────────────────
 function handleSingle(input,key){
   const f=input.files[0];if(!f)return;
   const r=new FileReader();
@@ -499,7 +470,7 @@ function handlePortMedia(input){
   });
 }
 
-// ── PAGES ─────────────────────────────────────────────────────────────────────
+// ── PAGES / DRAG ──────────────────────────────────────────────────────────────
 let dragSrc=null;
 function toggleAddBlock(){
   const el=document.getElementById('add-block-panel');
@@ -508,8 +479,7 @@ function toggleAddBlock(){
   if(!open){
     document.getElementById('block-type-grid').innerHTML=CUSTOM_BLOCKS.map(b=>`
       <button class="block-type-btn" onclick="addBlock('${b.type}')">
-        <span class="bico">${b.icon}</span>
-        <span>${b.label}</span>
+        <span class="bico">${b.icon}</span><span>${b.label}</span>
       </button>`).join('');
   }
 }
@@ -524,7 +494,7 @@ function addBlock(type){
 }
 function renderPagesList(){
   const pages=getPages();
-  document.getElementById('pages-list').innerHTML=pages.map((pg,i)=>`
+  document.getElementById('pages-list').innerHTML=pages.map(pg=>`
     <div class="page-item" id="pgi-${pg.uid}" draggable="true"
       ondragstart="dragStart(event,'${pg.uid}')"
       ondragover="dragOver(event,'${pg.uid}')"
@@ -543,42 +513,17 @@ function renderPagesList(){
     </div>`).join('');
 }
 function buildPgEditor(pg){
-  if(!pg.custom) return `<p style="font-size:10.5px;color:#555;padding:8px 0;line-height:1.5">Secção nativa — edita o conteúdo nas abas <strong style="color:#C8A97E">Textos</strong> e <strong style="color:#C8A97E">Média</strong>.<br>Arrastar para reordenar. Toggle para mostrar/esconder.</p>`;
-  const d=pg.data||{};
-  const id=pg.uid;
-  if(pg.id==='custom_text') return `
-    <label>Título</label><input value="${d.title||''}" oninput="pgData('${id}','title',this.value)" placeholder="Título (opcional)">
-    <label>Texto</label><textarea rows="4" oninput="pgData('${id}','text',this.value)">${d.text||''}</textarea>
-    <label>Alinhamento</label>
-    <select oninput="pgData('${id}','align',this.value)"><option value="left" ${d.align==='left'?'selected':''}>Esquerda</option><option value="center" ${(!d.align||d.align==='center')?'selected':''}>Centro</option><option value="right" ${d.align==='right'?'selected':''}>Direita</option></select>`;
-  if(pg.id==='custom_gallery') return `
-    <label>Título</label><input value="${d.title||''}" oninput="pgData('${id}','title',this.value)" placeholder="Título (opcional)">
-    <div class="upzone" onclick="document.getElementById('cg-${id}').click()" style="margin:5px 0 4px"><div class="uico">🖼</div><p>Adicionar fotos</p><input type="file" id="cg-${id}" accept="image/*" multiple onchange="handleCGallery(this,'${id}')"></div>
-    <div class="mthumb-grid" id="cg-${id}-t">${(d.images||[]).map((s,i)=>`<div class="mthumb"><img src="${s}"><button class="rm" onclick="rmCImg('${id}',${i})">✕</button></div>`).join('')}</div>`;
-  if(pg.id==='custom_video') return `
-    <label>Título</label><input value="${d.title||''}" oninput="pgData('${id}','title',this.value)">
-    <div class="upzone" onclick="document.getElementById('cv-${id}').click()" style="margin:5px 0"><div class="uico">▶️</div><p>${d.videoSrc?'Vídeo carregado ✓':'Upload vídeo (MP4, MOV)'}</p><input type="file" id="cv-${id}" accept="video/*" onchange="handleCVideo(this,'${id}')"></div>`;
-  if(pg.id==='custom_cta') return `
-    <label>Texto do botão</label><input value="${d.btnText||'Contacta-me'}" oninput="pgData('${id}','btnText',this.value)">
-    <label>Link</label><input value="${d.btnUrl||'#contact'}" oninput="pgData('${id}','btnUrl',this.value)">
-    <label>Texto acima</label><input value="${d.title||''}" oninput="pgData('${id}','title',this.value)">`;
-  if(pg.id==='custom_quote') return `
-    <label>Citação</label><textarea rows="3" oninput="pgData('${id}','quote',this.value)">${d.quote||''}</textarea>
-    <label>Autor (opcional)</label><input value="${d.author||''}" oninput="pgData('${id}','author',this.value)">`;
-  if(pg.id==='custom_brands') return `
-    <label>Título</label><input value="${d.title||'Marcas com quem trabalhei'}" oninput="pgData('${id}','title',this.value)">
-    <label>Marcas (uma por linha)</label><textarea rows="4" oninput="pgData('${id}','brands',this.value)">${d.brands||''}</textarea>`;
-  if(pg.id==='custom_divider') return `
-    <label>Estilo</label>
-    <select oninput="pgData('${id}','style',this.value)"><option value="line" ${d.style==='line'?'selected':''}>Linha</option><option value="dots" ${d.style==='dots'?'selected':''}>Pontos</option><option value="space" ${d.style==='space'?'selected':''}>Espaço</option></select>`;
-  if(pg.id==='custom_stats') return `
-    <label>Stat 1 — Número / Label</label>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px"><input value="${d.s1v||''}" oninput="pgData('${id}','s1v',this.value)" placeholder="50+"><input value="${d.s1l||''}" oninput="pgData('${id}','s1l',this.value)" placeholder="Marcas"></div>
-    <label>Stat 2</label>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px"><input value="${d.s2v||''}" oninput="pgData('${id}','s2v',this.value)" placeholder="300+"><input value="${d.s2l||''}" oninput="pgData('${id}','s2l',this.value)" placeholder="Vídeos"></div>
-    <label>Stat 3</label>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px"><input value="${d.s3v||''}" oninput="pgData('${id}','s3v',this.value)" placeholder="2M+"><input value="${d.s3l||''}" oninput="pgData('${id}','s3l',this.value)" placeholder="Views"></div>`;
-  return `<p style="font-size:10px;color:#555;padding:6px 0">Bloco personalizado.</p>`;
+  if(!pg.custom)return`<p style="font-size:10.5px;color:#555;padding:8px 0;line-height:1.5">Secção nativa — edita nas abas <strong style="color:#C8A97E">Textos</strong> e <strong style="color:#C8A97E">Média</strong>.<br>Arrastar para reordenar. Toggle para mostrar/esconder.</p>`;
+  const d=pg.data||{},id=pg.uid;
+  if(pg.id==='custom_text')return`<label>Título</label><input value="${d.title||''}" oninput="pgData('${id}','title',this.value)" placeholder="Título"><label>Texto</label><textarea rows="4" oninput="pgData('${id}','text',this.value)">${d.text||''}</textarea>`;
+  if(pg.id==='custom_gallery')return`<label>Título</label><input value="${d.title||''}" oninput="pgData('${id}','title',this.value)"><div class="upzone" onclick="document.getElementById('cg-${id}').click()" style="margin:5px 0 4px"><div class="uico">🖼</div><p>Fotos</p><input type="file" id="cg-${id}" accept="image/*" multiple onchange="handleCGallery(this,'${id}')"></div><div class="mthumb-grid" id="cg-${id}-t">${(d.images||[]).map((s,i)=>`<div class="mthumb"><img src="${s}"><button class="rm" onclick="rmCImg('${id}',${i})">✕</button></div>`).join('')}</div>`;
+  if(pg.id==='custom_video')return`<label>Título</label><input value="${d.title||''}" oninput="pgData('${id}','title',this.value)"><div class="upzone" onclick="document.getElementById('cv-${id}').click()" style="margin:5px 0"><div class="uico">▶️</div><p>${d.videoSrc?'Vídeo carregado ✓':'Upload vídeo'}</p><input type="file" id="cv-${id}" accept="video/*" onchange="handleCVideo(this,'${id}')"></div>`;
+  if(pg.id==='custom_cta')return`<label>Texto botão</label><input value="${d.btnText||'Contacta-me'}" oninput="pgData('${id}','btnText',this.value)"><label>Link</label><input value="${d.btnUrl||'#contact'}" oninput="pgData('${id}','btnUrl',this.value)">`;
+  if(pg.id==='custom_quote')return`<label>Citação</label><textarea rows="3" oninput="pgData('${id}','quote',this.value)">${d.quote||''}</textarea><label>Autor</label><input value="${d.author||''}" oninput="pgData('${id}','author',this.value)">`;
+  if(pg.id==='custom_brands')return`<label>Título</label><input value="${d.title||'Marcas'}" oninput="pgData('${id}','title',this.value)"><label>Marcas (1 por linha)</label><textarea rows="4" oninput="pgData('${id}','brands',this.value)">${d.brands||''}</textarea>`;
+  if(pg.id==='custom_divider')return`<label>Estilo</label><select oninput="pgData('${id}','style',this.value)"><option value="line" ${d.style==='line'?'selected':''}>Linha</option><option value="dots" ${d.style==='dots'?'selected':''}>Pontos</option><option value="space" ${d.style==='space'?'selected':''}>Espaço</option></select>`;
+  if(pg.id==='custom_stats')return`<label>Stat 1</label><div style="display:grid;grid-template-columns:1fr 1fr;gap:4px"><input value="${d.s1v||''}" oninput="pgData('${id}','s1v',this.value)" placeholder="50+"><input value="${d.s1l||''}" oninput="pgData('${id}','s1l',this.value)" placeholder="Marcas"></div><label>Stat 2</label><div style="display:grid;grid-template-columns:1fr 1fr;gap:4px"><input value="${d.s2v||''}" oninput="pgData('${id}','s2v',this.value)" placeholder="300+"><input value="${d.s2l||''}" oninput="pgData('${id}','s2l',this.value)" placeholder="Vídeos"></div><label>Stat 3</label><div style="display:grid;grid-template-columns:1fr 1fr;gap:4px"><input value="${d.s3v||''}" oninput="pgData('${id}','s3v',this.value)" placeholder="2M+"><input value="${d.s3l||''}" oninput="pgData('${id}','s3l',this.value)" placeholder="Views"></div>`;
+  return'';
 }
 function togglePgEdit(uid){document.getElementById('pge-'+uid).classList.toggle('open');}
 function togglePgVis(uid){
@@ -594,32 +539,22 @@ function pgData(uid,key,val){
   const pg=getPages().find(p=>p.uid===uid);
   if(pg){pg.data[key]=val;render();}
 }
-
-// custom gallery/video helpers
 function handleCGallery(input,uid){
   const pg=getPages().find(p=>p.uid===uid);
   if(!pg.data.images)pg.data.images=[];
   Array.from(input.files).forEach(f=>{
     const r=new FileReader();
-    r.onload=e=>{pg.data.images.push(e.target.result);
-      document.getElementById('cg-'+uid+'-t').innerHTML=(pg.data.images||[]).map((s,i)=>`<div class="mthumb"><img src="${s}"><button class="rm" onclick="rmCImg('${uid}',${i})">✕</button></div>`).join('');
-      render();};r.readAsDataURL(f);
+    r.onload=e=>{pg.data.images.push(e.target.result);document.getElementById('cg-'+uid+'-t').innerHTML=(pg.data.images||[]).map((s,i)=>`<div class="mthumb"><img src="${s}"><button class="rm" onclick="rmCImg('${uid}',${i})">✕</button></div>`).join('');render();};
+    r.readAsDataURL(f);
   });
 }
-function rmCImg(uid,idx){
-  const pg=getPages().find(p=>p.uid===uid);
-  if(pg&&pg.data.images){pg.data.images.splice(idx,1);renderPagesList();render();}
-}
+function rmCImg(uid,idx){const pg=getPages().find(p=>p.uid===uid);if(pg&&pg.data.images){pg.data.images.splice(idx,1);renderPagesList();render();}}
 function handleCVideo(input,uid){
   const f=input.files[0];if(!f)return;
   const r=new FileReader();
-  r.onload=e=>{
-    const pg=getPages().find(p=>p.uid===uid);
-    if(pg){pg.data.videoSrc=e.target.result;renderPagesList();render();}
-  };r.readAsDataURL(f);
+  r.onload=e=>{const pg=getPages().find(p=>p.uid===uid);if(pg){pg.data.videoSrc=e.target.result;renderPagesList();render();}};
+  r.readAsDataURL(f);
 }
-
-// drag
 function dragStart(e,uid){dragSrc=uid;document.getElementById('pgi-'+uid).style.opacity='.4';e.dataTransfer.effectAllowed='move';}
 function dragOver(e,uid){e.preventDefault();if(dragSrc!==uid)document.getElementById('pgi-'+uid).classList.add('drag-over');}
 function dragLeave(e,uid){document.getElementById('pgi-'+uid).classList.remove('drag-over');}
@@ -632,35 +567,29 @@ function dragDrop(e,uid){
   if(fi>=0&&ti>=0){const[m]=pages.splice(fi,1);pages.splice(ti,0,m);}
   dragSrc=null;renderPagesList();render();
 }
-
-// ── SECTION TOGGLES (design tab) ──────────────────────────────────────────────
 function renderToggles(){
-  [1,2,3,4].forEach(t=>{
-    const el=document.getElementById('tog-t'+t);
-    if(!el)return;
-    const savedT=activeTemplate;activeTemplate=t;
-    const pages=getPages();activeTemplate=savedT;
-    el.innerHTML=pages.filter(pg=>!pg.custom).map(pg=>`
-      <div class="tog-row">
-        <label>${pg.label}</label>
-        <div class="tog ${pg.visible?'on':''}" id="tog-${t}-${pg.uid}" onclick="toggleSecFromDesign(${t},'${pg.uid}')"><div class="tog-k"></div></div>
-      </div>`).join('');
-  });
+  const pages=getPages();
+  document.getElementById('tog-list').innerHTML=pages.filter(p=>!p.custom).map(p=>`
+    <div class="tog-row">
+      <label>${p.label}</label>
+      <div class="tog ${p.visible?'on':''}" id="tog-${p.uid}" onclick="togglePgVisFromDesign('${p.uid}')"><div class="tog-k"></div></div>
+    </div>`).join('');
 }
-function toggleSecFromDesign(tmpl,uid){
-  const saved=activeTemplate;activeTemplate=tmpl;
+function togglePgVisFromDesign(uid){
   const pg=getPages().find(p=>p.uid===uid);
-  if(pg){pg.visible=!pg.visible;document.getElementById('tog-'+tmpl+'-'+uid).classList.toggle('on',pg.visible);}
-  activeTemplate=saved;
-  render();
+  if(pg){pg.visible=!pg.visible;document.getElementById('tog-'+uid).classList.toggle('on',pg.visible);}
+  renderToggles();render();
 }
 
 // ── HELPERS ───────────────────────────────────────────────────────────────────
 const FB={
-  hero:'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=85',
+  hero:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=85',
   about:'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=600&q=85',
-  testiCenter:'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=80',
   contact:'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=700&q=85',
+  phone:'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&q=82',
+  phil:'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=900&q=85',
+  heroHero:'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=85',
+  testiCenter:'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500&q=85',
   port:['https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=620&q=82','https://images.unsplash.com/photo-1483985988355-763728e1935b?w=620&q=82','https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=620&q=82','https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=620&q=82','https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=620&q=82','https://images.unsplash.com/photo-1509631179647-0177331693ae?w=620&q=82'],
   svcs:['https://images.unsplash.com/photo-1616078360649-20fc2d14e7f1?w=600&q=80','https://images.unsplash.com/photo-1493916063172-f5ab3a5ba77a?w=600&q=80','https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&q=80'],
   cases:['https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=800&q=82','https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=800&q=82'],
@@ -671,7 +600,9 @@ function g(id){const e=document.getElementById(id);return e?e.value:'';}
 function gi(k){return imgs[k]||null;}
 function gA(arr,fb){return arr.length>0?arr:fb;}
 function lh(hex,amt){try{let r=parseInt(hex.slice(1,3),16),g2=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);return'#'+[Math.min(255,Math.max(0,r+amt)),Math.min(255,Math.max(0,g2+amt)),Math.min(255,Math.max(0,b+amt))].map(v=>v.toString(16).padStart(2,'0')).join('');}catch{return hex;}}
-const GFONTS=`<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700;1,9..144,900&display=swap" rel="stylesheet">`;
+function pkgItems(id){return g(id).split('\n').filter(Boolean).map(l=>`<li>${l.trim()}</li>`).join('');}
+function caseStats(id){return(g(id)||'').split(',').filter(Boolean).map(s=>{const[n,l]=s.split('|');return`<div style="text-align:center"><span style="font-family:'Fraunces',serif;font-weight:900;font-size:28px;color:${C.terra};display:block">${n||''}</span><span style="font-size:12px;color:#4A4444;font-weight:600;letter-spacing:.06em;text-transform:uppercase">${l||''}</span></div>`;}).join('');}
+const GFONTS=`<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700;1,9..144,900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">`;
 const RCSS=`.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}.reveal.visible{opacity:1;transform:translateY(0)}`;
 const RJS=`<script>const _r=document.querySelectorAll('.reveal');const _o=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');_o.unobserve(x.target)}})},{threshold:.1});_r.forEach(el=>_o.observe(el));<\/script>`;
 
@@ -698,7 +629,6 @@ function renderCustomBlock(pg){
   }
 }
 
-// ── TEMPLATE 1 — VELVET NOIR ─────────────────────────────────────────────────
 function buildT1(){
   const pages=getPages();
   const name=g('p-name'),sname=g('p-surname');
@@ -779,7 +709,6 @@ ${sections}
 ${RJS}</body></html>`;
 }
 
-// ── TEMPLATE 2 — LUMIÈRE ─────────────────────────────────────────────────────
 function buildT2(){
   const pages=getPages();
   const name=g('p-name'),sname=g('p-surname'),handle=g('p-handle')||'@jessicasantos';
@@ -860,7 +789,6 @@ ${sections}
 ${RJS}</body></html>`;
 }
 
-// ── TEMPLATE 3 — THE EDIT (Fraunces) ─────────────────────────────────────────
 function buildT3(){
   const pages=getPages();
   const name=g('p-name'),sname=g('p-surname'),handle=g('p-handle')||'@jessicasantos.ugc';
@@ -1026,8 +954,6 @@ ${sections}
 ${RJS}</body></html>`;
 }
 
-
-// ── TEMPLATE 4 — STUDIO ZINE ─────────────────────────────────────────────────
 function buildT4(){
   const pages=getPages();
   const name=g('p-name'),sname=g('p-surname'),handle=g('p-handle')||'@jessicasantos.ugc';
@@ -1172,14 +1098,13 @@ ${sections}
 ${RJS}</body></html>`;
 }
 
-
 // ── RENDER ────────────────────────────────────────────────────────────────────
 function render(){
   let html;
-  if(activeTemplate===1) html=buildT1();
+  if(activeTemplate===1)      html=buildT1();
   else if(activeTemplate===2) html=buildT2();
   else if(activeTemplate===3) html=buildT3();
-  else html=buildT4();
+  else                        html=buildT4();
   const fr=document.getElementById('preview-frame');
   const doc=fr.contentDocument||fr.contentWindow.document;
   doc.open();doc.write(html);doc.close();
@@ -1187,12 +1112,12 @@ function render(){
 
 function downloadSite(){
   let html;
-  if(activeTemplate===1) html=buildT1();
+  if(activeTemplate===1)      html=buildT1();
   else if(activeTemplate===2) html=buildT2();
   else if(activeTemplate===3) html=buildT3();
-  else html=buildT4();
-  const n=(g('p-name')||'jessica').toLowerCase().replace(/\s+/g,'-');
+  else                        html=buildT4();
   const names={1:'velvet-noir',2:'lumiere',3:'the-edit',4:'studio-zine'};
+  const n=(g('p-name')||'jessica').toLowerCase().replace(/\s+/g,'-');
   const blob=new Blob([html],{type:'text/html'});
   const url=URL.createObjectURL(blob);
   const a=document.createElement('a');
@@ -1202,26 +1127,21 @@ function downloadSite(){
 
 function setView(mode,ev){
   document.querySelectorAll('.vbtn').forEach(b=>b.classList.remove('on'));
-  if(ev&&ev.target) ev.target.classList.add('on');
+  if(ev&&ev.target)ev.target.classList.add('on');
   const fr=document.getElementById('preview-frame');
   if(mode==='mobile'){fr.style.maxWidth='390px';fr.style.margin='14px auto';fr.style.borderRadius='12px';fr.style.display='block';}
   else{fr.style.maxWidth='';fr.style.margin='';fr.style.borderRadius='';fr.style.display='';}
 }
 
-// ── INIT ─────────────────────────────────────────────────────────────────────
-// Read template from URL query ?t=1 or ?t=2 or ?t=3
+// ── INIT ──────────────────────────────────────────────────────────────────────
 (function(){
-  const params = new URLSearchParams(window.location.search);
-  let t = parseInt(params.get('t')) || 1;
-  t = Math.min(4, Math.max(1, t));
-  activeTemplate = t;
+  const params=new URLSearchParams(window.location.search);
+  let t=parseInt(params.get('t'))||1;
+  t=Math.min(4,Math.max(1,t));
+  activeTemplate=t;
   const names={1:'Velvet Noir',2:'Lumière',3:'The Edit',4:'Studio Zine'};
-  document.getElementById('tmpl-name-label').textContent = names[t];
-  // hide the template switcher bar since we arrived from home
-  const bar = document.querySelector('.tmpl-bar');
-  const lbl = document.querySelector('.tmpl-label');
-  if(bar) bar.style.display='none';
-  if(lbl) lbl.style.display='none';
+  document.getElementById('tmpl-name-label').textContent='— '+names[t];
+  document.getElementById('preview-template-label').textContent=names[t];
 })();
 
 renderNiches();
