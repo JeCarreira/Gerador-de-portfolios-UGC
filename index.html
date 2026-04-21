@@ -17,7 +17,7 @@ body{background:#080808;color:#F0EDE6;font-family:'DM Sans',sans-serif;min-heigh
 .hero h1 em{color:#C8A97E;font-style:inherit}
 .hero p{font-size:15px;color:#555;line-height:1.75;max-width:480px;margin:0 auto 8px}
 .hero-note{font-size:12px;color:#2E2E2E;font-style:italic;margin-top:6px}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;padding:0 48px 72px;max-width:1280px;margin:0 auto}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:0 48px 72px;max-width:1400px;margin:0 auto}
 .card{background:#0F0F0F;border:1px solid rgba(255,255,255,.06);border-radius:14px;overflow:hidden;cursor:pointer;transition:transform .22s,border-color .22s,box-shadow .22s;display:flex;flex-direction:column;text-decoration:none;color:inherit}
 .card:hover{transform:translateY(-5px);border-color:rgba(200,169,126,.4);box-shadow:0 24px 56px rgba(0,0,0,.5)}
 .card-preview{width:100%;aspect-ratio:16/10;overflow:hidden;position:relative;background:#1A1A1A;border-bottom:1px solid rgba(255,255,255,.05);flex-shrink:0}
@@ -46,6 +46,16 @@ body{background:#080808;color:#F0EDE6;font-family:'DM Sans',sans-serif;min-heigh
 .c4 .card-num{background:rgba(78,95,212,.15);color:#7A8FFF}
 .c4 .card-btn{background:rgba(78,95,212,.1);color:#7A8FFF}
 .c4:hover .card-btn{background:rgba(78,95,212,.2)}
+
+.c5 .card-num{background:rgba(91,140,219,.15);color:#7AABF0}
+.c5 .card-btn{background:rgba(91,140,219,.1);color:#7AABF0}
+.c5:hover .card-btn{background:rgba(91,140,219,.2)}
+.c6 .card-num{background:rgba(122,24,24,.2);color:#E87A7A}
+.c6 .card-btn{background:rgba(122,24,24,.15);color:#E87A7A}
+.c6:hover .card-btn{background:rgba(122,24,24,.28)}
+.c7 .card-num{background:rgba(107,92,85,.25);color:#C8B8B2}
+.c7 .card-btn{background:rgba(107,92,85,.18);color:#C8B8B2}
+.c7:hover .card-btn{background:rgba(107,92,85,.3)}
 .divider{display:flex;align-items:center;gap:16px;padding:0 48px;margin-bottom:24px;max-width:1280px;margin-left:auto;margin-right:auto}
 .divider span{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#2A2A2A;white-space:nowrap}
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.05)}
@@ -141,6 +151,44 @@ body{background:#080808;color:#F0EDE6;font-family:'DM Sans',sans-serif;min-heigh
       <div class="card-btn"><span>Editar este template</span><span class="arrow">→</span></div>
     </div>
   </a>
+  <!-- T5 iOS FINDER -->
+  <a class="card c5" href="editor.html?t=5" onclick="go(5,event)">
+    <div class="card-preview"><iframe id="pv5" title="preview"></iframe><div class="card-preview-fade"></div></div>
+    <div class="card-body">
+      <span class="card-num">Template 05</span>
+      <div class="card-name">iOS Finder</div>
+      <div class="card-sub">Macintosh · Finder Windows · Azul</div>
+      <p class="card-desc">Estética macOS com janelas Finder reais, sidebar com items, iPhone mockup com share sheet, iMessage bubbles para testimonials e folders iOS com estatísticas.</p>
+      <div class="card-features"><span class="feat">Janelas Finder</span><span class="feat">iPhone mockup</span><span class="feat">iMessage</span><span class="feat">iOS folders</span></div>
+      <div class="card-btn"><span>Editar este template</span><span class="arrow">→</span></div>
+    </div>
+  </a>
+
+  <!-- T6 BURGUNDY BOLD -->
+  <a class="card c6" href="editor.html?t=6" onclick="go(6,event)">
+    <div class="card-preview"><iframe id="pv6" title="preview"></iframe><div class="card-preview-fade"></div></div>
+    <div class="card-body">
+      <span class="card-num">Template 06</span>
+      <div class="card-name">Burgundy Bold</div>
+      <div class="card-sub">Anton · Notepad · Cartões inclinados 🍒</div>
+      <p class="card-desc">Tipografia Anton ultra-bold em bordeaux, notepads com linhas reais e margem vermelha, cartões de serviço inclinados com clips 📎, polaroid, 🍒 e stat bubbles.</p>
+      <div class="card-features"><span class="feat">Anton bold</span><span class="feat">Notepad CSS</span><span class="feat">Cartões inclinados</span><span class="feat">🍒 deco</span></div>
+      <div class="card-btn"><span>Editar este template</span><span class="arrow">→</span></div>
+    </div>
+  </a>
+
+  <!-- T7 TAUPE LUXURY -->
+  <a class="card c7" href="editor.html?t=7" onclick="go(7,event)">
+    <div class="card-preview"><iframe id="pv7" title="preview"></iframe><div class="card-preview-fade"></div></div>
+    <div class="card-body">
+      <span class="card-num">Template 07</span>
+      <div class="card-name">Taupe Luxury</div>
+      <div class="card-sub">Cormorant · Dancing Script · Doorbell CTA</div>
+      <p class="card-desc">Hero taupe luxuoso com heading Script+Serif empilhados, botão oval com traço animado, sobre mim com anotações flutuantes, Instagram mockup e CTA doorbell único.</p>
+      <div class="card-features"><span class="feat">Oval animado</span><span class="feat">Anotações flutuantes</span><span class="feat">Instagram mockup</span><span class="feat">Doorbell CTA</span></div>
+      <div class="card-btn"><span>Editar este template</span><span class="arrow">→</span></div>
+    </div>
+  </a>
 </div>
 
 <div class="divider"><span>Comparação</span></div>
@@ -148,22 +196,22 @@ body{background:#080808;color:#F0EDE6;font-family:'DM Sans',sans-serif;min-heigh
 <div class="compare">
   <table class="compare-table">
     <thead>
-      <tr><th>Funcionalidade</th><th>Velvet Noir</th><th>Lumière</th><th>The Edit</th><th>Studio Zine</th></tr>
+      <tr><th>Funcionalidade</th><th>Velvet Noir</th><th>Lumière</th><th>The Edit</th><th>Studio Zine</th><th>iOS Finder</th><th>Burgundy Bold</th><th>Taupe Luxury</th></tr>
     </thead>
     <tbody>
-      <tr><td>Fontes</td><td>Playfair + Inter</td><td>Cormorant + Jost</td><td>Fraunces + DM Sans</td><td>Space Mono + Caveat</td></tr>
-      <tr><td>Upload fotos &amp; vídeos</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Vídeos reproduzem no site</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Arrastar e reordenar secções</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Adicionar blocos custom</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Tabela de preços</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Testimonials</td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Case studies com stats</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td></tr>
-      <tr><td>Pain points &amp; resultados</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td></tr>
-      <tr><td>FAQ (6 perguntas)</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td></tr>
-      <tr><td>Cores editáveis</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Barra de anúncio</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Download HTML final</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Fontes</td><td>Playfair + Inter</td><td>Cormorant + Jost</td><td>Fraunces + DM Sans</td><td>Space Mono + Caveat</td><td>Cormorant + Inter</td><td>Anton + Caveat</td><td>Cormorant + Dancing</td></tr>
+      <tr><td>Upload fotos &amp; vídeos</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Vídeos reproduzem no site</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Arrastar e reordenar secções</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Adicionar blocos custom</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Tabela de preços</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Testimonials</td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Case studies com stats</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Pain points &amp; resultados</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="xx">—</span></td></tr>
+      <tr><td>FAQ (6 perguntas)</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Cores editáveis</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="xx">—</span></td></tr>
+      <tr><td>Barra de anúncio</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td></tr>
+      <tr><td>Download HTML final</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
     </tbody>
   </table>
 </div>
@@ -171,7 +219,7 @@ body{background:#080808;color:#F0EDE6;font-family:'DM Sans',sans-serif;min-heigh
 <div class="footer">✦ UGC Portfolio Studio — cada template descarrega como site HTML completo e autónomo</div>
 
 <script>
-const NAMES={1:'Velvet Noir',2:'Lumière',3:'The Edit',4:'Studio Zine'};
+const NAMES={1:'Velvet Noir',2:'Lumière',3:'The Edit',4:'Studio Zine',5:'iOS Finder',6:'Burgundy Bold',7:'Taupe Luxury'};
 function go(t,e){
   e.preventDefault();
   document.getElementById('load-sub').textContent='A abrir '+NAMES[t]+'...';
@@ -210,8 +258,70 @@ const PV4=`<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://
     <div style="margin-top:10px"><div style="display:inline-flex;align-items:center;background:#4E5FD4;color:#fff;font-family:'Caveat',cursive;font-size:11px;font-weight:700;padding:7px 16px;border-radius:20px;text-decoration:none">Ver o meu trabalho →</div></div>
   </div>
 </div></body></html>`;
+const PV5=`<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;1,700&family=Inter:wght@400;600&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box}html,body{height:100%;overflow:hidden;background:#DCDCDC}</style></head><body>
+<div style="position:relative;height:100%;background:linear-gradient(to bottom,rgba(60,100,180,.3),rgba(200,200,200,.6));display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden">
+  <h1 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:52px;color:#fff;line-height:.95;text-align:center;text-shadow:0 2px 20px rgba(0,0,0,.2)">Jessica<br>Santos</h1>
+  <div style="width:120px;aspect-ratio:3/4;background:#aaa;border:3px solid rgba(255,255,255,.4);margin-top:8px;position:relative">
+    <div style="position:absolute;top:0;left:0;width:14px;height:14px;border-top:2px solid rgba(255,215,100,.8);border-left:2px solid rgba(255,215,100,.8)"></div>
+    <div style="position:absolute;top:0;right:0;width:14px;height:14px;border-top:2px solid rgba(255,215,100,.8);border-right:2px solid rgba(255,215,100,.8)"></div>
+    <div style="position:absolute;bottom:0;left:0;width:14px;height:14px;border-bottom:2px solid rgba(255,215,100,.8);border-left:2px solid rgba(255,215,100,.8)"></div>
+    <div style="position:absolute;bottom:0;right:0;width:14px;height:14px;border-bottom:2px solid rgba(255,215,100,.8);border-right:2px solid rgba(255,215,100,.8)"></div>
+  </div>
+  <div style="margin-top:12px;background:#fff;border-radius:14px;overflow:hidden;width:220px;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+    <div style="background:#EBEBEB;padding:6px 10px;display:flex;align-items:center;gap:6px;border-bottom:1px solid rgba(0,0,0,.08)">
+      <div style="width:8px;height:8px;border-radius:50%;background:#FF5F57"></div><div style="width:8px;height:8px;border-radius:50%;background:#FEBC2E"></div><div style="width:8px;height:8px;border-radius:50%;background:#28C840"></div>
+      <span style="font-size:8px;font-weight:600;color:#1C1C1E;flex:1;text-align:center">Jessica Santos — About</span>
+    </div>
+    <div style="display:flex;height:60px">
+      <div style="width:60px;background:#EBEBEB;border-right:1px solid rgba(0,0,0,.08);padding:6px 4px;display:flex;flex-direction:column;gap:3px">
+        ${['👤','📁','📸','🎬'].map(i=>`<div style="font-size:8px;padding:2px 4px;border-radius:3px">${i}</div>`).join('')}
+      </div>
+      <div style="padding:8px 10px;flex:1"><p style="font-size:7px;color:#5B8CDB;font-weight:600">Nichos e Serviços</p><p style="font-size:7px;color:#555;margin-top:3px;line-height:1.4">Trabalho com marcas de beleza, lifestyle, moda e bem-estar.</p></div>
+    </div>
+  </div>
+</div></body></html>`;
+const PV6=`<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@700&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box}html,body{height:100%;overflow:hidden;background:#EEEAE3}</style></head><body>
+<nav style="background:#EEEAE3;border-bottom:2px solid #7A1818;padding:8px 24px;display:flex;align-items:center;justify-content:space-between">
+  <span style="font-family:'Anton',sans-serif;font-size:1.4rem;letter-spacing:.08em;color:#7A1818;text-transform:uppercase">JESSICA</span>
+  <span style="background:#E8B4C8;color:#5C1010;font-family:'Caveat',cursive;font-size:.8rem;font-weight:700;padding:4px 16px;border-radius:20px">trabalha comigo</span>
+</nav>
+<div style="display:grid;grid-template-columns:1fr 1fr;min-height:calc(100% - 42px);align-items:center;padding:16px 20px;gap:14px;position:relative;overflow:hidden">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Anton',sans-serif;font-size:18vw;color:#E7E2DA;pointer-events:none;letter-spacing:.1em;white-space:nowrap;z-index:0">UGC</div>
+  <div style="position:relative;z-index:1">
+    <h1 style="font-family:'Anton',sans-serif;font-size:42px;line-height:.95;text-transform:uppercase;letter-spacing:.02em;color:#7A1818;margin-bottom:14px">UGC<br>CRIADORA</h1>
+    <div style="background:#FFFEF8;border:1.5px solid #D0CBBC;border-radius:4px;padding:12px 12px 12px 26px;position:relative;box-shadow:2px 3px 6px rgba(0,0,0,.1)">
+      <div style="position:absolute;top:-10px;left:10px;font-size:1.2rem;transform:rotate(-20deg)">📎</div>
+      <p style="font-family:'Caveat',cursive;font-size:1rem;font-weight:700;color:#7A1818;line-height:1.4;margin-bottom:8px">Conteúdo que converte de verdade</p>
+      <div style="display:inline-block;background:#E8B4C8;color:#5C1010;font-family:'Caveat',cursive;font-size:.8rem;font-weight:700;padding:5px 14px;border-radius:20px">trabalha comigo</div>
+    </div>
+  </div>
+  <div style="position:relative;z-index:1;display:flex;justify-content:center">
+    <div style="position:relative;width:140px">
+      <span style="position:absolute;top:-10px;left:-15px;font-size:1.8rem;transform:rotate(-15deg);z-index:2">🍒</span>
+      <div style="width:100%;height:190px;background:#c8b8b0;border-radius:4px"></div>
+    </div>
+  </div>
+</div></body></html>`;
+const PV7=`<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;1,700&family=Dancing+Script:wght@700&family=Caveat:wght@700&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box}html,body{height:100%;overflow:hidden;background:#6B5C55}</style></head><body>
+<div style="display:grid;grid-template-columns:1fr 1fr;height:100%">
+  <div style="padding:60px 30px 30px;position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center">
+    <div style="margin-bottom:20px">
+      <span style="font-family:'Dancing Script',cursive;font-size:28px;color:#fff;display:block;line-height:1.1;margin-bottom:-6px">A</span>
+      <span style="font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#fff;line-height:.9;display:block">Criadora<br>de Conteúdo</span>
+      <span style="font-family:'Cormorant Garamond',serif;font-size:.6rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-top:4px;display:block;border-top:1px solid rgba(255,255,255,.3);padding-top:6px">UGC Creator · Jessica Santos</span>
+    </div>
+    <p style="font-family:'Caveat',cursive;font-size:.95rem;color:rgba(255,255,255,.9);line-height:1.4;margin-bottom:16px;max-width:200px">Construa sua marca e domine sua narrativa online.</p>
+    <div style="position:relative;display:inline-block;padding:8px 24px">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:.75rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff;position:relative;z-index:1">trabalha comigo</span>
+      <svg style="position:absolute;inset:0;width:100%;height:100%;overflow:visible" viewBox="0 0 180 36" preserveAspectRatio="none">
+        <ellipse cx="90" cy="18" rx="87" ry="15" fill="none" stroke="white" stroke-width="1.5" stroke-dasharray="5 3"/>
+      </svg>
+    </div>
+  </div>
+  <div style="background:#555;height:100%;overflow:hidden"><div style="width:100%;height:100%;background:linear-gradient(135deg,#8C7D76,#5C4E48)"></div></div>
+</div></body></html>`;
 window.addEventListener('load',()=>{
-  [[1,PV1],[2,PV2],[3,PV3],[4,PV4]].forEach(([t,html])=>{
+  [[1,PV1],[2,PV2],[3,PV3],[4,PV4],[5,PV5],[6,PV6],[7,PV7]].forEach(([t,html])=>{
     const fr=document.getElementById('pv'+t);
     if(!fr)return;
     const doc=fr.contentDocument||fr.contentWindow.document;
