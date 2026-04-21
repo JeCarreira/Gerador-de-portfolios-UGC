@@ -384,6 +384,39 @@ const SECTION_DEFS = {
     {id:'reviews',    label:'Reviews (dark)',           icon:'💬'},
     {id:'tools',      label:'Ferramentas',              icon:'🔧'},
     {id:'contact',    label:'Contacto + Formulário',    icon:'📩'},
+  ],
+  5: [
+    {id:'hero',          label:'Hero (foto + nome grande)',  icon:'🌟'},
+    {id:'about',         label:'Sobre mim (Finder)',         icon:'👤'},
+    {id:'black_section', label:'iPhone mockup dark',         icon:'📱'},
+    {id:'portfolio',     label:'Portfolio (Finder)',         icon:'🎬'},
+    {id:'cases',         label:'Case Studies (Finder)',      icon:'📊'},
+    {id:'testimonials',  label:'Testimonials (iMessage)',    icon:'💬'},
+    {id:'services',      label:'Preços (cards)',             icon:'💰'},
+    {id:'contact',       label:'Footer / Contacto',         icon:'📩'},
+  ],
+  6: [
+    {id:'ann',          label:'Barra anúncio',              icon:'📢'},
+    {id:'hero',         label:'Hero + notepad + 🍒',        icon:'🌟'},
+    {id:'about',        label:'Era do Conteúdo (dark red)', icon:'📢'},
+    {id:'services',     label:'Serviços (cartões inclinados)', icon:'✨'},
+    {id:'results',      label:'Stats em círculos',          icon:'📊'},
+    {id:'portfolio',    label:'Portfolio grid',             icon:'🎬'},
+    {id:'testimonials', label:'Testimonials (tape)',        icon:'💬'},
+    {id:'faq',          label:'FAQ grid',                   icon:'❓'},
+    {id:'contact',      label:'Contacto notepad CTA',       icon:'📩'},
+  ],
+  7: [
+    {id:'hero',         label:'Hero (taupe + oval btn)',    icon:'🌟'},
+    {id:'features',     label:'3 Features (dark)',         icon:'⭐'},
+    {id:'about',        label:'Sobre mim + anotações',     icon:'👤'},
+    {id:'services',     label:'Serviços (cards branco)',   icon:'✨'},
+    {id:'quote_section',label:'Quote full-width',          icon:'💬'},
+    {id:'portfolio',    label:'Portfolio (Instagram mockup)', icon:'🎬'},
+    {id:'phones_video', label:'Vídeo (phones row)',        icon:'📱'},
+    {id:'testimonials', label:'Testimonials (cards)',      icon:'💬'},
+    {id:'faq',          label:'FAQ grid numbered',         icon:'❓'},
+    {id:'contact',      label:'Contacto + Doorbell CTA',  icon:'📩'},
   ]
 };
 
@@ -398,7 +431,7 @@ const CUSTOM_BLOCKS = [
   {type:'custom_stats',   label:'Estatísticas',    icon:'📊'},
 ];
 
-let templatePages = {1:null,2:null,3:null,4:null};
+let templatePages = {1:null,2:null,3:null,4:null,5:null,6:null,7:null};
 function getPages(){
   if(!templatePages[activeTemplate]){
     templatePages[activeTemplate] = SECTION_DEFS[activeTemplate].map(s=>({
@@ -1098,13 +1131,624 @@ ${sections}
 ${RJS}</body></html>`;
 }
 
+function buildT5(){
+  // iOS/Finder style — Cormorant + Inter, azul #5B8CDB, silver #DCDCDC
+  const pages=getPages();
+  const name=g('p-name'),sname=g('p-surname'),handle=g('p-handle')||'@jessicasantos.ugc';
+  const bio1=g('p-bio1'),bio2=g('p-bio2');
+  const email=g('p-email'),tel=g('p-tel'),loc=g('p-loc');
+  const ann=g('p-ann');
+  const sky='#5B8CDB',black='#0A0A0A',silver='#DCDCDC',offwhite='#F0EEE9',gold='#C8922A';
+  const portItems=portMedia.length>0?portMedia:FB.port.map(s=>({src:s,type:'image'}));
+  const colMap={2:'1fr 1fr',3:'repeat(3,1fr)',4:'repeat(4,1fr)'};
+  const pcols=colMap[portCols]||'repeat(3,1fr)';
+  const svcs2=gA(svcImgs,FB.svcs);
+  const cases2=gA(caseImgs,FB.cases);
+  const year=new Date().getFullYear();
+  const GFONTS5=`<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">`;
+
+  function finderWindow(title,sidebarItems,mainContent,path){
+    return `<div style="background:#fff;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.12),0 2px 8px rgba(0,0,0,.08);overflow:hidden;margin:0 auto">
+      <div style="background:#EBEBEB;padding:12px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(0,0,0,.08)">
+        <div style="display:flex;gap:6px"><div style="width:12px;height:12px;border-radius:50%;background:#FF5F57"></div><div style="width:12px;height:12px;border-radius:50%;background:#FEBC2E"></div><div style="width:12px;height:12px;border-radius:50%;background:#28C840"></div></div>
+        <div style="display:flex;gap:4px"><span style="font-size:16px;color:#8E8E93;cursor:pointer;padding:0 4px">‹</span><span style="font-size:16px;color:#8E8E93;cursor:pointer;padding:0 4px">›</span></div>
+        <span style="font-size:12px;font-weight:600;color:#1C1C1E;flex:1;text-align:center">${path||title}</span>
+        <span style="font-size:15px;color:#8E8E93">🔍</span>
+      </div>
+      <div style="display:flex">
+        <div style="width:180px;min-width:180px;background:#EBEBEB;padding:16px 0;border-right:1px solid rgba(0,0,0,.08)">${sidebarItems}</div>
+        <div style="flex:1">${mainContent}</div>
+      </div>
+    </div>`;
+  }
+  function sidebarItem(icon,label,active){
+    return `<div style="display:flex;align-items:center;gap:8px;padding:5px 16px;font-size:12px;font-weight:500;color:${active?sky:'#1C1C1E'};cursor:pointer;border-radius:6px;margin:0 4px;background:${active?`rgba(91,140,219,.15)`:'transparent'}"><span style="font-size:14px;width:18px;text-align:center">${icon}</span>${label}</div>`;
+  }
+
+  const sections=pages.map(pg=>{
+    if(!pg.visible)return'';
+    if(pg.custom)return renderCustomBlock(pg);
+    switch(pg.id){
+      case 'hero': return `
+        <section style="position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden">
+          <div style="position:absolute;inset:0;background:url('${gi('heroImg')||FB.heroHero}') center/cover no-repeat;z-index:0"></div>
+          <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(60,100,180,.18) 0%,rgba(30,60,140,.08) 60%,rgba(200,200,200,.4) 100%);z-index:1"></div>
+          <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;width:100%;padding:0 48px">
+            <h1 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:clamp(80px,10vw,140px);color:#fff;line-height:.95;text-align:center;text-shadow:0 2px 40px rgba(0,0,0,.2);white-space:nowrap">${name} ${sname}</h1>
+            <div style="position:relative;margin-top:-40px;z-index:2">
+              <div style="position:absolute;inset:-12px;pointer-events:none">
+                <div style="position:absolute;top:0;left:0;width:22px;height:22px;border-top:2px solid rgba(255,215,100,.8);border-left:2px solid rgba(255,215,100,.8)"></div>
+                <div style="position:absolute;top:0;right:0;width:22px;height:22px;border-top:2px solid rgba(255,215,100,.8);border-right:2px solid rgba(255,215,100,.8)"></div>
+                <div style="position:absolute;bottom:0;left:0;width:22px;height:22px;border-bottom:2px solid rgba(255,215,100,.8);border-left:2px solid rgba(255,215,100,.8)"></div>
+                <div style="position:absolute;bottom:0;right:0;width:22px;height:22px;border-bottom:2px solid rgba(255,215,100,.8);border-right:2px solid rgba(255,215,100,.8)"></div>
+              </div>
+              <img src="${gi('heroImg')||FB.heroHero}" style="width:320px;aspect-ratio:3/4;object-fit:cover;object-position:top;display:block;border:3px solid rgba(255,255,255,.4)">
+            </div>
+            <div style="position:relative;z-index:3;margin-top:28px">
+              <a href="#contacto" style="display:inline-block;padding:14px 36px;background:${sky};color:#fff;border-radius:50px;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;box-shadow:0 4px 20px rgba(91,140,219,.4)">Work With Me</a>
+            </div>
+          </div>
+        </section>`;
+      case 'about': return `
+        <section style="padding:60px 48px;background:${silver}">
+          ${finderWindow('About',
+            sidebarItem('👤','Sobre Mim',true)+sidebarItem('📁','Portfolio',false)+sidebarItem('📸','Fotografia',false)+sidebarItem('🎬','Vídeo UGC',false)+'<div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8E8E93;padding:0 16px 6px;margin-top:8px">Niches</div>'+niches.slice(0,5).map((n,i)=>sidebarItem(['💄','🌿','👗','✈️','🍃'][i]||'📌',n,false)).join(''),
+            `<div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding:36px 40px">
+              <div>
+                <h2 style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(36px,3.5vw,52px);line-height:1.1;margin-bottom:16px"><span style="background:${sky};color:#fff;padding:2px 8px;border-radius:3px">Nichos</span> e <em style="font-style:italic">Serviços</em></h2>
+                <p style="font-size:14px;line-height:1.75;color:#444;margin-bottom:20px">${bio1}</p>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">${['Vídeos curtos (TikTok / Reels)','Fotografia lifestyle e de produto','Vídeos de unboxing e demonstração','Conteúdo em formato testemunhal','Campanhas criativas'].map(i=>`<li style="font-size:13px;color:#1C1C1E;display:flex;align-items:center;gap:8px"><span style="color:${sky};font-size:16px">•</span>${i}</li>`).join('')}</ul>
+                <div style="display:inline-flex;align-items:flex-end;gap:8px;margin-top:20px">
+                  <div style="background:${sky};color:#fff;font-size:14px;padding:10px 16px;border-radius:18px 18px 4px 18px;font-weight:500;box-shadow:0 2px 8px rgba(91,140,219,.3)">Conteúdo que converte 🔥</div>
+                </div>
+              </div>
+              <img src="${gi('aboutImg')||FB.about}" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;border-radius:8px">
+            </div>`,
+            'Jessica Santos — About'
+          )}
+        </section>`;
+      case 'black_section': return `
+        <section style="background:${black};padding:80px 80px;display:grid;grid-template-columns:1.1fr 1fr;gap:80px;align-items:center">
+          <div style="display:flex;justify-content:center" class="reveal">
+            <div style="width:260px;border-radius:38px;background:#111;border:8px solid #222;box-shadow:0 30px 80px rgba(0,0,0,.6);overflow:hidden;aspect-ratio:9/19;position:relative">
+              <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:100px;height:22px;background:#111;border-radius:0 0 16px 16px;z-index:2"></div>
+              <img src="${gi('contactImg')||FB.contact}" style="width:100%;height:100%;object-fit:cover">
+              <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-radius:16px 16px 0 0;padding:16px 0 8px;z-index:3">
+                ${['Camera','Photo & Video Library','Document','Location'].map((l,i)=>`<div style="display:flex;align-items:center;gap:12px;padding:9px 20px;font-size:13px;color:#1C1C1E;font-weight:500;border-bottom:1px solid rgba(0,0,0,.06)"><span style="font-size:15px;width:20px;text-align:center">${['📷','🖼','📄','📍'][i]}</span>${l}</div>`).join('')}
+                <div style="text-align:center;padding:10px;color:${sky};font-size:15px;font-weight:700;margin-top:4px">Cancel</div>
+              </div>
+            </div>
+          </div>
+          <div style="color:#fff" class="reveal">
+            <h2 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(40px,4vw,62px);line-height:1.1;margin-bottom:20px;font-weight:700">Conteúdo que<br>parece real,<br>porque <em>é</em> real.</h2>
+            <p style="font-size:15px;line-height:1.75;color:rgba(255,255,255,.7);margin-bottom:32px">${bio2}</p>
+            <a href="#contacto" style="display:inline-block;padding:14px 32px;background:transparent;border:2px solid rgba(255,255,255,.5);color:#fff;border-radius:50px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none">Vamos impulsionar a tua marca →</a>
+          </div>
+        </section>`;
+      case 'portfolio': return `
+        <section id="portfolio" style="background:${silver};padding:60px 48px">
+          <div class="reveal" style="margin-bottom:28px">
+            ${finderWindow('Portfolio',
+              sidebarItem('☁️','iCloud Drive',false)+sidebarItem('💻','Desktop',true)+sidebarItem('📄','Documentos',false)+sidebarItem('⬇️','Downloads',false),
+              `<div style="padding:24px 28px"><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;padding:0 0 8px">
+                ${[0,1,2].map(i=>`<div style="display:flex;flex-direction:column;gap:10px">
+                  <div style="border-radius:28px;background:#111;border:6px solid #1a1a1a;box-shadow:0 12px 40px rgba(0,0,0,.18);overflow:hidden;aspect-ratio:9/18;position:relative">
+                    <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:70px;height:16px;background:#111;border-radius:0 0 10px 10px;z-index:2"></div>
+                    <img src="${portItems[i]?.src||FB.port[i]}" style="width:100%;height:100%;object-fit:cover">
+                  </div>
+                  <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1C1C1E;display:flex;justify-content:space-between">
+                    ${[g('svc1-name'),g('svc2-name'),g('svc3-name')][i]} <span style="color:#8E8E93;font-weight:400">0${i+1}</span>
+                  </div>
+                </div>`).join('')}
+              </div></div>`,
+              'Portfolio — UGC Vídeo'
+            )}
+          </div>
+          <div class="reveal">
+            ${finderWindow('Fotografia',
+              sidebarItem('📡','AirDrop',false)+sidebarItem('🕐','Recentes',false)+sidebarItem('🖼','Fotografias',true),
+              `<div style="padding:24px 28px">
+                <h3 style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;margin-bottom:16px">UGC <em style="font-style:italic">Fotografia</em></h3>
+                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+                  ${portItems.slice(0,8).map((m,i)=>`<div style="aspect-ratio:1;overflow:hidden;position:relative">
+                    ${m.type==='video'?`<video src="${m.src}" loop muted playsinline style="width:100%;height:100%;object-fit:cover"></video>`:`<img src="${m.src}" style="width:100%;height:100%;object-fit:cover;transition:transform .3s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform=''">` }
+                  </div>`).join('')}
+                </div>
+              </div>`,
+              'Portfolio — UGC Fotografia'
+            )}
+          </div>
+        </section>`;
+      case 'cases': return `
+        <section style="background:${silver};padding:0 48px 60px">
+          <div class="reveal">
+            ${finderWindow('Case Study',
+              sidebarItem('📁',g('case1-tag')||'Lustra Skin',true)+sidebarItem('📁',g('case2-tag')||'Élan Beauty',false)+sidebarItem('📊','Analytics',false)+sidebarItem('📈','Crescimento',false),
+              `<div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;padding:36px 40px">
+                <div>
+                  <h2 style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(40px,4vw,60px);line-height:1.05;margin-bottom:16px"><span style="background:${sky};color:#fff;padding:2px 6px;border-radius:3px">Case</span> <em style="font-style:italic">Study</em></h2>
+                  <p style="font-size:14px;color:#555;line-height:1.75;margin-bottom:32px">${g('case1-desc')}</p>
+                  <div style="display:flex;gap:20px;flex-wrap:wrap">
+                    ${(g('case1-stats')||'').split(',').filter(Boolean).map(s=>{const[v,l]=s.split('|');return`<div style="display:flex;flex-direction:column;align-items:center;gap:6px;min-width:80px"><svg style="width:60px;height:50px" viewBox="0 0 80 64" fill="none"><rect x="0" y="10" width="80" height="54" rx="7" fill="${sky}"/><rect x="2" y="8" width="28" height="10" rx="4" fill="#5B8FEE"/></svg><div style="font-size:11px;font-weight:700;text-align:center;color:#1C1C1E;line-height:1.3">${v||''}<br>${l||''}</div></div>`;}).join('')}
+                  </div>
+                </div>
+                <div>
+                  <div style="background:#EBEBEB;padding:10px 14px;border-radius:10px 10px 0 0;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(0,0,0,.08)">
+                    <div style="display:flex;gap:6px"><div style="width:10px;height:10px;border-radius:50%;background:#FF5F57"></div><div style="width:10px;height:10px;border-radius:50%;background:#FEBC2E"></div><div style="width:10px;height:10px;border-radius:50%;background:#28C840"></div></div>
+                    <span style="font-size:11px;font-weight:600;color:#1C1C1E">${g('case1-title')||'campaign'}</span>
+                  </div>
+                  <div style="background:#fff;border-radius:0 0 10px 10px;padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:14px">
+                    ${cases2.slice(0,4).map((s,i)=>`<div style="position:relative"><img src="${s}" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px;display:block"><div style="font-size:10px;color:#555;margin-top:4px;font-weight:500">📄 img${i+1}.jpg</div></div>`).join('')}
+                  </div>
+                </div>
+              </div>`,
+              'Case Study'
+            )}
+          </div>
+        </section>`;
+      case 'testimonials': return `
+        <section id="reviews" style="position:relative;overflow:hidden">
+          <div style="background:url('${gi('contactImg')||FB.contact}') center/cover no-repeat;position:relative">
+            <div style="position:absolute;inset:0;background:rgba(0,0,0,.55)"></div>
+            <div style="position:relative;z-index:2;padding:80px 80px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start">
+              <div style="display:flex;flex-direction:column;gap:20px" class="reveal">
+                ${[1,2,3].map((n,ri)=>`<div style="display:flex;align-items:flex-end;gap:10px;${ri===1?'flex-direction:row-reverse':''}">
+                  <img src="${FB.port[ri]}" style="width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid #fff">
+                  <div style="background:${ri===1?sky:'#fff'};border-radius:${ri===1?'18px 18px 4px 18px':'18px 18px 18px 4px'};padding:14px 18px;font-size:13px;line-height:1.6;color:${ri===1?'#fff':'#1C1C1E'};max-width:340px;box-shadow:0 4px 16px rgba(0,0,0,.15);position:relative">
+                    ${g('t'+n+'-quote')}
+                    <span style="font-size:18px;position:absolute;bottom:-10px;${ri===1?'left':'right'}:12px">${['😍','❤️','🥰'][ri]}</span>
+                  </div>
+                </div>`).join('')}
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px" class="reveal">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+                  <svg style="width:100px;height:84px" viewBox="0 0 80 64" fill="none"><rect x="0" y="10" width="80" height="54" rx="7" fill="${sky}"/><rect x="2" y="8" width="36" height="10" rx="4" fill="#6496EE"/></svg>
+                  <span style="font-size:14px;font-weight:600;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.4)">Testimonials</span>
+                </div>
+                <div style="text-align:center;color:rgba(255,255,255,.7);font-size:13px;line-height:1.6;max-width:220px">Mais de 50 marcas satisfeitas com o conteúdo criado</div>
+              </div>
+            </div>
+          </div>
+        </section>`;
+      case 'services': return `
+        <section id="servicos" style="background:${offwhite};padding:80px 80px">
+          <h2 class="reveal" style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(36px,3.5vw,54px);text-align:center;margin-bottom:8px">Serviços &amp; <em style="font-style:italic;color:${sky}">Preços</em></h2>
+          <p class="reveal" style="text-align:center;font-size:14px;color:#666;margin-bottom:52px">Pacotes flexíveis para cada necessidade de marca</p>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1000px;margin:0 auto">
+            ${[1,2,3].map(n=>`<div class="reveal" style="background:${n===2?sky:'#fff'};border-radius:20px;padding:36px 28px;box-shadow:0 4px 24px rgba(0,0,0,.06);position:relative">
+              <div style="position:absolute;top:20px;right:20px;width:40px;height:40px;border-radius:50%;background:${n===2?'rgba(255,255,255,.25)':gold};display:flex;align-items:center;justify-content:center;font-size:18px">${['✦','⭐','💎'][n-1]}</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:26px;font-weight:700;margin-bottom:6px;color:${n===2?'#fff':'#1C1C1E'}">${g('svc'+n+'-name')}</div>
+              <p style="font-size:12px;color:${n===2?'rgba(255,255,255,.75)':'#888'};margin-bottom:20px">${g('svc'+n+'-desc').substring(0,80)}...</p>
+              <div style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:28px;color:${n===2?'#fff':sky};margin-bottom:16px">${g('svc'+n+'-price')}</div>
+              <a href="#contacto" style="display:block;text-align:center;padding:12px;border-radius:50px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border:2px solid ${n===2?'#fff':sky};color:${n===2?sky:'#5B8CDB'};background:${n===2?'#fff':'transparent'}">Começar</a>
+            </div>`).join('')}
+          </div>
+        </section>`;
+      case 'contact': return `
+        <section id="contacto" style="background:#1C1C1E;padding:48px 80px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px">
+          <a href="#" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:32px;color:#fff;text-decoration:none">${name} ${sname}</a>
+          <ul style="display:flex;gap:28px;list-style:none">
+            ${[['#sobre','About'],['#portfolio','Portfolio'],['#reviews','Testimonials'],['#servicos','Services']].map(([h,l])=>`<li><a href="${h}" style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);text-decoration:none">${l}</a></li>`).join('')}
+          </ul>
+          <div style="display:flex;gap:12px">
+            ${g('soc-ig')?`<a href="${g('soc-ig')}" style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;text-decoration:none">📸</a>`:''} 
+            ${g('soc-tt')?`<a href="${g('soc-tt')}" style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;text-decoration:none">🎵</a>`:''}
+          </div>
+          <span style="font-size:11px;color:rgba(255,255,255,.25);letter-spacing:.06em">&copy;${year} ${name} ${sname} &middot; UGC Creator</span>
+        </section>`;
+      default: return '';
+    }
+  }).join('\n');
+
+  return `<!DOCTYPE html><html lang="pt"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${name} ${sname} — iOS Finder</title>${GFONTS5}
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:${silver};color:${black};font-family:'Inter',sans-serif;overflow-x:hidden}
+nav{position:absolute;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(255,255,255,.12);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.18)}
+${RCSS}
+</style></head><body>
+<nav>
+  <a href="#" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:26px;color:#fff;text-decoration:none;display:flex;align-items:center;gap:6px;line-height:1">${name} ${sname}<small style="font-size:10px;font-family:'Inter',sans-serif;font-style:normal;font-weight:600;letter-spacing:.14em;text-transform:uppercase;opacity:.7;display:block;margin-top:2px">UGC Creator</small></a>
+  <ul style="display:flex;gap:32px;list-style:none">${[['#sobre','About'],['#portfolio','Portfolio'],['#reviews','Testimonials'],['#servicos','Services']].map(([h,l])=>`<li><a href="${h}" style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.85);text-decoration:none">${l}</a></li>`).join('')}</ul>
+  <a href="#contacto" style="padding:10px 22px;background:#fff;color:${black};border-radius:50px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none">Contact</a>
+</nav>
+${sections}
+${RJS}</body></html>`;
+}
+
+function buildT6(){
+  // Burgundy/Anton bold — notepad linhas, cartões inclinados, 🍒
+  const pages=getPages();
+  const name=g('p-name'),sname=g('p-surname'),handle=g('p-handle')||'@jessicasantos.ugc';
+  const bio1=g('p-bio1'),bio2=g('p-bio2');
+  const email=g('p-email'),tel=g('p-tel'),loc=g('p-loc');
+  const ann=g('p-ann');
+  const burg='#7A1818',dred='#5C1010',rdbg='#6B1212',pink='#E8B4C8',psoft='#F0D0DF',ptext='#CC88B8';
+  const linen='#EEEAE3',linen2='#E7E2DA',dark='#1A1010',paper='#F4F0E8';
+  const portItems=portMedia.length>0?portMedia:FB.port.map(s=>({src:s,type:'image'}));
+  const year=new Date().getFullYear();
+  const GFONTS6=`<link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">`;
+
+  const notepadBg=`background-color:#FFFEF8;background-image:repeating-linear-gradient(to bottom,transparent,transparent 31px,#D5CFBE 31px,#D5CFBE 32px),linear-gradient(to right,#F8C1C1 0,#F8C1C1 2px,#FFFEF8 2px);background-position:0 40px,48px 0;background-size:100% 32px,100% 100%`;
+
+  const sections=pages.map(pg=>{
+    if(!pg.visible)return'';
+    if(pg.custom)return renderCustomBlock(pg);
+    switch(pg.id){
+      case 'ann': return ann?`<div style="background:${dark};color:#fff;text-align:center;padding:11px 20px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase">${ann}</div>`:'';
+      case 'hero': return `
+        <section style="min-height:92vh;background:${linen};display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:60px 48px;gap:40px;position:relative;overflow:hidden">
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Anton',sans-serif;font-size:22vw;color:${linen2};pointer-events:none;z-index:0;letter-spacing:.1em;white-space:nowrap">UGC</div>
+          <div style="position:relative;z-index:1" class="reveal">
+            <h1 style="font-family:'Anton',sans-serif;font-size:clamp(4rem,8vw,9rem);line-height:.95;text-transform:uppercase;letter-spacing:.02em;color:${burg};margin-bottom:32px">UGC<br>CRIADORA</h1>
+            <div style="position:relative;${notepadBg};border:1.5px solid #D0CBBC;border-radius:4px;padding:28px 28px 28px 56px;max-width:440px;box-shadow:3px 4px 12px rgba(0,0,0,.10)">
+              <div style="position:absolute;top:-18px;left:20px;font-size:1.8rem;transform:rotate(-20deg)">📎</div>
+              <div style="position:absolute;left:48px;top:0;bottom:0;width:2px;background:rgba(248,193,193,.6)"></div>
+              <p style="font-family:'Caveat',cursive;font-size:1.45rem;font-weight:700;color:${burg};line-height:1.5;margin-bottom:20px">${g('p-tagline')||'Conteúdo que converte de verdade — não só fica bonito.'}</p>
+              <a href="#contacto" style="display:inline-block;background:${pink};color:${dred};font-family:'Caveat',cursive;font-size:1.1rem;font-weight:700;padding:10px 32px;border-radius:50px;text-decoration:none;letter-spacing:.04em">trabalha comigo</a>
+            </div>
+          </div>
+          <div style="position:relative;z-index:1;display:flex;justify-content:center;align-items:center" class="reveal">
+            <div style="position:relative;width:380px">
+              <span style="position:absolute;top:-20px;left:-30px;font-size:3rem;transform:rotate(-15deg);z-index:2">🍒</span>
+              <img src="${gi('heroImg')||FB.hero}" style="width:100%;height:520px;object-fit:cover;border-radius:6px;filter:grayscale(15%);display:block">
+              <div style="position:absolute;bottom:-30px;right:-40px;background:#FFFEF8;padding:10px 10px 32px 10px;box-shadow:4px 6px 16px rgba(0,0,0,.18);transform:rotate(4deg);width:150px">
+                <img src="${gi('aboutImg')||FB.about}" style="width:100%;height:110px;object-fit:cover;display:block">
+                <p style="font-family:'Caveat',cursive;font-size:.9rem;color:${burg};text-align:center;margin-top:6px">bastidores ♡</p>
+              </div>
+            </div>
+          </div>
+        </section>`;
+      case 'about': return `
+        <section style="background:${rdbg};padding:80px 48px;position:relative;overflow:hidden;display:flex;align-items:center;gap:60px">
+          <div style="position:absolute;left:-10px;top:50%;transform:translateY(-50%);font-family:'Anton',sans-serif;font-size:clamp(6rem,14vw,16rem);line-height:.9;text-transform:uppercase;color:${ptext};opacity:.22;pointer-events:none;white-space:nowrap;letter-spacing:.04em">ERA DO UGC</div>
+          <div style="position:relative;z-index:1;flex:1" class="reveal">
+            <h2 style="font-family:'Anton',sans-serif;font-size:clamp(3.5rem,7vw,8rem);text-transform:uppercase;line-height:.9;color:${ptext};letter-spacing:.05em;margin-bottom:10px">ERA DO<br>CONTEÚDO</h2>
+            <p style="font-family:'Caveat',cursive;font-size:1.6rem;color:${pink};font-weight:700">é agora ou nunca.</p>
+          </div>
+          <div style="position:relative;z-index:1;flex:1" class="reveal">
+            <div style="background:#FFFEF8;border-radius:4px;padding:36px 36px 36px 64px;max-width:480px;position:relative;box-shadow:6px 8px 24px rgba(0,0,0,.25);background-image:repeating-linear-gradient(to bottom,transparent,transparent 31px,#D5CFBE 31px,#D5CFBE 32px),linear-gradient(to right,#F8C1C1 0,#F8C1C1 2px,#FFFEF8 2px);background-position:0 40px,62px 0;background-size:100% 32px,100% 100%">
+              <div style="position:absolute;left:62px;top:0;bottom:0;width:2px;background:rgba(248,193,193,.6)"></div>
+              <p style="font-family:'Playfair Display',serif;font-size:1.25rem;font-style:italic;color:${burg};margin-bottom:10px">a realidade do mercado:</p>
+              <p style="font-family:'Caveat',cursive;font-size:1.5rem;font-weight:700;color:${dark};line-height:1.6">${bio1}</p>
+              <span style="font-family:'Caveat',cursive;font-size:2rem;color:${pink};display:block;margin-top:20px;font-weight:700">Eu mostro como fazer. →</span>
+            </div>
+          </div>
+        </section>`;
+      case 'services': return `
+        <section id="servicos" style="background:${dred};padding:80px 48px 100px;position:relative;overflow:hidden">
+          <div style="text-align:center;margin-bottom:60px;position:relative;z-index:1" class="reveal">
+            <h2 style="font-family:'Anton',sans-serif;font-size:clamp(2.5rem,5vw,5.5rem);text-transform:uppercase;color:${ptext};letter-spacing:.06em;line-height:.95">O QUE<br>EU FAÇO</h2>
+            <p style="font-family:'Caveat',cursive;font-size:1.4rem;color:${pink};margin-top:8px">cada serviço criado para converter de verdade</p>
+          </div>
+          <div style="position:relative;max-width:860px;margin:0 auto;z-index:1">
+            ${[1,2,3].map((n,i)=>{
+              const bgs=[linen,psoft,'#3C0B0B'];
+              const rot=['-1.5deg','1.2deg','-.8deg'];
+              const isD=i===2;
+              return`<div class="reveal" style="border-radius:8px;padding:40px 48px;margin-bottom:32px;position:relative;overflow:visible;box-shadow:6px 10px 28px rgba(0,0,0,.28);background:${bgs[i]};transform:rotate(${rot[i]});transition-delay:${i*.1}s">
+                <span style="position:absolute;top:-20px;right:60px;font-size:2.2rem;transform:rotate(-20deg);z-index:2">📎</span>
+                <p style="font-family:'Caveat',cursive;font-size:1rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.6;margin-bottom:4px;color:${isD?linen:dark}">0${n} / serviço</p>
+                <h3 style="font-family:'Anton',sans-serif;font-size:clamp(1.8rem,3.5vw,3rem);text-transform:uppercase;color:${isD?psoft:burg};letter-spacing:.04em;line-height:1;margin-bottom:14px">${g('svc'+n+'-name').toUpperCase()}</h3>
+                <p style="font-family:'Playfair Display',serif;font-size:1rem;line-height:1.7;color:${isD?'rgba(255,255,255,.82)':dark};max-width:480px">${g('svc'+n+'-desc')}</p>
+                <div style="position:absolute;right:40px;top:50%;transform:translateY(-50%) rotate(${i%2===0?'5deg':'-5deg'});background:#FFFEF8;padding:6px 6px 24px 6px;box-shadow:3px 5px 14px rgba(0,0,0,.2);width:130px">
+                  <img src="${[gi('heroImg')||FB.svcs[0],gi('aboutImg')||FB.svcs[1],gi('contactImg')||FB.svcs[2]][i]}" style="width:100%;height:95px;object-fit:cover;display:block">
+                  <p style="font-family:'Caveat',cursive;font-size:.75rem;color:${isD?'#999':'#444'};text-align:center;margin-top:4px">${g('svc'+n+'-price')}</p>
+                </div>
+              </div>`;
+            }).join('')}
+          </div>
+        </section>`;
+      case 'results': return `
+        <section style="background:${burg};padding:80px 48px;position:relative;overflow:hidden">
+          <div style="position:relative;z-index:1;text-align:center" class="reveal">
+            <h2 style="font-family:'Anton',sans-serif;font-size:clamp(2rem,4vw,4.5rem);text-transform:uppercase;color:${ptext};letter-spacing:.06em;margin-bottom:10px">NÚMEROS<br>QUE FALAM</h2>
+            <p style="font-family:'Caveat',cursive;font-size:1.3rem;color:${pink};margin-bottom:60px">resultados reais de marcas reais</p>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;max-width:900px;margin:0 auto">
+              ${[[g('st-v1'),g('st-l1')],[g('st-v2'),g('st-l2')],[g('st-v3'),g('st-l3')],[g('st-v4'),g('st-l4')]].map(([v,l])=>`<div style="background:rgba(255,255,255,.06);border:1.5px solid rgba(232,180,200,.3);border-radius:50%;width:180px;height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto">
+                <span style="font-family:'Anton',sans-serif;font-size:2.4rem;color:${ptext};letter-spacing:.04em;line-height:1">${v}</span>
+                <span style="font-family:'Caveat',cursive;font-size:.95rem;color:${pink};font-weight:700;text-align:center;padding:0 12px;margin-top:4px">${l}</span>
+              </div>`).join('')}
+            </div>
+          </div>
+        </section>`;
+      case 'portfolio': return `
+        <section id="portfolio" style="background:${linen};padding:80px 48px">
+          <div class="reveal" style="margin-bottom:50px">
+            <h2 style="font-family:'Anton',sans-serif;font-size:clamp(2.5rem,5vw,6rem);text-transform:uppercase;color:${burg};letter-spacing:.04em;line-height:.9">PORTFÓLIO</h2>
+            <p style="font-family:'Caveat',cursive;font-size:1.3rem;color:${burg};opacity:.7;margin-top:8px">trabalhos selecionados</p>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+            ${portItems.slice(0,6).map((m,i)=>`<div class="reveal" style="position:relative;overflow:hidden;border-radius:4px;background:#C8C0B4;transition-delay:${i*.08}s">
+              ${m.type==='video'?`<video src="${m.src}" loop muted playsinline onclick="this.paused?this.play():this.pause()" style="width:100%;height:280px;object-fit:cover;display:block;cursor:pointer"></video>`:`<img src="${m.src}" style="width:100%;height:280px;object-fit:cover;display:block;transition:transform .4s ease,filter .4s ease" onmouseover="this.style.transform='scale(1.06)';this.style.filter='brightness(.75)'" onmouseout="this.style.transform='';this.style.filter=''">`}
+            </div>`).join('')}
+          </div>
+        </section>`;
+      case 'testimonials': return `
+        <section style="background:${paper};padding:80px 48px;position:relative;overflow:hidden">
+          <div style="position:absolute;right:-60px;top:50%;transform:translateY(-50%);font-size:40vw;color:${linen2};pointer-events:none;line-height:1">✦</div>
+          <div style="position:relative;z-index:1" class="reveal">
+            <h2 style="font-family:'Anton',sans-serif;font-size:clamp(2.5rem,5vw,5.5rem);text-transform:uppercase;color:${burg};letter-spacing:.04em;line-height:.9;margin-bottom:40px">O QUE DIZEM</h2>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+              ${[1,2,3].map(n=>`<div style="background:${linen};border:1.5px solid rgba(122,24,24,.15);border-radius:6px;padding:32px;position:relative;transition:transform .3s,box-shadow .3s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 28px rgba(0,0,0,.1)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+                <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%) rotate(-1.5deg);background:rgba(232,180,200,.6);width:70px;height:20px;border-radius:2px"></div>
+                <p style="font-family:'Playfair Display',serif;font-size:4rem;color:${pink};line-height:.8;margin-bottom:6px;font-style:italic">"</p>
+                <p style="font-family:'Playfair Display',serif;font-size:.95rem;font-style:italic;color:${dark};line-height:1.7;margin-bottom:20px">${g('t'+n+'-quote')}</p>
+                <div style="display:flex;align-items:center;gap:12px">
+                  <div style="width:44px;height:44px;border-radius:50%;background:${pink};display:flex;align-items:center;justify-content:center;border:2px solid ${burg};font-size:1.2rem">🌸</div>
+                  <div><p style="font-family:'Caveat',cursive;font-size:1.05rem;font-weight:700;color:${burg}">${g('t'+n+'-author')}</p></div>
+                </div>
+              </div>`).join('')}
+            </div>
+          </div>
+        </section>`;
+      case 'faq': return `
+        <section id="faq" style="background:${linen};padding:80px 48px">
+          <div class="reveal"><h2 style="font-family:'Anton',sans-serif;font-size:clamp(2.5rem,5vw,5.5rem);text-transform:uppercase;color:${burg};letter-spacing:.04em;line-height:.9;margin-bottom:8px">PERGUNTAS<br>FREQUENTES</h2></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:50px;max-width:860px" class="reveal">
+            ${[1,2,3,4,5,6].map((n,i)=>`<div style="border-top:1.5px solid ${burg};padding:22px ${i%2===0?'40px 22px 0':'0 22px 0 20px'};${i%2===0?`border-right:1.5px solid ${burg}`:''}${n===5||n===6?`;border-bottom:1.5px solid ${burg}`:''}">
+              <p style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:${burg};margin-bottom:8px">${g('faq'+n+'-q')}</p>
+              <p style="font-family:'Inter',sans-serif;font-size:.88rem;color:${burg};opacity:.75;line-height:1.7">${g('faq'+n+'-a')}</p>
+            </div>`).join('')}
+          </div>
+        </section>`;
+      case 'contact': return `
+        <section id="contacto" style="background:${dred};padding:80px 48px;position:relative;overflow:hidden;text-align:center">
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:50vw;color:rgba(255,255,255,.03);pointer-events:none;line-height:1">♡</div>
+          <div style="position:relative;z-index:1" class="reveal">
+            <h2 style="font-family:'Anton',sans-serif;font-size:clamp(3rem,7vw,8rem);text-transform:uppercase;color:${ptext};letter-spacing:.06em;line-height:.9;margin-bottom:12px">VAMOS<br>TRABALHAR<br>JUNTAS?</h2>
+            <p style="font-family:'Caveat',cursive;font-size:1.5rem;color:${pink};font-weight:700;margin-bottom:40px">manda a tua mensagem — respondo em até 24h 🍒</p>
+            <div style="background:#FFFEF8;max-width:560px;margin:0 auto;border-radius:6px;padding:40px 40px 40px 68px;box-shadow:8px 10px 30px rgba(0,0,0,.3);position:relative;text-align:left;background-image:repeating-linear-gradient(to bottom,transparent,transparent 31px,#D5CFBE 31px,#D5CFBE 32px),linear-gradient(to right,#F8C1C1 0,#F8C1C1 2px,#FFFEF8 2px);background-position:0 48px,66px 0;background-size:100% 32px,100% 100%">
+              <div style="position:absolute;top:-20px;left:24px;font-size:2rem;transform:rotate(-20deg)">📎</div>
+              <div style="position:absolute;left:66px;top:0;bottom:0;width:2px;background:rgba(248,193,193,.6)"></div>
+              ${email?`<p style="font-family:'Caveat',cursive;font-size:1.3rem;font-weight:700;color:${burg};margin-bottom:8px">✉ ${email}</p>`:''}
+              ${tel?`<p style="font-family:'Caveat',cursive;font-size:1.3rem;font-weight:700;color:${burg};margin-bottom:8px">📱 ${tel}</p>`:''}
+              ${loc?`<p style="font-family:'Caveat',cursive;font-size:1.1rem;color:${burg};opacity:.8">📍 ${loc}</p>`:''}
+              <a href="mailto:${email||'ola@jessica.com'}" style="display:block;margin:28px auto 0;background:${pink};color:${dred};font-family:'Caveat',cursive;font-size:1.15rem;font-weight:700;padding:12px 40px;border-radius:50px;text-decoration:none;text-align:center;width:fit-content">enviar mensagem ♡</a>
+            </div>
+          </div>
+        </section>`;
+      default: return '';
+    }
+  }).join('\n');
+
+  return `<!DOCTYPE html><html lang="pt"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${name} ${sname} — Burgundy Bold</title>${GFONTS6}
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:${linen};color:${burg};overflow-x:hidden}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:${linen}}::-webkit-scrollbar-thumb{background:${burg};border-radius:3px}
+nav{position:sticky;top:0;z-index:100;background:${linen};border-bottom:2px solid ${burg};display:flex;align-items:center;justify-content:space-between;padding:14px 48px}
+${RCSS}
+</style></head><body>
+<nav>
+  <a href="#" style="font-family:'Anton',sans-serif;font-size:2rem;letter-spacing:.08em;color:${burg};text-decoration:none;text-transform:uppercase">${name.toUpperCase()}</a>
+  <ul style="display:flex;gap:36px;list-style:none">${[['#servicos','Serviços'],['#sobre','Sobre'],['#portfolio','Portfólio'],['#contacto','Contacto']].map(([h,l])=>`<li><a href="${h}" style="font-family:'Playfair Display',serif;font-size:.85rem;font-style:italic;color:${burg};text-decoration:none;letter-spacing:.04em">${l}</a></li>`).join('')}</ul>
+  <a href="#contacto" style="background:${pink};color:${dred};font-family:'Caveat',cursive;font-size:1rem;font-weight:700;padding:8px 26px;border-radius:50px;text-decoration:none">trabalha comigo</a>
+</nav>
+${sections}
+<footer style="background:${dark};padding:48px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px">
+  <a href="#" style="font-family:'Anton',sans-serif;font-size:2.4rem;color:${ptext};letter-spacing:.1em;text-decoration:none">${name.toUpperCase()}</a>
+  <p style="font-family:'Caveat',cursive;font-size:1rem;color:rgba(255,255,255,.5)">UGC Creator · Conteúdo que converte</p>
+  <span style="font-family:'Inter',sans-serif;font-size:.72rem;color:rgba(255,255,255,.3)">&copy;${year} ${name} ${sname}</span>
+</footer>
+${RJS}</body></html>`;
+}
+
+function buildT7(){
+  // Taupe/luxo — Cormorant + Dancing Script, botão oval animado, doorbell CTA
+  const pages=getPages();
+  const name=g('p-name'),sname=g('p-surname'),handle=g('p-handle')||'@jessicasantos.ugc';
+  const bio1=g('p-bio1'),bio2=g('p-bio2');
+  const email=g('p-email'),tel=g('p-tel'),loc=g('p-loc');
+  const taupe='#6B5C55',taupe2='#7A6B62',taupeL='#8C7D76';
+  const black='#0A0A0A',offwhite='#F5F2EF',grayT='rgba(255,255,255,.65)';
+  const portItems=portMedia.length>0?portMedia:FB.port.map(s=>({src:s,type:'image'}));
+  const svcs2=gA(svcImgs,FB.svcs);
+  const year=new Date().getFullYear();
+  const GFONTS7=`<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Dancing+Script:wght@700&family=Caveat:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">`;
+
+  const sections=pages.map(pg=>{
+    if(!pg.visible)return'';
+    if(pg.custom)return renderCustomBlock(pg);
+    switch(pg.id){
+      case 'hero': return `
+        <section style="min-height:100vh;background:${taupe};display:grid;grid-template-columns:1fr 1fr;align-items:center;overflow:hidden;position:relative">
+          <div style="padding:120px 60px 80px;position:relative;z-index:1" class="reveal">
+            <div style="position:relative;line-height:1;margin-bottom:32px">
+              <span style="font-family:'Dancing Script',cursive;font-size:clamp(2.5rem,4vw,4.5rem);color:#fff;display:block;line-height:1.1;margin-bottom:-10px">A</span>
+              <span style="font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,6vw,7rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#fff;line-height:.9;display:block">Criadora<br>de Conteúdo</span>
+              <span style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:#fff;opacity:.8;margin-top:6px;display:block;border-top:1px solid rgba(255,255,255,.3);padding-top:10px">UGC Creator · ${name} ${sname}</span>
+            </div>
+            <p style="font-family:'Caveat',cursive;font-size:1.4rem;color:#fff;opacity:.9;line-height:1.5;margin-bottom:36px;max-width:380px">${g('p-tagline')||'Construa sua marca, eleve sua presença e domine sua narrativa online.'}</p>
+            <a href="#contacto" style="position:relative;display:inline-block;padding:14px 44px;text-decoration:none;color:#fff;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase">
+              trabalha comigo
+              <svg style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none" viewBox="0 0 240 60" preserveAspectRatio="none">
+                <ellipse cx="120" cy="30" rx="116" ry="26" fill="none" stroke="white" stroke-width="2" stroke-dasharray="6 3" style="animation:oval-spin 8s linear infinite;transform-origin:center"/>
+              </svg>
+            </a>
+          </div>
+          <div style="height:100vh;overflow:hidden;position:relative">
+            <img src="${gi('heroImg')||FB.heroHero}" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;filter:grayscale(20%) brightness(.88)">
+          </div>
+        </section>`;
+      case 'features': return `
+        <section style="background:${black};padding:80px 60px;display:grid;grid-template-columns:repeat(3,1fr);gap:40px;text-align:center;border-top:1px solid rgba(255,255,255,.08)">
+          ${[['🏅','Expertise Certificada','Com formação especializada em marketing digital e UGC, ofereço conteúdo estratégico que realmente converte.'],['🤍','Atenção Personalizada','Cada marca é única. Mergulho fundo na identidade do seu negócio para criar conteúdo autêntico.'],['👍','Resultados Reais','Foco em impacto positivo e crescimento sustentável com métricas reais.']].map(([ico,t,d])=>`<div class="reveal"><span style="font-size:2.4rem;margin-bottom:16px;opacity:.9;display:block">${ico}</span><p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff;margin-bottom:12px">${t}</p><p style="font-family:'Inter',sans-serif;font-size:.85rem;color:${grayT};line-height:1.7">${d}</p></div>`).join('')}
+        </section>`;
+      case 'about': return `
+        <section id="sobre" style="background:${taupe};padding:80px 40px;text-align:center;position:relative;overflow:hidden">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:4px;display:block" class="reveal">Sobre mim</span>
+          <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,8vw,9rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;line-height:.9;color:#fff;margin-bottom:0" class="reveal">${name} ${sname}</h1>
+          <span style="font-family:'Cormorant Garamond',serif;font-size:.9rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.7);display:block;border-top:1px solid rgba(255,255,255,.3);border-bottom:1px solid rgba(255,255,255,.3);padding:10px 0;margin:8px auto;max-width:380px" class="reveal">UGC Creator · Social Media</span>
+          <div style="position:relative;max-width:900px;margin:40px auto 0;height:560px;display:flex;align-items:center;justify-content:center" class="reveal">
+            <span style="position:absolute;top:90px;left:60px;font-family:'Caveat',cursive;font-size:1.4rem;color:#fff;z-index:3;white-space:nowrap">criadora ↘</span>
+            <span style="position:absolute;top:185px;left:30px;font-family:'Caveat',cursive;font-size:1.2rem;color:#fff;z-index:3;white-space:nowrap">viajante →</span>
+            <span style="position:absolute;top:85px;right:60px;font-family:'Caveat',cursive;font-size:1.2rem;color:#fff;z-index:3;white-space:nowrap">↙ 26 anos</span>
+            <span style="position:absolute;top:185px;right:30px;font-family:'Caveat',cursive;font-size:1.2rem;color:#fff;z-index:3;white-space:nowrap">🐱 mãe de gatos</span>
+            <span style="position:absolute;top:240px;right:60px;font-family:'Caveat',cursive;font-size:1.1rem;color:rgba(255,255,255,.7);z-index:3">♡ ♡</span>
+            <img src="${gi('aboutImg')||FB.about}" style="width:300px;height:420px;object-fit:cover;object-position:top;display:block;position:relative;z-index:2;filter:grayscale(10%)">
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;max-width:900px;margin:40px auto 0;text-align:left" class="reveal">
+            <p style="font-family:'Caveat',cursive;font-size:1.15rem;color:rgba(255,255,255,.85);line-height:1.65">${bio1}</p>
+            <p style="font-family:'Caveat',cursive;font-size:1.15rem;color:rgba(255,255,255,.85);line-height:1.65">${bio2}</p>
+          </div>
+        </section>`;
+      case 'services': return `
+        <section id="servicos" style="background:${black}">
+          <div style="text-align:center;padding:70px 0 50px;position:relative" class="reveal">
+            <span style="font-family:'Dancing Script',cursive;font-size:clamp(2rem,3.5vw,4rem);color:#fff;display:block;line-height:1;margin-bottom:-14px">Meus</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:clamp(4rem,8vw,10rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;line-height:.9;color:#fff;display:block">Serviços</span>
+          </div>
+          <div style="padding:0 40px 80px;display:flex;flex-direction:column;gap:20px;max-width:1100px;margin:0 auto">
+            ${[1,2,3].map(n=>`<div class="reveal" style="background:#fff;display:grid;grid-template-columns:380px 1fr;overflow:hidden;border-radius:2px">
+              <img src="${svcs2[n-1]||FB.svcs[n-1]||FB.svcs[0]}" style="width:100%;height:320px;object-fit:cover;display:block;filter:grayscale(25%)">
+              <div style="padding:40px 48px;display:flex;flex-direction:column;justify-content:center;gap:14px">
+                <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,2.5vw,2.5rem);font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:${black};line-height:1">${g('svc'+n+'-name')}</h3>
+                <p style="font-family:'Inter',sans-serif;font-size:.88rem;color:#444;line-height:1.7;max-width:380px">${g('svc'+n+'-desc')}</p>
+                <p style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:${black};font-style:italic">${g('svc'+n+'-price')}</p>
+                <a href="#contacto" style="display:inline-block;background:${black};color:#fff;font-family:'Cormorant Garamond',serif;font-size:.95rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:12px 32px;text-decoration:none;align-self:flex-start">reservar agora</a>
+              </div>
+            </div>`).join('')}
+          </div>
+        </section>`;
+      case 'quote_section': return `
+        <div style="position:relative;height:50vh;min-height:340px;overflow:hidden">
+          <img src="${gi('philImg')||FB.phil}" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:brightness(.35) grayscale(.5);display:block">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center" class="reveal">
+            <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6vw,7rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;line-height:.9;color:#fff">${g('tx-quote')||'UGC É MUITO\nMAIS'}</p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:300;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.7);border-top:1px solid rgba(255,255,255,.3);padding-top:10px;margin-top:4px">É SOBRE COMO FAZ VOCÊ SE SENTIR</p>
+          </div>
+        </div>`;
+      case 'portfolio': return `
+        <section id="portfolio" style="background:${black};padding-bottom:80px">
+          <div style="text-align:center;padding:70px 0 50px" class="reveal">
+            <span style="font-family:'Dancing Script',cursive;font-size:clamp(2rem,3.5vw,4rem);color:#fff;display:block;line-height:1;margin-bottom:-14px">Trabalho com</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:clamp(4rem,8vw,10rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;line-height:.9;color:#fff;display:block">Marcas</span>
+          </div>
+          <div style="padding:0 40px;display:flex;flex-direction:column;gap:40px;max-width:1100px;margin:0 auto">
+            ${[1,2].map(n=>`<div class="reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:60px 0;border-top:1px solid rgba(255,255,255,.08)">
+              <div style="background:${offwhite};border-radius:12px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5);transform:rotate(${n===2?'2deg':'-2deg'});transition:transform .4s" onmouseover="this.style.transform='rotate(0deg)'" onmouseout="this.style.transform='rotate(${n===2?'2deg':'-2deg'})'">
+                <div style="background:#fff;border-bottom:1px solid #eee;padding:10px 16px;display:flex;align-items:center;justify-content:space-between">
+                  <span style="font-family:'Inter',sans-serif;font-size:.8rem;font-weight:600;color:#111">${['@bellamar_cosmeticos','@fitlife.app'][n-1]}</span>
+                  <span style="background:#1877F2;color:#fff;font-family:'Inter',sans-serif;font-size:.7rem;font-weight:600;padding:4px 12px;border-radius:4px">FOLLOW</span>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px">
+                  ${portItems.slice((n-1)*3,(n-1)*3+6).map(m=>`<img src="${m.src}" style="width:100%;aspect-ratio:1;object-fit:cover;display:block;filter:grayscale(20%)">`).join('')}
+                </div>
+              </div>
+              <div>
+                <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,4rem);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#fff;line-height:.95;margin-bottom:20px">${[g('case1-title'),g('case2-title')][n-1]}</h3>
+                <ul style="list-style:none;margin-bottom:24px">${(g('case'+(n)+'-stats')||'').split(',').filter(Boolean).map(s=>{const[v,l]=s.split('|');return`<li style="font-family:'Inter',sans-serif;font-size:.88rem;color:${grayT};padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:10px"><span style="color:${taupeL}">✓</span> ${v} ${l}</li>`;}).join('')}</ul>
+                <p style="font-family:'Caveat',cursive;font-size:1.05rem;color:rgba(255,255,255,.8);max-width:360px;line-height:1.6;margin-top:10px">${g('t'+n+'-quote')}</p>
+              </div>
+            </div>`).join('')}
+          </div>
+        </section>`;
+      case 'phones_video': return `
+        <section style="background:${black}">
+          <div style="text-align:center;padding:70px 0 50px" class="reveal">
+            <span style="font-family:'Dancing Script',cursive;font-size:clamp(2rem,3.5vw,4rem);color:#fff;display:block;line-height:1;margin-bottom:-14px">Conteúdo em</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:clamp(4rem,8vw,10rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;line-height:.9;color:#fff;display:block">Vídeo</span>
+          </div>
+          <div style="display:flex;gap:16px;padding:0 40px 80px;justify-content:center;flex-wrap:wrap;max-width:1100px;margin:0 auto" class="reveal">
+            ${portItems.slice(0,4).map((m,i)=>`<div style="width:220px;flex-shrink:0;background:${offwhite};border-radius:24px;border:3px solid rgba(255,255,255,.25);overflow:hidden;box-shadow:0 16px 50px rgba(0,0,0,.45);transform:translateY(${[0,30,0,20][i]}px);transition:transform .35s" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(${[0,30,0,20][i]}px)'">
+              ${m.type==='video'?`<video src="${m.src}" loop muted playsinline style="width:100%;aspect-ratio:9/16;object-fit:cover;display:block;filter:grayscale(15%)"></video>`:`<img src="${m.src}" style="width:100%;aspect-ratio:9/16;object-fit:cover;display:block;filter:grayscale(15%)">`}
+            </div>`).join('')}
+          </div>
+        </section>`;
+      case 'testimonials': return `
+        <section id="depoimentos" style="background:${black};padding-bottom:80px">
+          <div style="text-align:center;padding:70px 0 50px" class="reveal">
+            <span style="font-family:'Dancing Script',cursive;font-size:clamp(2rem,3.5vw,4rem);color:#fff;display:block;line-height:1;margin-bottom:-14px">Avaliações de</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:clamp(4rem,8vw,10rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;line-height:.9;color:#fff;display:block">Clientes</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:1100px;margin:0 auto;padding:0 40px">
+            ${[1,2,3,4].map(n=>`<div class="reveal" style="display:grid;grid-template-columns:220px 1fr;overflow:hidden;background:${offwhite};border-radius:2px;transition:transform .3s" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform=''">
+              <img src="${FB.port[n-1]||FB.port[0]}" style="width:100%;height:200px;object-fit:cover;display:block;filter:grayscale(25%)">
+              <div style="padding:24px 28px;display:flex;flex-direction:column;justify-content:center;gap:8px">
+                <p style="color:#C8A860;font-size:1rem;letter-spacing:2px">★★★★★</p>
+                <p style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:${black}">${['Ana Lima','Renata Moura','Camila Torres','Lucas Ferreira'][n-1]}</p>
+                <p style="font-family:'Inter',sans-serif;font-size:.78rem;color:#444;line-height:1.7">${g('t'+Math.min(n,2)+'-quote')}</p>
+              </div>
+            </div>`).join('')}
+          </div>
+        </section>`;
+      case 'faq': return `
+        <section style="background:${black};padding-bottom:80px">
+          <div style="text-align:center;padding:70px 0 50px" class="reveal">
+            <span style="font-family:'Dancing Script',cursive;font-size:clamp(1.6rem,3vw,3rem);color:#fff;display:block;line-height:1;margin-bottom:0">Tudo o que você precisa</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,6vw,7rem);font-weight:700;text-transform:uppercase;letter-spacing:.04em;line-height:.9;color:#fff;display:block">Saber</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:1100px;margin:0 auto;padding:0 40px" class="reveal">
+            ${[1,2,3,4,5,6].map(n=>`<div style="border:1px solid rgba(255,255,255,.12);display:grid;grid-template-columns:80px 1fr;overflow:hidden;transition:border-color .2s" onmouseover="this.style.borderColor='rgba(255,255,255,.35)'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)'">
+              <div style="padding:24px 20px;border-right:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center"><span style="font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-style:italic;font-weight:300;color:rgba(255,255,255,.35);line-height:1">0${n}</span></div>
+              <div style="padding:24px 28px"><p style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#fff;margin-bottom:8px">${g('faq'+n+'-q')}</p><p style="font-family:'Inter',sans-serif;font-size:.78rem;color:${grayT};line-height:1.7">${g('faq'+n+'-a')}</p></div>
+            </div>`).join('')}
+          </div>
+        </section>`;
+      case 'contact': return `
+        <section id="contacto" style="background:${taupe};padding:80px 60px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center">
+          <div class="reveal">
+            <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,6vw,7rem);font-weight:700;text-transform:uppercase;color:#fff;line-height:.9;margin-bottom:28px">Vamos<br>Conectar!</h2>
+            <div style="display:flex;gap:16px;margin-bottom:28px">
+              ${g('soc-ig')?`<a href="${g('soc-ig')}" style="width:40px;height:40px;border:1.5px solid rgba(255,255,255,.5);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;text-decoration:none;color:#fff">📸</a>`:''}
+              ${g('soc-tt')?`<a href="${g('soc-tt')}" style="width:40px;height:40px;border:1.5px solid rgba(255,255,255,.5);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;text-decoration:none;color:#fff">🎵</a>`:''}
+              ${g('soc-li')?`<a href="${g('soc-li')}" style="width:40px;height:40px;border:1.5px solid rgba(255,255,255,.5);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;text-decoration:none;color:#fff">💼</a>`:''}
+            </div>
+            <span style="font-family:'Dancing Script',cursive;font-size:3rem;color:#fff;display:block;margin-bottom:12px">${name} ${sname}</span>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
+              ${email?`<li style="font-family:'Inter',sans-serif;font-size:.85rem;color:rgba(255,255,255,.75);display:flex;align-items:center;gap:10px"><span style="opacity:.6">📧</span> ${email}</li>`:''}
+              ${tel?`<li style="font-family:'Inter',sans-serif;font-size:.85rem;color:rgba(255,255,255,.75);display:flex;align-items:center;gap:10px"><span style="opacity:.6">📱</span> ${tel}</li>`:''}
+              ${loc?`<li style="font-family:'Inter',sans-serif;font-size:.85rem;color:rgba(255,255,255,.75);display:flex;align-items:center;gap:10px"><span style="opacity:.6">🌐</span> ${loc}</li>`:''}
+            </ul>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:24px" class="reveal">
+            <div style="width:300px;height:420px;background:linear-gradient(135deg,#8C8070,#6A5E52,#4A3E38);border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;box-shadow:0 20px 60px rgba(0,0,0,.4);position:relative;overflow:hidden">
+              <div style="position:absolute;inset:12px;border:2px solid rgba(255,255,255,.15);border-radius:8px;pointer-events:none"></div>
+              <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85);text-align:center;line-height:1.4;padding:0 20px">CLIQUE PARA<br>ENTRAR EM<br>CONTATO</p>
+              <a href="mailto:${email||'ola@jessica.com'}" style="width:80px;height:80px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#CCC,#888,#555);border:none;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;color:#333;font-size:1.5rem;text-decoration:none">✉</a>
+              <p style="font-family:'Caveat',cursive;font-size:1rem;color:rgba(255,255,255,.6);text-align:center">respondo em até 24h</p>
+            </div>
+          </div>
+        </section>`;
+      default: return '';
+    }
+  }).join('\n');
+
+  return `<!DOCTYPE html><html lang="pt"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${name} ${sname} — Taupe Luxury</title>${GFONTS7}
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:${black};color:#fff;overflow-x:hidden}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:${black}}::-webkit-scrollbar-thumb{background:${taupe};border-radius:2px}
+nav{position:fixed;top:0;width:100%;z-index:200;padding:22px 60px;display:flex;align-items:center;justify-content:space-between;transition:background .3s}
+@keyframes oval-spin{to{stroke-dashoffset:-100}}
+${RCSS}
+</style></head><body>
+<nav id="mainNav">
+  <ul style="display:flex;gap:40px;list-style:none">${[['#sobre','Sobre'],['#servicos','Serviços'],['#depoimentos','Depoimentos'],['#portfolio','Portfólio'],['#contacto','Contato']].map(([h,l])=>`<li><a href="${h}" style="font-family:'Inter',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#fff;text-decoration:none;opacity:.9">${l}</a></li>`).join('')}</ul>
+</nav>
+${sections}
+<footer style="background:${black};padding:32px 60px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;border-top:1px solid rgba(255,255,255,.06)">
+  <a href="#" style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;font-style:italic;letter-spacing:.08em;color:#fff;text-decoration:none;text-transform:uppercase">${name} ${sname}</a>
+  <span style="font-family:'Inter',sans-serif;font-size:.68rem;color:rgba(255,255,255,.25);letter-spacing:.08em">&copy;${year} ${name} ${sname}. Todos os direitos reservados.</span>
+</footer>
+<script>
+const nav=document.getElementById('mainNav');
+window.addEventListener('scroll',()=>{nav.style.background=window.scrollY>60?'rgba(10,10,10,.92)':'transparent';});
+<\/script>
+${RJS}</body></html>`;
+}
+
 // ── RENDER ────────────────────────────────────────────────────────────────────
 function render(){
   let html;
   if(activeTemplate===1)      html=buildT1();
   else if(activeTemplate===2) html=buildT2();
   else if(activeTemplate===3) html=buildT3();
-  else                        html=buildT4();
+  else if(activeTemplate===4) html=buildT4();
+  else if(activeTemplate===5) html=buildT5();
+  else if(activeTemplate===6) html=buildT6();
+  else                        html=buildT7();
   const fr=document.getElementById('preview-frame');
   const doc=fr.contentDocument||fr.contentWindow.document;
   doc.open();doc.write(html);doc.close();
@@ -1115,8 +1759,11 @@ function downloadSite(){
   if(activeTemplate===1)      html=buildT1();
   else if(activeTemplate===2) html=buildT2();
   else if(activeTemplate===3) html=buildT3();
-  else                        html=buildT4();
-  const names={1:'velvet-noir',2:'lumiere',3:'the-edit',4:'studio-zine'};
+  else if(activeTemplate===4) html=buildT4();
+  else if(activeTemplate===5) html=buildT5();
+  else if(activeTemplate===6) html=buildT6();
+  else                        html=buildT7();
+  const names={1:'velvet-noir',2:'lumiere',3:'the-edit',4:'studio-zine',5:'ios-finder',6:'burgundy-bold',7:'taupe-luxury'};
   const n=(g('p-name')||'jessica').toLowerCase().replace(/\s+/g,'-');
   const blob=new Blob([html],{type:'text/html'});
   const url=URL.createObjectURL(blob);
@@ -1137,9 +1784,9 @@ function setView(mode,ev){
 (function(){
   const params=new URLSearchParams(window.location.search);
   let t=parseInt(params.get('t'))||1;
-  t=Math.min(4,Math.max(1,t));
+  t=Math.min(7,Math.max(1,t));
   activeTemplate=t;
-  const names={1:'Velvet Noir',2:'Lumière',3:'The Edit',4:'Studio Zine'};
+  const names={1:'Velvet Noir',2:'Lumière',3:'The Edit',4:'Studio Zine',5:'iOS Finder',6:'Burgundy Bold',7:'Taupe Luxury'};
   document.getElementById('tmpl-name-label').textContent='— '+names[t];
   document.getElementById('preview-template-label').textContent=names[t];
 })();
