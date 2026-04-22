@@ -440,6 +440,19 @@ const SECTION_DEFS = {
     {id:'testimonials',  label:'Testimonials (dark)',       icon:'💬'},
     {id:'faq',           label:'FAQ numerado',              icon:'❓'},
     {id:'contact',       label:'Contacto + formulário',     icon:'📩'},
+  ],
+  10: [
+    {id:'hero',         label:'Hero (folder tabs)',         icon:'🌟'},
+    {id:'about',        label:'Sobre + Clipboard',          icon:'👤'},
+    {id:'notepad',      label:'Notepad / Citação',          icon:'📝'},
+    {id:'services',     label:'Serviços (3 cards pink)',    icon:'✨'},
+    {id:'portfolio',    label:'Portfolio gingham 4col',     icon:'🎬'},
+    {id:'growth',       label:'Business Growth (dark)',     icon:'📈'},
+    {id:'brands',       label:'Brand badges',               icon:'🏷'},
+    {id:'lead',         label:'Lead Magnet section',        icon:'🎯'},
+    {id:'phones_video', label:'Phones + Video showcase',    icon:'📱'},
+    {id:'testimonials', label:'Testimonials (tape)',        icon:'💬'},
+    {id:'contact',      label:'Contacto + Formulário',      icon:'📩'},
   ]
 };
 
@@ -454,7 +467,7 @@ const CUSTOM_BLOCKS = [
   {type:'custom_stats',   label:'Estatísticas',    icon:'📊'},
 ];
 
-let templatePages = {1:null,2:null,3:null,4:null,5:null,6:null,7:null,8:null,9:null};
+let templatePages = {1:null,2:null,3:null,4:null,5:null,6:null,7:null,8:null,9:null,10:null};
 function getPages(){
   if(!templatePages[activeTemplate]){
     templatePages[activeTemplate] = SECTION_DEFS[activeTemplate].map(s=>({
@@ -2129,6 +2142,261 @@ ${RJS}</body></html>`;
 }
 
 
+function buildT10(){
+  // Linen/Gold — folder tabs hero, clipboard, notepad, gingham pattern, growth stats, lead magnet
+  const pages=getPages();
+  const name=g('p-name'),sname=g('p-surname'),handle=g('p-handle')||'@jessicasantos';
+  const bio1=g('p-bio1'),bio2=g('p-bio2');
+  const email=g('p-email'),tel=g('p-tel'),loc=g('p-loc');
+  const ann=g('p-ann');
+  const linen='#F6EFE2',linen2='#EEE4D1',beige='#E5D9C4',pink='#E8CFC3',pink2='#D9B8AC';
+  const gold='#C8A560',gold2='#A88340',white='#FFFFFF',black='#1C1713',mid='#6B5C4E',lightMid='#9C8C7C';
+  const portItems=portMedia.length>0?portMedia:FB.port.map(s=>({src:s,type:'image'}));
+  const brands=(g('p-brands')||'The Ordinary\nZara Home\nRituals\nNYX Cosmetics\nKiehl\'s\nL\'Occitane\nLush\nMango').split('\n').filter(Boolean);
+  const year=new Date().getFullYear();
+  const GFONTS10=`<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">`;
+  const gingham=`background-color:${linen2};background-image:linear-gradient(rgba(160,145,128,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(160,145,128,.18) 1px,transparent 1px);background-size:40px 40px`;
+
+  const sections=pages.map(pg=>{
+    if(!pg.visible)return'';
+    if(pg.custom)return renderCustomBlock(pg);
+    switch(pg.id){
+      case 'hero': return `
+        <section style="min-height:100vh;background:${linen};display:flex;align-items:center;justify-content:center;padding:80px 48px;position:relative;overflow:hidden">
+          <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(180,160,130,.12) 1px,transparent 1px);background-size:22px 22px"></div>
+          <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:0;max-width:860px;width:100%">
+            <div style="display:flex;gap:0;align-self:flex-start;padding-left:60px">
+              ${['Sobre Mim','Serviços','Portfolio'].map((t,i)=>`<div style="padding:8px 24px;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:${i===0?white:mid};border-radius:6px 6px 0 0;border:1.5px solid ${i===0?gold:beige};border-bottom:none;background:${i===0?gold:linen2};margin-right:4px;position:relative;top:2px">${t}</div>`).join('')}
+            </div>
+            <div style="width:100%;background:${gold};border-radius:2px 12px 12px 12px;padding:56px 64px;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;box-shadow:0 24px 60px rgba(100,80,50,.18),0 8px 20px rgba(100,80,50,.1);position:relative;overflow:hidden">
+              <div style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 8px,rgba(255,255,255,.04) 8px,rgba(255,255,255,.04) 9px)"></div>
+              <div style="position:relative;z-index:1">
+                <div style="display:inline-block;background:rgba(255,255,255,.2);color:rgba(255,255,255,.9);font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;padding:6px 14px;border-radius:2px;margin-bottom:24px">${loc||'Est. 2022 · Lisboa, Portugal'}</div>
+                <div style="font-family:'Playfair Display',serif;font-size:clamp(3.2rem,7vw,5.5rem);font-weight:900;line-height:.92;color:${white};text-transform:uppercase;letter-spacing:-.01em;margin-bottom:12px">${name}<br>${sname}</div>
+                <div style="font-family:'Great Vibes',cursive;font-size:clamp(1.8rem,4vw,2.8rem);color:rgba(255,255,255,.85);margin-bottom:28px">UGC Creator &amp; Social Media</div>
+                <div style="display:flex;gap:16px;flex-wrap:wrap">
+                  ${['📸 Conteúdo Autêntico','🎬 UGC Creator','✨ Social Media'].map(p=>`<span style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:${white};font-size:11px;font-weight:500;letter-spacing:.1em;padding:7px 16px;border-radius:100px">${p}</span>`).join('')}
+                </div>
+              </div>
+              <div style="position:relative;z-index:1;flex-shrink:0">
+                <img src="${gi('heroImg')||FB.hero}" style="width:220px;height:280px;border-radius:8px;object-fit:cover;border:4px solid rgba(255,255,255,.3);display:block">
+                <div style="position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);background:${white};color:${black};font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:6px 18px;border-radius:100px;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.15)">${handle}</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;width:100%;margin-top:16px">
+              ${[['🎯','Conteúdo UGC','Vídeos & Fotos de Produto'],['💼','Gestão Social','Estratégia & Calendário'],['📈','Crescimento','Engagement & Resultados']].map(([ico,t,s])=>`<div style="flex:1;background:${linen2};border:1.5px solid ${beige};border-radius:8px;padding:18px 20px;display:flex;align-items:center;gap:12px"><div style="width:36px;height:36px;background:${pink};border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">${ico}</div><div><div style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:${mid}">${t}</div><div style="font-size:11px;color:${lightMid};margin-top:2px">${s}</div></div></div>`).join('')}
+            </div>
+          </div>
+        </section>`;
+      case 'about': return `
+        <section style="background:${white};padding:100px 48px" id="sobre">
+          <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
+            <div class="reveal">
+              <span style="display:inline-block;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:${lightMid};margin-bottom:14px">Quem Sou</span>
+              <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:800;line-height:1.05;color:${black};margin-bottom:20px">A criadora por detrás das câmeras</h2>
+              <p style="font-size:15px;line-height:1.75;color:${mid};margin-bottom:16px">${bio1}</p>
+              <p style="font-size:15px;line-height:1.75;color:${mid};margin-bottom:28px">${bio2}</p>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:14px">
+                ${['Mais de 3 anos de experiência em conteúdo digital','Conteúdo optimizado para Meta Ads e TikTok Ads','Entrega rápida — 5 a 7 dias úteis','Portfolio diversificado em beleza, casa e wellness'].map(i=>`<li style="display:flex;align-items:flex-start;gap:12px;font-size:14px;color:${mid};line-height:1.5"><span style="color:${gold};font-size:12px;flex-shrink:0;margin-top:2px">✦</span>${i}</li>`).join('')}
+              </ul>
+            </div>
+            <div style="position:relative;background:${linen};border:1.5px solid ${beige};border-radius:4px;padding:48px 40px 40px;box-shadow:0 8px 32px rgba(100,80,50,.12)" class="reveal">
+              <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);width:64px;height:20px;background:#B8A898;border-radius:4px 4px 0 0;border:2px solid #9A8878;box-shadow:inset 0 2px 4px rgba(0,0,0,.15)"></div>
+              <div style="position:absolute;top:-24px;left:50%;transform:translateX(-50%);width:38px;height:14px;background:#8A7A6A;border-radius:3px 3px 0 0"></div>
+              <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px;padding-bottom:20px;border-bottom:1px dashed ${beige}">
+                <img src="${gi('aboutImg')||FB.about}" style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid ${gold}">
+                <div>
+                  <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:${black}">${name} ${sname}</div>
+                  <div style="font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:${lightMid};margin-top:2px">UGC Creator &amp; Social Media</div>
+                </div>
+              </div>
+              <p style="font-size:14px;line-height:1.8;color:${mid};margin-bottom:24px">${bio1}</p>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px">
+                ${[[g('st-v1'),g('st-l1')],[g('st-v2'),g('st-l2')],[g('st-v3'),g('st-l3')]].map(([v,l])=>`<div style="background:${white};border:1px solid ${beige};border-radius:4px;padding:14px 10px;text-align:center"><span style="font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:${gold2};display:block">${v}</span><span style="font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:${lightMid};margin-top:4px;display:block">${l}</span></div>`).join('')}
+              </div>
+              <div style="font-family:'Great Vibes',cursive;font-size:2rem;color:${black};text-align:right">${name} ${sname}</div>
+            </div>
+          </div>
+        </section>`;
+      case 'notepad': return `
+        <div style="background:${linen2};padding:80px 48px">
+          <div style="max-width:700px;margin:0 auto;background:${white};border-radius:4px;box-shadow:0 12px 40px rgba(100,80,50,.1);overflow:hidden" class="reveal">
+            <div style="background:${pink};padding:16px 40px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid ${pink2}">
+              <span style="font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:${mid}">Nota Pessoal</span>
+              <div style="display:flex;gap:8px">${[1,2,3].map(()=>`<div style="width:12px;height:12px;border-radius:50%;background:${linen2};border:1.5px solid ${pink2}"></div>`).join('')}</div>
+            </div>
+            <div style="padding:40px 48px 40px 72px;background-image:repeating-linear-gradient(transparent,transparent 31px,#E8DDD0 31px,#E8DDD0 32px),linear-gradient(to right,#F0C5B5 0,#F0C5B5 2px,transparent 2px,transparent 48px);background-size:100% 32px,100% 100%;min-height:220px;display:flex;flex-direction:column;justify-content:center">
+              <div style="font-family:'Great Vibes',cursive;font-size:clamp(2rem,5vw,3rem);color:${black};line-height:1.4;margin-bottom:24px">"${g('tx-quote')||'O teu negócio merece conteúdo que conta a tua história com verdade.'}"</div>
+              <div style="font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:${lightMid}">— ${name} ${sname}, UGC Creator</div>
+            </div>
+          </div>
+        </div>`;
+      case 'services': return `
+        <section style="background:${linen};padding:100px 48px" id="servicos">
+          <div style="max-width:1200px;margin:0 auto">
+            <div style="text-align:center;margin-bottom:60px" class="reveal">
+              <span style="display:inline-block;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:${lightMid};margin-bottom:14px">O Que Ofereço</span>
+              <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:800;line-height:1.05;color:${black}">Os Meus Serviços</h2>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+              ${[1,2,3].map(n=>`<div class="reveal" style="background:${n===2?black:pink};border-radius:8px;padding:40px 32px 32px;display:flex;flex-direction:column;position:relative;overflow:hidden;transition-delay:${(n-1)*.1}s"><div style="position:absolute;top:0;left:0;right:0;height:4px;background:${gold}"></div><div style="font-size:28px;margin-bottom:20px">${['📸','⭐','🚀'][n-1]}</div><div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:${n===2?white:black};margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em">${g('svc'+n+'-name')}</div><div style="font-size:13px;font-weight:700;letter-spacing:.1em;color:${n===2?gold:gold2};margin-bottom:20px">${g('svc'+n+'-price')}</div><p style="font-size:13px;line-height:1.7;color:${n===2?'rgba(255,255,255,.75)':mid};margin-bottom:24px;flex:1">${g('svc'+n+'-desc')}</p><a href="#contacto" style="display:block;text-align:center;background:${n===2?gold:black};color:${white};font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;padding:14px 24px;border-radius:2px">${n===2?'Mais Popular':'Reservar'}</a></div>`).join('')}
+            </div>
+          </div>
+        </section>`;
+      case 'portfolio': return `
+        <section style="${gingham};padding:100px 48px" id="portfolio">
+          <div style="max-width:1200px;margin:0 auto">
+            <div style="text-align:center;margin-bottom:56px" class="reveal">
+              <span style="display:inline-block;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:${lightMid};margin-bottom:14px">O Meu Trabalho</span>
+              <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:800;line-height:1.05;color:${black}">Portfolio</h2>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+              ${portItems.slice(0,8).map((m,i)=>`<div class="reveal" style="border-radius:6px;overflow:hidden;position:relative;background:${beige};aspect-ratio:3/4;transition-delay:${i*.08}s">
+                ${m.type==='video'?`<video src="${m.src}" loop muted playsinline onclick="this.paused?this.play():this.pause()" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer"></video>`:`<img src="${m.src}" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">`}
+                <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(28,23,19,.7) 0%,transparent 55%);display:flex;align-items:flex-end;padding:20px 16px;opacity:0;transition:opacity .3s" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'"><span style="font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:${white}">${niches[i%niches.length]||'UGC'}</span></div>
+              </div>`).join('')}
+            </div>
+          </div>
+        </section>`;
+      case 'growth': return `
+        <section style="background:${black};padding:100px 48px;text-align:center;position:relative;overflow:hidden">
+          <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(200,165,96,.08) 1px,transparent 1px);background-size:28px 28px"></div>
+          <div style="position:relative;z-index:1" class="reveal">
+            <div style="font-family:'Great Vibes',cursive;font-size:2rem;color:${gold};margin-bottom:8px">crescimento real</div>
+            <div style="font-family:'Playfair Display',serif;font-size:clamp(4rem,10vw,8rem);font-weight:900;color:${white};line-height:.9;text-transform:uppercase;letter-spacing:-.02em;margin-bottom:48px">Business<br><span style="color:${gold}">Growth</span></div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:40px;max-width:800px;margin:0 auto 56px">
+              ${[[g('st-v1'),g('st-l1')],[g('st-v2'),g('st-l2')],[g('st-v3'),g('st-l3')],[g('st-v4'),g('st-l4')]].map(([v,l])=>`<div><span style="font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:800;color:${white};display:block;line-height:1">${v}</span><div style="font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:${gold};margin-top:8px">${l}</div></div>`).join('')}
+            </div>
+            <a href="#contacto" style="display:inline-block;background:${gold};color:${white};font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:18px 48px;border-radius:2px">Quero estes resultados</a>
+          </div>
+        </section>`;
+      case 'brands': return `
+        <section style="background:${white};padding:80px 48px">
+          <div style="max-width:1200px;margin:0 auto">
+            <div style="text-align:center;margin-bottom:48px" class="reveal">
+              <span style="display:inline-block;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:${lightMid};margin-bottom:14px">Parcerias</span>
+              <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:800;line-height:1.05;color:${black}">Marcas com quem trabalhei</h2>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center" class="reveal">
+              ${brands.map(b=>`<div style="background:${linen};border:1.5px solid ${beige};border-radius:100px;padding:12px 28px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:${mid}">${b}</div>`).join('')}
+            </div>
+          </div>
+        </section>`;
+      case 'lead': return `
+        <div style="background:${pink};position:relative">
+          <div style="display:grid;grid-template-columns:1fr 1fr;min-height:480px;max-width:1200px;margin:0 auto" class="reveal">
+            <div style="padding:80px 64px;display:flex;flex-direction:column;justify-content:center">
+              <div style="font-size:10px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:${mid};margin-bottom:16px">Exclusivo para ti</div>
+              <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2.4rem,4vw,3.8rem);font-weight:900;text-transform:uppercase;line-height:1.0;color:${black};margin-bottom:20px">Leva o que<br>Precisas</h2>
+              <div style="font-family:'Great Vibes',cursive;font-size:1.8rem;color:${gold2};margin-bottom:28px">sem compromisso</div>
+              <p style="font-size:14px;line-height:1.75;color:${mid};margin-bottom:36px">Escolhe o serviço que faz mais sentido para o teu negócio. Cada opção foi desenhada para gerar resultados reais, sem complicações.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:10px">
+                ${['📸 UGC Básico','🎬 Vídeos Ads','💼 Gestão Social','📊 Estratégia','✨ Pacote Completo'].map(t=>`<span style="background:${white};border:1.5px solid ${pink2};border-radius:100px;padding:10px 20px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:${mid}">${t}</span>`).join('')}
+              </div>
+            </div>
+            <div style="position:relative;overflow:hidden">
+              <img src="${gi('philImg')||gi('contactImg')||FB.contact}" style="width:100%;height:100%;object-fit:cover;filter:brightness(.88) saturate(.85);display:block">
+              <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(232,207,195,.5) 0%,transparent 60%)"></div>
+              <div style="position:absolute;top:40px;right:40px;background:${white};border-radius:4px;padding:16px 20px;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.12);transform:rotate(3deg)">
+                <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:${black};line-height:1">UGC</div>
+                <div style="font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:${lightMid};margin-top:4px">Content Creator</div>
+              </div>
+            </div>
+          </div>
+        </div>`;
+      case 'phones_video': return `
+        <section style="${gingham};padding:100px 48px">
+          <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
+            <div style="display:flex;gap:20px;justify-content:center" class="reveal">
+              ${portItems.slice(0,3).map((m,i)=>`<div style="flex-shrink:0;${i===1?'transform:translateY(-24px)':''}${i===2?'':''}">
+                <div style="width:${i===2?'120px':'140px'};height:${i===2?'230px':'270px'};background:${black};border-radius:24px;padding:10px 8px 14px;box-shadow:0 20px 50px rgba(0,0,0,.3);position:relative;${i===2?'transform:translateY(12px)':''}">
+                  <div style="position:absolute;top:10px;left:50%;transform:translateX(-50%);width:48px;height:10px;background:#0A0A0A;border-radius:6px;z-index:3"></div>
+                  <div style="width:100%;height:100%;border-radius:17px;overflow:hidden;background:${linen2}">
+                    ${m.type==='video'?`<video src="${m.src}" loop muted playsinline style="width:100%;height:100%;object-fit:cover"></video>`:`<img src="${m.src}" style="width:100%;height:100%;object-fit:cover">`}
+                  </div>
+                </div>
+              </div>`).join('')}
+            </div>
+            <div class="reveal">
+              <span style="display:inline-block;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:${lightMid};margin-bottom:14px">Video Showcase</span>
+              <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:800;line-height:1.05;color:${black};margin-bottom:20px">Conteúdo que <em style="font-family:'Great Vibes',cursive;font-weight:400;font-size:1.4em">para</em> o scroll</h2>
+              <p style="font-size:15px;line-height:1.75;color:${mid};margin-bottom:16px">Cada vídeo é pensado ao milímetro — do hook nos primeiros 3 segundos ao CTA final.</p>
+              <p style="font-size:15px;line-height:1.75;color:${mid}">Produzo conteúdo UGC para Meta Ads, TikTok Ads, Instagram Stories e Reels orgânicos.</p>
+            </div>
+          </div>
+        </section>`;
+      case 'testimonials': return `
+        <section style="background:${linen};padding:100px 48px" id="depoimentos">
+          <div style="max-width:1200px;margin:0 auto">
+            <div style="text-align:center;margin-bottom:56px" class="reveal">
+              <span style="display:inline-block;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:${lightMid};margin-bottom:14px">Clientes Felizes</span>
+              <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:800;line-height:1.05;color:${black}">O que dizem de mim</h2>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+              ${[1,2,3].map(n=>`<div class="reveal" style="background:${white};border:1.5px solid ${beige};border-radius:8px;padding:36px 32px;position:relative;transition-delay:${(n-1)*.1}s">
+                <div style="position:absolute;top:-8px;left:50%;transform:translateX(-50%) rotate(-2deg);width:60px;height:18px;background:rgba(200,165,96,.4);border-radius:2px"></div>
+                <div style="display:flex;gap:4px;margin-bottom:16px">${[1,2,3,4,5].map(()=>`<span style="color:${gold};font-size:14px">★</span>`).join('')}</div>
+                <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:16px;line-height:1.65;color:${black};margin-bottom:24px">"${g('t'+n+'-quote')}"</p>
+                <div style="width:40px;height:1px;background:${beige};margin-bottom:20px"></div>
+                <div style="font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:${black}">${g('t'+n+'-author')}</div>
+              </div>`).join('')}
+            </div>
+          </div>
+        </section>`;
+      case 'contact': return `
+        <section style="background:${black};padding:100px 48px;position:relative;overflow:hidden" id="contacto">
+          <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(200,165,96,.06) 1px,transparent 1px);background-size:24px 24px"></div>
+          <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start;position:relative;z-index:1">
+            <div class="reveal">
+              <span style="display:inline-block;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:${gold};margin-bottom:14px">Vamos Trabalhar Juntas</span>
+              <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:800;line-height:1.05;color:${white};margin-bottom:20px">Vamos criar algo incrível?</h2>
+              <div style="font-family:'Great Vibes',cursive;font-size:2.2rem;color:${gold};margin:16px 0 32px">Diz-me tudo</div>
+              <p style="font-size:15px;line-height:1.75;color:rgba(255,255,255,.55);margin-bottom:32px">Respondo a todas as mensagens em 24-48 horas.</p>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:14px">
+                ${[email,'Resposta em 24-48 horas','Chamada de descoberta gratuita (30 min)','Proposta personalizada sem compromisso'].filter(Boolean).map(i=>`<li style="display:flex;align-items:center;gap:12px;font-size:13px;color:rgba(255,255,255,.65)"><span style="color:${gold};font-size:10px;flex-shrink:0">✦</span>${i}</li>`).join('')}
+              </ul>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:16px" class="reveal">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+                ${[['Nome','text','O teu nome'],['Email','email','email@marca.com']].map(([l,t,p])=>`<div style="display:flex;flex-direction:column;gap:8px"><label style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5)">${l}</label><input type="${t}" placeholder="${p}" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:14px 16px;color:${white};font-family:'DM Sans',sans-serif;font-size:14px;outline:none;width:100%"></div>`).join('')}
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px"><label style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5)">Marca / Empresa</label><input type="text" placeholder="Nome da tua marca" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:14px 16px;color:${white};font-family:'DM Sans',sans-serif;font-size:14px;outline:none;width:100%"></div>
+              <div style="display:flex;flex-direction:column;gap:8px"><label style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5)">Mensagem</label><textarea placeholder="Conta-me um pouco sobre o teu projeto..." style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:14px 16px;color:${white};font-family:'DM Sans',sans-serif;font-size:14px;outline:none;resize:none;height:120px;width:100%"></textarea></div>
+              <button type="button" onclick="if(document.getElementById('p-email').value)window.location.href='mailto:'+document.getElementById('p-email').value" style="display:block;width:100%;background:${gold};color:${white};border:none;border-radius:2px;padding:18px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;cursor:pointer">Enviar Mensagem</button>
+            </div>
+          </div>
+        </section>`;
+      default: return '';
+    }
+  }).join('\n');
+
+  return `<!DOCTYPE html><html lang="pt"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${name} ${sname} — UGC Creator &amp; Social Media</title>${GFONTS10}
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:${linen};color:${black};overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:${linen}}::-webkit-scrollbar-thumb{background:${gold};border-radius:3px}
+nav{position:sticky;top:0;z-index:100;background:${white};border-bottom:1px solid ${beige};display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;transition:box-shadow .3s}
+${RCSS}
+</style></head><body>
+<nav id="mainNav">
+  <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:800;letter-spacing:.08em;color:${black};text-transform:uppercase">JS<span style="color:${gold}">Studio</span></div>
+  <ul style="display:flex;gap:36px;list-style:none">${[['#sobre','Sobre'],['#servicos','Serviços'],['#portfolio','Portfolio'],['#depoimentos','Clientes']].map(([h,l])=>`<li><a href="${h}" style="font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:${mid};text-decoration:none">${l}</a></li>`).join('')}</ul>
+  <a href="#contacto" style="background:${black};color:${white};padding:10px 22px;border-radius:2px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;text-decoration:none">Trabalha Comigo</a>
+</nav>
+${sections}
+<footer style="background:${black};border-top:1px solid rgba(255,255,255,.08);padding:48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px">
+  <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:${white}">${name}<span style="color:${gold}">${sname}</span></div>
+  <div style="font-size:12px;color:rgba(255,255,255,.35);letter-spacing:.08em">&copy;${year} ${name} ${sname} &middot; UGC Creator &middot; ${loc||'Lisboa, Portugal'}</div>
+  <div style="display:flex;gap:20px">${[g('soc-ig')?`<a href="${g('soc-ig')}" style="font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);text-decoration:none">Instagram</a>`:'',g('soc-tt')?`<a href="${g('soc-tt')}" style="font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);text-decoration:none">TikTok</a>`:''].filter(Boolean).join('')}</div>
+</footer>
+<script>
+const nav=document.getElementById('mainNav');
+window.addEventListener('scroll',()=>{nav.style.boxShadow=window.scrollY>20?'0 4px 20px rgba(100,80,50,.1)':'';});
+<\/script>
+${RJS}</body></html>`;
+}
+
+
 // ── RENDER ────────────────────────────────────────────────────────────────────
 function render(){
   let html;
@@ -2138,8 +2406,10 @@ function render(){
   else if(activeTemplate===4) html=buildT4();
   else if(activeTemplate===5) html=buildT5();
   else if(activeTemplate===6) html=buildT6();
+  else if(activeTemplate===7) html=buildT7();
   else if(activeTemplate===8) html=buildT8();
-  else                        html=buildT9();
+  else if(activeTemplate===9) html=buildT9();
+  else                        html=buildT10();
   const fr=document.getElementById('preview-frame');
   const doc=fr.contentDocument||fr.contentWindow.document;
   doc.open();doc.write(html);doc.close();
@@ -2153,9 +2423,11 @@ function downloadSite(){
   else if(activeTemplate===4) html=buildT4();
   else if(activeTemplate===5) html=buildT5();
   else if(activeTemplate===6) html=buildT6();
+  else if(activeTemplate===7) html=buildT7();
   else if(activeTemplate===8) html=buildT8();
-  else                        html=buildT9();
-  const names={1:'velvet-noir',2:'lumiere',3:'the-edit',4:'studio-zine',5:'ios-finder',6:'burgundy-bold',7:'taupe-luxury',8:'blue-boogaloo',9:'ivory-elegance'};
+  else if(activeTemplate===9) html=buildT9();
+  else                        html=buildT10();
+  const names={1:'velvet-noir',2:'lumiere',3:'the-edit',4:'studio-zine',5:'ios-finder',6:'burgundy-bold',7:'taupe-luxury',8:'blue-boogaloo',9:'ivory-elegance',10:'linen-gold'};
   const n=(g('p-name')||'jessica').toLowerCase().replace(/\s+/g,'-');
   const blob=new Blob([html],{type:'text/html'});
   const url=URL.createObjectURL(blob);
@@ -2176,9 +2448,9 @@ function setView(mode,ev){
 (function(){
   const params=new URLSearchParams(window.location.search);
   let t=parseInt(params.get('t'))||1;
-  t=Math.min(9,Math.max(1,t));
+  t=Math.min(10,Math.max(1,t));
   activeTemplate=t;
-  const names={1:'Velvet Noir',2:'Lumière',3:'The Edit',4:'Studio Zine',5:'iOS Finder',6:'Burgundy Bold',7:'Taupe Luxury',8:'Blue Boogaloo',9:'Ivory Elegance'};
+  const names={1:'Velvet Noir',2:'Lumière',3:'The Edit',4:'Studio Zine',5:'iOS Finder',6:'Burgundy Bold',7:'Taupe Luxury',8:'Blue Boogaloo',9:'Ivory Elegance',10:'Linen Gold'};
   document.getElementById('tmpl-name-label').textContent='— '+names[t];
   document.getElementById('preview-template-label').textContent=names[t];
 })();
