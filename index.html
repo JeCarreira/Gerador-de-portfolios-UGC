@@ -56,6 +56,13 @@ body{background:#080808;color:#F0EDE6;font-family:'DM Sans',sans-serif;min-heigh
 .c7 .card-num{background:rgba(107,92,85,.25);color:#C8B8B2}
 .c7 .card-btn{background:rgba(107,92,85,.18);color:#C8B8B2}
 .c7:hover .card-btn{background:rgba(107,92,85,.3)}
+
+.c8 .card-num{background:rgba(75,111,165,.18);color:#7AABF0}
+.c8 .card-btn{background:rgba(75,111,165,.12);color:#7AABF0}
+.c8:hover .card-btn{background:rgba(75,111,165,.24)}
+.c9 .card-num{background:rgba(26,23,19,.15);color:#9A8A7A}
+.c9 .card-btn{background:rgba(26,23,19,.1);color:#9A8A7A}
+.c9:hover .card-btn{background:rgba(26,23,19,.22)}
 .divider{display:flex;align-items:center;gap:16px;padding:0 48px;margin-bottom:24px;max-width:1280px;margin-left:auto;margin-right:auto}
 .divider span{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#2A2A2A;white-space:nowrap}
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.05)}
@@ -189,6 +196,31 @@ body{background:#080808;color:#F0EDE6;font-family:'DM Sans',sans-serif;min-heigh
       <div class="card-btn"><span>Editar este template</span><span class="arrow">→</span></div>
     </div>
   </a>
+  <!-- T8 BLUE BOOGALOO -->
+  <a class="card c8" href="editor.html?t=8" onclick="go(8,event)">
+    <div class="card-preview"><iframe id="pv8" title="preview"></iframe><div class="card-preview-fade"></div></div>
+    <div class="card-body">
+      <span class="card-num">Template 08</span>
+      <div class="card-name">Blue Boogaloo</div>
+      <div class="card-sub">Azul · Circular · Boogaloo font</div>
+      <p class="card-desc">Hero com foto circular, stats de plataformas sociais, brand circles coloridos, portfolio em grid 4 colunas, rates & bundles com hover azul e case studies com métricas.</p>
+      <div class="card-features"><span class="feat">Foto circular</span><span class="feat">Social stats</span><span class="feat">Brand circles</span><span class="feat">4-col grid</span></div>
+      <div class="card-btn"><span>Editar este template</span><span class="arrow">→</span></div>
+    </div>
+  </a>
+
+  <!-- T9 IVORY ELEGANCE -->
+  <a class="card c9" href="editor.html?t=9" onclick="go(9,event)">
+    <div class="card-preview"><iframe id="pv9" title="preview"></iframe><div class="card-preview-fade"></div></div>
+    <div class="card-body">
+      <span class="card-num">Template 09</span>
+      <div class="card-name">Ivory Elegance</div>
+      <div class="card-sub">Bebas Neue · Pinyon Script · Wave dividers</div>
+      <p class="card-desc">Hero com polaroids sobrepostos, wave dividers entre secções, Pinyon Script cursiva, about com texto gigante, phones row, Instagram mockups, Venn circles e FAQ numerado.</p>
+      <div class="card-features"><span class="feat">Polaroids</span><span class="feat">Wave dividers</span><span class="feat">Pinyon Script</span><span class="feat">FAQ numerado</span></div>
+      <div class="card-btn"><span>Editar este template</span><span class="arrow">→</span></div>
+    </div>
+  </a>
 </div>
 
 <div class="divider"><span>Comparação</span></div>
@@ -196,22 +228,22 @@ body{background:#080808;color:#F0EDE6;font-family:'DM Sans',sans-serif;min-heigh
 <div class="compare">
   <table class="compare-table">
     <thead>
-      <tr><th>Funcionalidade</th><th>Velvet Noir</th><th>Lumière</th><th>The Edit</th><th>Studio Zine</th><th>iOS Finder</th><th>Burgundy Bold</th><th>Taupe Luxury</th></tr>
+      <tr><th>Funcionalidade</th><th>Velvet Noir</th><th>Lumière</th><th>The Edit</th><th>Studio Zine</th><th>iOS Finder</th><th>Burgundy Bold</th><th>Taupe Luxury</th><th>Blue Boogaloo</th><th>Ivory Elegance</th></tr>
     </thead>
     <tbody>
-      <tr><td>Fontes</td><td>Playfair + Inter</td><td>Cormorant + Jost</td><td>Fraunces + DM Sans</td><td>Space Mono + Caveat</td><td>Cormorant + Inter</td><td>Anton + Caveat</td><td>Cormorant + Dancing</td></tr>
-      <tr><td>Upload fotos &amp; vídeos</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Vídeos reproduzem no site</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Arrastar e reordenar secções</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Adicionar blocos custom</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Tabela de preços</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Testimonials</td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Case studies com stats</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Pain points &amp; resultados</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="xx">—</span></td></tr>
-      <tr><td>FAQ (6 perguntas)</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
-      <tr><td>Cores editáveis</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="xx">—</span></td></tr>
-      <tr><td>Barra de anúncio</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td></tr>
-      <tr><td>Download HTML final</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Fontes</td><td>Playfair + Inter</td><td>Cormorant + Jost</td><td>Fraunces + DM Sans</td><td>Space Mono + Caveat</td><td>Cormorant + Inter</td><td>Anton + Caveat</td><td>Cormorant + Dancing</td><td>Boogaloo + Lato</td><td>Bebas Neue + Pinyon</td></tr>
+      <tr><td>Upload fotos &amp; vídeos</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Vídeos reproduzem no site</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Arrastar e reordenar secções</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Adicionar blocos custom</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Tabela de preços</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Testimonials</td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Case studies com stats</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Pain points &amp; resultados</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="xx">—</span></td></tr>
+      <tr><td>FAQ (6 perguntas)</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td></tr>
+      <tr><td>Cores editáveis</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="xx">—</span></td></tr>
+      <tr><td>Barra de anúncio</td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td><td><span class="ck">✦</span></td><td><span class="xx">—</span></td><td><span class="xx">—</span></td><td><span class="xx">—</span></td></tr>
+      <tr><td>Download HTML final</td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td><td><span class="ck">✦</span></td></tr>
     </tbody>
   </table>
 </div>
@@ -219,7 +251,7 @@ body{background:#080808;color:#F0EDE6;font-family:'DM Sans',sans-serif;min-heigh
 <div class="footer">✦ UGC Portfolio Studio — cada template descarrega como site HTML completo e autónomo</div>
 
 <script>
-const NAMES={1:'Velvet Noir',2:'Lumière',3:'The Edit',4:'Studio Zine',5:'iOS Finder',6:'Burgundy Bold',7:'Taupe Luxury'};
+const NAMES={1:'Velvet Noir',2:'Lumière',3:'The Edit',4:'Studio Zine',5:'iOS Finder',6:'Burgundy Bold',7:'Taupe Luxury',8:'Blue Boogaloo',9:'Ivory Elegance'};
 function go(t,e){
   e.preventDefault();
   document.getElementById('load-sub').textContent='A abrir '+NAMES[t]+'...';
@@ -320,8 +352,46 @@ const PV7=`<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://
   </div>
   <div style="background:#555;height:100%;overflow:hidden"><div style="width:100%;height:100%;background:linear-gradient(135deg,#8C7D76,#5C4E48)"></div></div>
 </div></body></html>`;
+const PV8=`<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Boogaloo&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box}html,body{height:100%;overflow:hidden;background:#fff;color:#4B6FA5}</style></head><body>
+<nav style="background:#fff;display:flex;align-items:center;justify-content:center;padding:8px 24px;gap:20px;border-bottom:1px solid rgba(75,111,165,.08)">
+  <span style="font-family:'Boogaloo',cursive;font-size:12px;color:#4B6FA5;text-decoration:underline;text-underline-offset:2px">about me</span>
+  <span style="font-family:'Boogaloo',cursive;font-size:12px;color:#4B6FA5;text-decoration:underline;text-underline-offset:2px">rates &amp; bundles</span>
+  <span style="font-family:'Boogaloo',cursive;font-size:12px;color:#4B6FA5;text-decoration:underline;text-underline-offset:2px">portfolio</span>
+  <span style="font-family:'Boogaloo',cursive;font-size:12px;color:#4B6FA5;text-decoration:underline;text-underline-offset:2px">work with me</span>
+</nav>
+<div style="display:grid;grid-template-columns:1fr 1.1fr;align-items:center;gap:24px;padding:16px 24px;height:calc(100% - 38px)">
+  <div style="display:flex;justify-content:center">
+    <div style="width:120px;height:120px;border-radius:50%;background:#c8d8e8;overflow:hidden"></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <div style="font-family:'Boogaloo',cursive;font-size:36px;color:#4B6FA5;line-height:.92">jessica<br>santos</div>
+    <div style="font-family:'Boogaloo',cursive;font-size:12px;color:#4B6FA5">ugc content creator</div>
+    <div style="display:inline-block;background:#4B6FA5;color:#fff;font-family:'Boogaloo',cursive;font-size:10px;padding:5px 16px;border-radius:20px;margin-top:4px">work with me →</div>
+  </div>
+</div></body></html>`;
+const PV9=`<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Bebas+Neue&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box}html,body{height:100%;overflow:hidden;background:#F8F4EC;color:#1A1713}</style></head><body>
+<nav style="background:#1A1713;height:36px;display:flex;align-items:center;justify-content:center;gap:24px;padding:0 24px">
+  <span style="font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.75)">About</span>
+  <span style="font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.75)">Services</span>
+  <span style="font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.75)">Testimonials</span>
+</nav>
+<div style="display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:16px;padding:16px 24px;height:calc(100% - 36px);background:#F8F4EC">
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <div style="font-size:14px;color:#1A1713">✦ ✧</div>
+    <div style="font-family:'Pinyon Script',cursive;font-size:48px;color:#1A1713;line-height:.9">Jessica<br>Santos</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:9px;letter-spacing:.25em;color:#7A7060">UGC CREATOR &amp; SOCIAL MEDIA</div>
+    <div style="position:relative;display:inline-flex;align-items:center;justify-content:center;width:120px;height:32px;margin-top:4px">
+      <svg style="position:absolute;inset:0;width:100%;height:100%;overflow:visible" viewBox="0 0 120 32" fill="none"><path d="M4,16 C7,6 26,2 60,2 C94,2 114,7 116,16 C118,25 98,30 60,30 C22,30 2,26 4,16 Z" stroke="#1A1713" stroke-width="1.5" fill="none"/></svg>
+      <span style="font-family:'Bebas Neue',sans-serif;font-size:8px;letter-spacing:.15em;color:#1A1713;position:relative;z-index:1">TRABALHA COMIGO</span>
+    </div>
+  </div>
+  <div style="position:relative;height:180px">
+    <div style="position:absolute;background:#fff;padding:5px 5px 22px;box-shadow:0 6px 20px rgba(0,0,0,.12);width:100px;height:140px;top:10px;left:30px;transform:rotate(-3deg)"><div style="background:#c8c0b4;width:100%;height:100%"></div></div>
+    <div style="position:absolute;background:#fff;padding:5px 5px 22px;box-shadow:0 6px 20px rgba(0,0,0,.12);width:84px;height:116px;top:40px;left:80px;transform:rotate(4deg)"><div style="background:#d4ccc4;width:100%;height:100%"></div></div>
+  </div>
+</div></body></html>`;
 window.addEventListener('load',()=>{
-  [[1,PV1],[2,PV2],[3,PV3],[4,PV4],[5,PV5],[6,PV6],[7,PV7]].forEach(([t,html])=>{
+  [[1,PV1],[2,PV2],[3,PV3],[4,PV4],[5,PV5],[6,PV6],[7,PV7],[8,PV8],[9,PV9]].forEach(([t,html])=>{
     const fr=document.getElementById('pv'+t);
     if(!fr)return;
     const doc=fr.contentDocument||fr.contentWindow.document;
